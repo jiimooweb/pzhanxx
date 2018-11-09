@@ -217,7 +217,7 @@ Page({
         var specials = this.data.specials;
         var item = specials[index];
         var sid = item.id;
-        var curl = item.cover_img.url;
+        var curl = item.cover;
         var title = item.title
         wx.navigateTo({
             url: '../special/show/show?sid=' + sid + '&curl=' + curl + '&title=' + title,

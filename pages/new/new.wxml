@@ -47,8 +47,8 @@
             </view>
             <view class="flexWarp">
                 <view class='sview' wx:for="{{list}}">
-                    <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover_img.url}}" data-title='{{item.title}}'>
-                        <image class='simg' mode="aspectFill" src="{{item.cover_img.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
+                    <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover}}" data-title='{{item.title}}'>
+                        <image class='simg' mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
                         <text class='stext'>{{item.title}}</text>
                     </view>
 
