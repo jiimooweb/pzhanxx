@@ -1,0 +1,295 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding:20rpx;
+  border-bottom: 1px solid #F2F6FC;
+}
+
+.comment:first-child {
+  border-top: 1px solid #F2F6FC;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  align-items: center;
+}
+
+.avatar {
+  height: 80rpx;
+  /* width: 100rpx; */
+}
+
+.userinfo-avatar {
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+}
+
+.nickname {
+  height: 70rpx;
+  margin-left: 20rpx;
+  /* line-height: 40rpx; */
+}
+
+.name {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.time {
+  font-size: 22rpx;  
+  color: #aaa;
+}
+
+.reply {
+  position: absolute;
+  right: 20rpx;
+  width: 50rpx;
+  margin-top:-10rpx;
+}
+
+.reply image {
+  width: 25rpx;
+  height: 25rpx;
+}
+
+.reply text {
+  font-size: 24rpx;
+  position: absolute;
+  color: #8a8a8a;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 100rpx;
+  padding-top:10rpx;
+  padding-right: 10rpx;
+}
+
+.text {
+  font-size: 30rpx;
+  color:#606266;
+  margin-bottom: 20rpx;
+}
+
+.line {
+  height:20rpx;
+  width: 100%;
+  background-color: #f1f1f2;
+}
+
+.replys {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding:20rpx 20rpx 10rpx 20rpx;
+  border-bottom: 1rpx solid #f8f8f8;
+}
+
+.replys:first-child {
+  border-top: 1rpx solid #f8f8f8;
+}
+
+.replys .name {
+  font-weight: 400;
+  color:#248AD3;
+}
+
+.replys .content {
+  display: flex;
+  flex-direction: row;
+}
+
+.replys .text {
+  font-size: 26rpx;
+  color:#606266;
+  margin-bottom: 20rpx;
+}
+
+.replys .tofan {
+  display: flex;
+  flex-direction: row;
+  font-size:28rpx;
+  margin-right:15rpx;
+}
+
+.replys .tofan .name {
+  font-size:28rpx;
+  color:#248AD3;
+  margin-left: 5rpx;
+  
+}
+
+.section {
+  position: fixed;
+  bottom: 0;
+  height: 300rpx;
+  width: 100%;
+  background-color: #fff;
+  padding:20rpx 30rpx 30rpx 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section .header {
+  height: 60rpx;
+  width: 100%;
+  font-size: 28rpx;
+
+}
+
+
+.reply-panel {
+  background-color: rgba(0,0,0, .3);
+  height:100%;
+  width: 100%;
+  position: fixed;
+  top:0;
+}
+
+.reply-input {
+  flex: 5;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 10rpx 0 30rpx 0;
+  font-size: 30rpx;
+  width: 100%;
+}
+
+.textarea {
+  height: 100%;
+  width: 100%;
+}
+
+.placeholder {
+  color:#C0C4CC;
+  font-size: 30rpx;  
+  font-weight: 200;
+  width: 100%;
+  
+}
+
+.send {
+  font-size: 30rpx;
+  color:#409EFF;
+  width: 150rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: right;
+}
+
+.section button {
+  padding: 0;
+  background-color: #fff;
+  position: absolute;
+  right: 40rpx;
+  bottom: 10rpx;
+}
+
+.send::after {
+  border: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.send-comment {
+  display: flex;
+  flex-direction: row;
+  height: 90rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: #f1f1f2;
+  box-sizing: border-box;
+  padding: 15rpx 20rpx;
+}
+
+.send-comment .box {
+  background: #fff;
+  height:60rpx;
+  font-size: 26rpx;
+  color:#C0C4CC;
+  padding:10rpx 20rpx;
+  box-sizing: border-box;
+  font-weight: 300;
+  border-radius: 6rpx;
+  width: 88%;
+}
+
+.send-comment image {
+  width: 46rpx;
+  height: 46rpx;
+  margin-left: 15rpx;
+  margin-top: 7rpx;
+}
+
+.send-comment text {
+  font-size: 26rpx;
+  color: #8a8a8a;
+  margin-left: 5rpx;
+  line-height: 55rpx;
+}
+
+.list {
+  position: fixed;
+  bottom: 0;
+  /* height: 480rpx; */
+  width: 100%;
+  background-color: #f1f1f2;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  font-size:30rpx;
+  color:#606266;
+  
+}
+
+
+
+.list .operate {
+
+}
+
+.list .operate view {
+  height:90rpx;
+  line-height: 90rpx;
+  border-top: 1px solid #F2F6FC;
+  background-color: #fff;
+  
+}
+
+.list .cancel {
+  margin-top:20rpx;
+  height:90;
+  line-height: 90rpx;
+  border-top: 1px solid #F2F6FC;
+  background-color: #fff;
+}
+
+.list .content {
+  background-color: #fff;  
+  font-size: 22rpx;
+  color:#8a8a8a;
+  text-align: center;
+  padding:20rpx 40rpx;
+  height:90rpx;
+  line-height: 50rpx;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+
+

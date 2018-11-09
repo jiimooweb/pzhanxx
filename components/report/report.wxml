@@ -1,0 +1,8 @@
+<view class="report" catchtap="changeOperateFlag" catchtap="_hide" wx:if="{{display}}">
+  <view class="list">
+    <view class="operate">
+      <view wx:for="{{contents}}" data-content="{{item}}" bindtap="_select">{{item}}</view>
+    </view>
+    <view class="cancel">取消</view>
+  </view>
+</view>

@@ -1,0 +1,84 @@
+.ranks {
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranks .rank {
+  padding:10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 150rpx;
+  border-top: 1px solid #f6f6f7;
+}
+
+.ranks .rank:last-child {
+  border-bottom: 1px solid #f6f6f7;
+}
+
+
+.ranks .rank .sort{
+  padding:10rpx;
+  display: flex;
+  flex-direction: row;
+  color: #409EFF;
+  font-weight: 500;
+  width: 70rpx;
+  font-style:italic;
+}
+
+.ranks .rank:nth-child(1) .sort{
+  color: #F56C6C;
+  font-size: 60rpx;
+
+}
+
+.ranks .rank:nth-child(2) .sort{
+  color: #E6A23C;
+  font-size: 55rpx;
+}
+.ranks .rank:nth-child(3) .sort{
+  color: #67C23A;
+  font-size: 50rpx;
+}
+
+.ranks .rank .pic{
+  height:120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  margin-right: 40rpx;
+}
+
+.ranks .rank .pic image{
+  height:120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  
+}
+
+.ranks .rank .pic-info{
+  width: calc(100% - 240rpx);
+}
+
+.ranks .rank .pic-info .title{
+  color:#303133;
+  font-size: 32rpx;
+  line-height: 34rpx;
+  margin-bottom: 5rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
+.ranks .rank .pic-info .author{
+  color:#606266;
+  margin-bottom: 5rpx;  
+  font-size: 26rpx;
+}
+
+.ranks .rank .pic-info .num{
+  color:#606266;
+  font-size: 26rpx;
+}

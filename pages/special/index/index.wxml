@@ -1,0 +1,26 @@
+<tab-bar title="专辑" block></tab-bar>
+<login-panel id="loginPanel"></login-panel>
+
+<view class="container" style="padding:0rpx">
+    <!--垂直滚动，这里必须设置高度-->
+    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="bindDownLoad" bindscroll="scroll">
+        
+        <view class='box-apply-spacing'>
+            <view class='box-img' bindtap="showSearch">
+                <image class='icon-search' src="../../../icon/specials/icon_search.png"></image>
+                <text class='search-size' decode='true'></text>
+            </view>
+        </view>
+
+        <view class="flexWarp">
+            <view class='sview' wx:for="{{list}}">
+                <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover}}" data-title='{{item.title}}'>
+                    <image class='simg' mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
+                    <text class='stext'>{{item.title}}</text>
+                </view>
+
+            </view>
+        </view>
+    </scroll-view>
+
+</view>

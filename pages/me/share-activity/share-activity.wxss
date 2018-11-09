@@ -1,0 +1,79 @@
+/* pages/fenxiang/fenxiang.wxss */
+
+page {
+  height: 100%;
+  background-color: #18366d;
+  overflow: hidden;
+}
+
+.pageTitle{
+  width: 100%;
+  height: 600rpx;
+  margin-bottom: 40rpx;
+}
+
+
+
+.fxPage {
+  width: 100%;
+  min-height:100%;
+  padding-bottom: 20rpx;
+}
+
+.scrollPage {
+  width: 100%;
+  height: 100%;
+}
+
+.fenxiangBtn{
+  width: 100%;
+  height: 100rpx;
+  margin-bottom: 50rpx;
+}
+
+.fenxiangBtnText{
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 100rpx;
+  background: #2db7f5;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+
+}
+
+.rules {
+  width: 90%;
+  height: 280rpx;
+  margin: 50rpx auto 0;
+  padding: 30rpx 0;
+  border-radius: 15rpx;
+  background: #fff;
+}
+
+.rulesTitle {
+  display: block;
+  width: 100%;
+  font-size: 28rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.rulesText {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 24rpx;
+  line-height: 44rpx;
+  
+}
+
+
+.afterTip{
+  color: #fff;
+  text-align: center;
+  font-size: 22rpx;
+  margin-top: 50rpx;
+}

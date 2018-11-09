@@ -1,0 +1,6 @@
+<view class="loading" wx:if="{{loading}}" style="background-color:{{bgColor}}">
+  <view >
+    <image src="/icon/loading.gif"></image>
+    <text>正在加载...</text>
+  </view>
+</view>

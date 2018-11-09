@@ -1,0 +1,278 @@
+swiper {
+  height: 100vh;
+  width: 100%;
+}
+
+swiper-item {
+  height: 100%;
+  width: 100%;
+}
+
+scroll-view {
+  height: 100%;
+}
+
+.loading-tip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color:#909399;
+  height:80rpx;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.to-top {
+  position: fixed;
+  right: 25rpx;
+  bottom: 50rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.45);
+  height:85rpx;
+  width: 85rpx;
+  padding:20rpx;
+  box-sizing: border-box;
+}
+
+.to-top image {
+  width: 100%;
+  height: 100%;
+}
+
+.hot-tab {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  align-items: center;
+  justify-content: space-around;
+  padding:0 50rpx;
+  color: #909399;
+  font-size: 26rpx;
+}
+
+.hot-tab-fixed {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  align-items: center;
+  justify-content: space-around;
+  background: #fff;
+  color: #909399;
+  font-size: 26rpx;
+  z-index: 20;
+}
+
+.hot-tab .hot-bar{
+  width: 150rp;
+  text-align: center;
+}
+
+.select {
+  color: #E6A23C;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+/* 专辑 */
+
+.flexWarp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 16rpx;
+}
+
+.sview {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 2.55555556;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+    color: #000;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.simg {
+    width: 354rpx;
+    box-sizing: border-box;
+    display: block;
+    height: 188rpx;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.stext {
+    font-size: 24rpx;
+    color: #9b9b9b;
+    display: block;
+    width: 354rpx;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 54rpx;
+}
+/* 搜索 */
+
+.panel-box {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.panel-body {
+    position: relative;
+}
+
+.panel-head {
+    position: relative;
+    padding: 10rpx;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input {
+    box-sizing: border-box;
+    padding-left: 42rpx;
+    width: 80%;
+    height: 60rpx;
+    font-size: 26rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+}
+
+.colorGray {
+    color: #cacaca;
+}
+
+.btn-cancle {
+    /* height: 67rpx;
+  width: 20%;
+  text-align: center; */
+    width: 20%;
+    background-color: #f0f0f0;
+    display: table;
+}
+
+.font-cancle {
+    font-size: 33rpx;
+    text-align: center;
+    /* color: #2782d7; */
+    display: table-cell;
+}
+
+.bg-font-color {
+    color: #2782d7;
+}
+
+.result-search {
+    position: fixed;
+    top: 100rpx;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 108rpx);
+    background: #fff;
+}
+
+.li-list-search {
+    height: 89rpx;
+    padding: 0 40rpx;
+    display: flex;
+    align-content: center;
+    line-height: 89rpx;
+    border-bottom: solid 2rpx #f0f0f0;
+}
+
+.li-list-search text {
+    font-size: 32rpx;
+}
+
+.icon-waiting {
+    width: 29rpx;
+    height: 29rpx;
+}
+
+.icon-cancel {
+    /* padding-right: 3rpx; */
+    width: 29rpx;
+    height: 29rpx;
+}
+
+.list-t {
+    /* padding-right: 3rpx; */
+    width: 50%;
+    height: 29rpx;
+}
+
+.icon-down {
+    width: 30rpx;
+    height: 19rpx;
+}
+
+.pl30 {
+    padding-left: 30rpx;
+}
+
+.rightFlex {
+    margin-left: auto;
+}
+
+.ima-list {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.colGray {
+    color: #808080;
+}
+.box-apply-spacing {
+  margin-top: 5rpx;
+  box-sizing: border-box;
+  padding: 0 40rpx;
+}
+.box-img {
+  margin-top: 5rpx;
+  margin-bottom: 18rpx;
+  background: #f2f2f2;
+  padding: 1rpx;
+  width: 100%;
+  height: 50rpx;
+  border-radius: 5px;
+  text-align: center;
+}
+.icon-search {
+  width: 38rpx;
+  height: 38rpx;
+  margin-top: 4rpx;
+  /* vertical-align: middle; */
+}
+.search-size {
+  color: #cdcdcd;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+.btn-cancle::after{
+  border: none;
+}
+
+
+

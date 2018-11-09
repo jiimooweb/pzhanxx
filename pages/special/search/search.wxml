@@ -1,0 +1,68 @@
+<tab-bar title="" block></tab-bar>
+<view class="container" style="padding:0rpx">
+    <!--垂直滚动，这里必须设置高度-->
+    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="bindDownLoad" bindscroll="scroll">
+
+        <view class="panel-box" hidden="{{flag_search}}">
+            <view class="panel-body">
+                <view class="panel-head ">
+                    <input class="search-input colorGray" type='text' confirm-type="search" placeholder="搜索你要的专辑" placeholder-class="colorGray" value="{{inputVal}}" bindfocus="showlog" bindinput="inputChange" bindconfirm="bindGoSearch"></input>
+                    <button class="btn-cancle" bindtap="hide">
+                        <text class="font-cancle bg-font-color">取消</text>
+                    </button>
+                </view>
+                <view class="no-tip" wx:if="{{isnull}}">
+                    <text>查无资料</text>
+                </view>
+
+                <view class="result-search" hidden="{{searchIsHidden}}" bindtap='bindSearchHidden'>
+                    <view>
+                        <view class='li-list-search' wx:for="{{searchList}}" wx:key="{{index}}" wx:if="{{index<3 || searchAllShow}}" catchtap="bindGo" data-item="{{item}}">
+                            <view class="icon-waiting">
+                                <image class='ima-list' src="../../../icon/specials/icon_waiting.png"></image>
+                            </view>
+                            <view class='list-t'>
+                                <text class="pl30 colGray">{{item}}</text>
+                            </view>
+                            <view class='icon-cancel rightFlex' catchtap="bindDelLog" data-item="{{item}}">
+                                <image class='ima-list' src="../../../icon/specials/icon_cancel.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="li-list-search" catchtap="bindSearchAllShow" wx:if="{{searchList.length>3 && !searchAllShow}}">
+                        <view class="icon-waiting"></view>
+                        <text class="pl30 colGray">全部搜索记录</text>
+                        <view class='icon-down rightFlex'>
+                            <image class='ima-list' src="../../../icon/specials/icon_down.png"></image>
+                        </view>
+                    </view>
+                    <view class='li-list-search' catchtap="bindClearSearch" wx:if="{{searchList.length>0 && searchAllShow}}">
+                        <text class="ui-col colGray tc">清除搜索记录</text>
+                    </view>
+                </view>
+
+                <view class="flexWarp" hidden='{{flag_res}}'>
+                    <view class='sview' wx:for="{{list}}">
+                        <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover_img.url}}">
+                            <image class='simg' mode="aspectFill" src="{{item.cover_img.url}}"></image>
+                            <text class='stext'>{{item.title}}</text>
+                        </view>
+
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+
+
+
+
+
+    </scroll-view>
+    <!-- <view class="body-view">
+        <loading hidden="{{hidden}}" bindchange="loadingChange">
+            加载中...
+        </loading>
+    </view> -->
+</view>

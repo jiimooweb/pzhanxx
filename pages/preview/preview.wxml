@@ -1,0 +1,65 @@
+<tab-bar bgColor="rgba(0,0,0,0)"></tab-bar>
+
+<swiper bindchange="change" circular skip-hidden-item-layout class="swiper-preview preview-wallpaper" duration="300" current="{{index}}" >
+  <swiper-item wx:for="{{pictures}}" wx:for-item="picture" wx:key="{{index}}">
+    <scroll-view scrollY bindscrolltolower="onReachBottom_" scrollTop="0" bindscroll="scroll">
+      <view class="preview-box">
+        <view class="preview-image">
+          <image bindtap="previewImage" src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="aspectFill"></image>
+        </view>
+
+        <view class="tags-relative">
+          <view class="title">{{picture.title}}</view>
+          <tags tags="{{picture.tags}}"></tags>
+        </view>
+        <view class="border"></view>
+        
+        <view class="similar-wallpaper">
+          <view class="title">相关推荐</view>
+            <view wx:if="{{recommends.length > 0}}">
+              <pic-list pictures="{{recommends}}"></pic-list>
+            </view>
+            <view class="tips" wx:elif="{{recommends.length == 0 && load}}">
+              相关推荐内容为空，敬请期待新的内容！
+            </view>
+            <view class="tips" wx:else>
+              正在加载相关推荐，请稍等...
+            </view>
+        </view>
+      </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+
+<view class="bottom-nav-container">
+  <button class="btn-home btn" catchtap="toHome" hoverClass="none">
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-home.svg"></image>
+    <text>首页</text>
+  </button>
+  <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{pictures[index].collect?'-active':''}}.svg"></image>
+    <text style="{{pictures[index].collect?'color: #F32B2B;':''}}">{{pictures[index].collect? '取消收藏' : '收藏'}}</text>
+  </button>
+  <!-- <button class="btn-download btn" data-event="downloadInit" formType="submit" hoverClass="none">
+    <view></view>
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-preview-download.svg"></image>
+    <text>下载</text>
+  </button> -->
+  <button catchtap="likeHandle" hoverClass="none">
+    <image src="/icon/like{{pictures[index].like?'-active':''}}.png"></image>
+    <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like ? '取消点赞' : '点赞'}}</text>
+  </button>
+  <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-share.svg"></image>
+    <text>分享</text>
+  </button>
+</view>
+<!-- <view class="open-buy-btn-box {{isShareUnlock?'shareUnlock':''}}" wx:else>
+  <button data-type="1" openType="share" wx:if="{{isShareUnlock}}">
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-preview-unlock-share.svg"></image>
+    <text>分享解锁</text>
+  </button>
+</view> -->
+
+<!-- <import src="../../utils/tpl.wxml"></import> -->
+<!-- <import src="../../utils/ad.wxml"></import> -->

@@ -1,0 +1,5 @@
+<view class="pic-list">
+  <view class="pic" wx:for="{{pictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
+    <image wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFill"></image>
+  </view>
+</view>

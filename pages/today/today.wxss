@@ -1,0 +1,452 @@
+/* 主页 */
+.pop-tab {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    /* height:44px; */
+    padding-left: 10px;
+}
+.all-container {
+    display: inline-flex;
+    flex-direction: row;
+    line-height: 30px;
+}
+
+.index-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.plain {
+    font-size: 16px;
+}
+
+.index {
+    font-size: 30px;
+    font-weight: 800;
+    margin-right: 7px;
+}
+
+.vertical-line {
+    margin-right: 7px;
+    height: 22px;
+    border-left: 1px solid black;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.month {
+    font-size: 12px;
+    line-height: 12px;
+    padding-bottom: 2px;
+    margin-right: 2rpx;
+}
+
+.year {
+    font-size: 10px;
+    line-height: 10px;
+    padding-bottom: 3px;
+}
+
+.span {
+    position: absolute;
+    bottom: 2rpx;
+    right: 2rpx;
+    transform: rotate(-45deg);
+}
+
+.ui-popup-content.left.show {
+    transform: translate3d(0, 0, 0) !important;
+}
+
+.ui-popup-content.left {
+    width: auto;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    transition: transform 300ms;
+    transition: transform 300ms, -webkit-transform 300ms;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.ui-popup-content {
+    position: absolute;
+    background-color: #fff;
+}
+
+ui-popup-mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+    transition: opacity 400ms;
+}
+
+.ui-popup-mask.show {
+    opacity: 1 !important;
+}
+
+.switch-container {
+    width: 600rpx;
+    height: 150rpx;
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch-container2 {
+    width: 600rpx;
+    height: 150rpx;
+    background-color: #f7f7f7;
+    /* border-radius: 2px; */
+    border-radius: 30rpx 0;
+    /* display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+.zan-show-text {
+    font-size: 26rpx;
+}
+
+.zan-noshow-text {
+    font-size: 26rpx;
+    opacity: 0.2;
+}
+
+.text-content {
+    width: 750rpx;
+    /* height: 850rpx; */
+    background-color: #fff;
+    padding-left: 80rpx;
+    padding-right: 80rpx;
+    margin-top:5px;
+}
+
+.text-content2 {
+    justify-content: center;
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+}
+
+.text-info {
+    font-size: 34rpx;
+    text-align: left;
+    line-height: 60rpx;
+    color: #333;
+    font-weight: lighter;
+    display:block;
+
+}
+
+/* 顶部导航栏 */
+
+.ui-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+    z-index: 490;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.ui-nav-bar-content {
+    display: flex;
+}
+
+.ui-col.align-left {
+    justify-content: flex-start;
+}
+
+.ui-col.valign-middle {
+    align-items: center;
+}
+
+.ui-col {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.ui-col-content.align-left {
+    align-items: flex-start;
+}
+
+.ui-col-content.valign-middle {
+    justify-content: center;
+}
+
+.ui-col-content {
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+}
+
+.date-header {
+    font-size: 26rpx;
+    font-weight: lighter;
+    color: #333;
+    width: 100%;
+    position: relative;
+}
+
+.date-header text {
+    font-size: 48rpx;
+    font-weight: lighter;
+    color: #333;
+    padding-right: 6rpx;
+}
+
+/* 日期 */
+
+view {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.popup-content {
+    background-color: #f5f5f5;
+}
+
+.ui-row {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.ui-col-3 {
+    float: left;
+    height: 100%;
+    width: 25%;
+}
+
+.ui-col {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex: 1;
+    /* height:100%; */
+}
+
+.ui-col-content {
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+}
+
+.popup-content .time-tabs-year {
+    font-size: 28rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+    color: #999;
+    margin-top: 20rpx;
+    padding-left: 10rpx;
+}
+
+.time-tabs-year {
+    font-size: 28rpx;
+    height: 50rpx;
+    display: flex;
+    align-items: center;
+    color: #999;
+    margin-top: 20rpx;
+    padding-left: 10rpx;
+}
+
+.ui-v-tab {
+    padding: 14px 18px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.ui-v-tabs {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+.ui-choice {
+    font-size: 13px;
+    padding: 8px 0;
+    font-weight: 500;
+    color: #333;
+    width: 80px;
+    border-right: 0px solid #333;
+}
+
+.ui-nochoice {
+    font-size: 13px;
+    padding: 8px 0;
+    font-weight: 300;
+    color: #999;
+    width: 80px;
+}
+
+.active {
+    position: absolute;
+    width: 40rpx;
+    height: 8rpx;
+    background-color: #333;
+    left: 0;
+}
+
+.popup-scroll-view {
+    display: block;
+    width: 100%;
+}
+
+.month-box {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+    align-content: flex-start;
+    padding-bottom: 30rpx;
+}
+
+.month-list-box {
+    flex: 0 0 50%;
+    height: 218rpx;
+    margin-top: 20rpx;
+}
+
+.month-list {
+    background-color: #fff;
+    width: 92%;
+    height: 100%;
+    border-radius: 8rpx;
+}
+
+.month-day {
+    text-align: center;
+    font-size: 80rpx;
+    font-weight: lighter;
+    height: 140rpx;
+}
+
+.month-year {
+    /* color: #333;
+    font-size: 30rpx;
+    padding-left: 12rpx;
+    font-weight: lighter;
+    padding-top: 10rpx; */
+    border: none;
+    padding: 0.6em 1.2em;
+    background: #c0392b;
+    color: #fff;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    margin: 3px 2px;
+    border-radius: 2px;
+}
+
+.month-year-box {
+    flex: 0 0 50%;
+    margin-top: 20rpx;
+}
+
+.year-list {
+    /* background-color: #fff; */
+    width: 92%;
+    height: 100%;
+    border-radius: 8rpx;
+}
+
+.month-line {
+    width: 100%;
+    height: 2rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.month-line text {
+    width: 50rpx;
+    height: 2rpx;
+    background-color: #bfbfbf;
+    margin-left: 10rpx;
+    margin-top: 10rpx;
+}
+
+.title {
+    color: #333;
+    font-size: 28rpx;
+    padding-left: 12rpx;
+    font-weight: lighter;
+    padding-top: 10rpx;
+    text-align: center;
+}
+
+.yi {
+    color: red;
+    display: block;
+    width: 50%;
+    float: left;
+}
+
+.yit {
+    width: 50%;
+    display: block;
+    float: right;
+    text-align: left;
+}
+
+.dian {
+    color: #333;
+    font-size: 28rpx;
+    height: 12rpx;
+    padding-left: 12rpx;
+    text-align: center;
+}
+
+.dian-select {
+    background: red;
+}
+
+.dian-unselect {
+    background: #f09cc6;
+}
+
+.dianyit {
+    width: 50%;
+    display: block;
+    float: right;
+}

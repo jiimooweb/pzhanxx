@@ -1,0 +1,11 @@
+
+<view class="container" style="height:{{statusBarHeight + barHeight}}px;background:{{bgColor}}" wx:if="{{block}}"></view>
+<view class="container-fixed" style="background:{{bgColor}}">
+  <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+  <view class="bar" style="height:{{barHeight}}px;background:{{bgColor}}">
+    <view class="back" bindtap="_back" wx:if="{{backFlag}}">
+      <image src="/icon/back.png"></image>
+    </view>
+    <view class="tab">{{title}}</view>
+  </view>
+</view>

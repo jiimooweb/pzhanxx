@@ -1,0 +1,62 @@
+<tab-bar title="社区" block></tab-bar>
+
+<loading loading="{{loading}}" position="bottom" height="100rpx"></loading>
+<login-panel id="loginPanel"></login-panel>
+
+<view class="comment-btn" bindtap="toRelease">
+  <image src="/icon/socials/write_comment.png"></image>
+  <text>发布</text>
+</view>
+
+<scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true" style="height:{{scrollHeight}}px">
+  <view class="social" wx:for="{{socials}}" wx:for-item="social" wx:for-index="socialIndex" scrolltolower="100" wx:key="{{socialIndex}}">
+    <view class="user">
+      <view class="avatar">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{social.fan.avatarUrl}}" mode="cover"></image>
+      </view>
+      <view class="nickname">
+        <view class="name">{{social.fan.nickname}}</view>
+        <view class="time">{{social.created_at}}</view>      
+      </view>
+    </view>
+    <view class="content" catchtap="toSocial" data-id="{{social.id}}" data-index="{{socialIndex}}">
+      <view class="text" wx:if="{{social.content != null}}">{{social.content}}</view>
+      <view class="photos">
+        <block wx:for="{{social.photos}}" wx:for-item="photo" wx:key="{{index}}">
+          <image wx:if="{{social.new == 1}}"  src="{{photo.url}}"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}" ></image>
+          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+       </block>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="like" wx:if="{{social.like == 1}}">
+        <image src="/icon/socials/liked.png" ></image>
+        <text>{{social.like_fans_count}}</text>
+      </view>
+      <view class="like" wx:else catchtap="like" data-id="{{social.id}}" data-index="{{socialIndex}}">
+        <image src="/icon/socials/like.png"></image>
+        <text wx:if="{{social.like_fans_count == 0}}">点赞</text>
+        <text wx:else>{{social.like_fans_count}}</text>
+      </view>
+      <view class="comment" catchtap="toComment" data-id="{{social.id}}" data-index="{{socialIndex}}">
+        <image src="/icon/socials/comment.png"></image>    
+        <text wx:if="{{social.comments_count == 0}}">评论</text>
+        <text wx:else>{{social.comments_count}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="loading-more" wx:if="{{loadMore}}">
+    <view class="info">
+      <image src="/icon/loading.gif"></image>
+      <text>加载中...</text>
+    </view>
+  </view>
+  <view class="no-tip" wx:if="{{tipFlag}}">
+      <text>没有更多了...</text>
+  </view>
+</scroll-view>
+
+
+
+
+

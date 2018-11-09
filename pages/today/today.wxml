@@ -1,0 +1,115 @@
+<!-- 主页 -->
+<view>
+<loading loading="{{loading}}"></loading>
+<login-panel id="loginPanel"></login-panel>
+
+    <view class='navigation'>
+      <view class='startBar' style='height:{{statusBarHeight}}px'></view>
+    </view>
+    <!-- 日期选择 -->
+    <view bindtap="openPopup" data-show="{{headtap}}" style='height:{{barHeight}}px'class="pop-tab">
+        <view class="all-container">
+            <view class="index-container">
+                <text class="plain" style='float:right'>No.</text>
+                <text class="index">{{num}}</text>
+                <view class="vertical-line">
+                </view>
+            </view>
+            <view class="date">
+                <text class="month">{{day}}</text>
+                <text class="year">{{month}}</text>
+            </view>
+            <image wx:if='{{datemore}}' style='width:10px;height:10px;margin-top:17px;;margin-left:5px' src='{{datemore}}'></image>
+        </view>
+    </view>
+
+    <!-- 日期 -->
+    <view class="popup-content" style="width:100vw;height:100%;" hidden='{{headtap}}'>
+        <view class="ui-row">
+            <view class="ui-col ui-col-3" style="flex: 0 0 25%;">
+                <view class="ui-col-content">
+                    <view bindtap="yearTap" data-show="{{showY}}" class="time-tabs-year">{{year}}</view>
+
+                    <scroll-view scroll-with-animation="" class="ui-v-tabs" scroll-top="52.5" scroll-y="" style="">
+                        <block wx:for="{{months}}" wx:key="*this">
+                            <view bindtap="handleTap" data-choice="{{item}}" class="ui-v-tab {{choice==item?'ui-choice':'ui-nochoice'}}">
+                                <text class="{{choice==item?'active':''}}"></text> {{item}}月
+                            </view>
+                        </block>
+                    </scroll-view>
+                </view>
+            </view>
+            <view class="ui-col">
+                <view class="ui-col-content">
+                    <scroll-view scrollY class="popup-scroll-view" style="height:100vh">
+                        <view class="month-box">
+                            <view class="month-year-box" wx:for="{{years}}" wx:key="id" hidden='{{showY}}'>
+                                <view bindtap="getYearTap" class="year-list" data-year="{{item}}">
+                                    <view class='month-year'>{{item}}</view>
+                                </view>
+                            </view>
+                            <view class="month-list-box" wx:for="{{data}}" wx:key="id" hidden='{{!showY}}'>
+                                <view bindtap="getArticleTap" class="month-list" data-select="{{index}}" data-dataSelect="{{item}}">
+                                    <view class="dian  {{select ==index? 'dian-select':'dian-unselect'}}">
+                                        <text class='dianyit'> · </text>
+                                        <text class='dianyit'>·</text>
+                                    </view>
+                                    <view class='month-day'>{{item[0].day}}</view>
+                                    <view class="month-line">
+                                        <text></text>
+                                        <text></text>
+                                        <text></text>
+                                    </view>
+                                    <view class='title'>
+                                        <text class='yi'> 宜 </text>
+                                        <text class='yit'>{{item[0].title}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 图 话 -->
+    <view id="id"  bindtouchstart="handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style="width : 100%; height:{{scrollHeight}}px;" data-sub="{{sub}}" hidden='{{!headtap}}'>
+        <!-- 图 -->
+        <view style="width:750rpx;height:{{scrollHeight-120}}px;margin-top:5px;background-color:#FFF;" hidden="{{list[sub].text!=null&&nowGesture==1}}" bindtap='toPreview' data-sub='{{sub}}' data-id='{{list[sub].img_id}}'>
+            <image wx:if="{{list[sub].picture.url}}" src="{{list[sub].picture.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim" mode="aspectFit" style="width:100%;height:100%;"></image>
+        </view>
+
+        <!-- 话 -->
+        <view class='text-content' style='height:{{scrollHeight-120}}px'hidden="{{list[sub].text==null ||nowGesture!=1}}">
+            <view class='text-content2' >
+                <view style='width:100%'>
+                    <view class='text-info'>
+                        <text >
+                             {{list[sub].text}} 
+                        </text>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+
+        <!-- like -->
+        <view style=" display: flex;align-items: center;justify-content: center;  width: 100%； height:85px ;margin-top:20rpx;">
+            <view class="switch-container2">
+                <view style="float:left;margin-left:30rpx;margin-top:20rpx">
+                    <text style="font-size:35rpx;">{{list[sub].title}}</text>
+                </view>
+                <view style="float:right;margin-right:20rpx;margin-top:40rpx">
+                    <text style="font-size:28rpx;position:absolute;margin-top:10rpx;opacity:0.5;">{{list[sub].today_likes_count}}</text>
+
+                    <image bindtap="like" data-sub="{{sub}}" data-list="{{list}}" style="height:68rpx;width:68rpx;margin-left:30rpx" src="{{list[sub].isLike==0?todayNoLove:todayLove}}"></image>
+                </view>
+                <view style='position:absolute;margin-top:80rpx;margin-left:30rpx;'>
+                    <text class="{{nowGesture!=1||list[sub].text==null?'zan-show-text':'zan-noshow-text'}}">图</text>
+                    <text class="{{nowGesture==1?'zan-show-text':'zan-noshow-text'}}" style="margin-left:30rpx;" hidden="{{list[sub].text==null}}">话</text>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>

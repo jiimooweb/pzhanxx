@@ -1,0 +1,23 @@
+<tab-bar title="发布" block></tab-bar>
+
+<form bindsubmit="formSocial">
+  <view style="height:100%;width:100%" bindtap="changeReplyFlag" ></view>
+  <view class="section">
+    <!-- <view class="header">回复</view> -->
+    <view class="reply-input">
+      <textarea type="text" placeholder="这一刻的想法..." placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="40" auto-focus />
+    </view>
+    <button class="send" formType="submit">发布</button>
+  </view>
+</form>
+<view class="photo-panel">
+  <view class="photos" wx:for="{{photos}}" catchtap="preview" data-url="{{item}}">
+    <image src="{{item}}" mode="aspectFill"></image>
+    <view class="del-icon" catchtap="deletePhoto" data-index="{{index}}">
+      <image class="del" src="/icon/socials/del.png"></image>
+    </view>
+  </view>
+  <view class="add" catchtap="selectPhoto" wx:if="{{addFlag}}">
+    <image class="add-img" src="/icon/socials/add.png"></image>
+  </view>
+</view>

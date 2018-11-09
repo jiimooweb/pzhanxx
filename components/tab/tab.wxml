@@ -1,0 +1,14 @@
+<view class="container" style="height:{{height}}px"></view>
+<view class="container-fixed">
+  <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+  <view class="bar" style="height:{{barHeight}}px">
+    <view class="tabs">
+      <view class="back" bindtap="_back" wx:if="{{backFlag}}">
+        <image src="/icon/back.png"></image>
+      </view>
+      <view class="tab {{tabIndex == index ? 'choose' : ''}}" wx:for="{{tabs}}" wx:for-item="tab" data-index="{{index}}" bindtap="_choose" wx:key="{{index}}">{{tab}}
+      <view class="dot" wx:if="{{index > 0 && dot > 0}}"></view>
+      </view>
+    </view>
+  </view>
+</view>

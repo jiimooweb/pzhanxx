@@ -1,0 +1,45 @@
+<tab-bar title="{{title}}" block></tab-bar>
+
+<scroll-view enableBackToTop scroll-y bindscrolltolower="loadMore" class="index-scroll-view" lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" scroll-with-animation>
+    <view id="outside">
+        <view class="swipers" id="swipers">
+            <swiper autoplay circular="true" class="swiper" duration="500" interval="3000" nextMargin="50rpx" previousMargin="50rpx" current="0"  bindchange='onSlideChangeEnd'>
+                <swiper-item wx:for="{{swpiers}}" wx:key="{{index}}" bindtap="toOther" data-url="{{item.url}}">
+                    <button class="swiper-btn {{carouselIndex===index?'ori':''}}" data-albumId="{{item.AlbumId}}" data-event="swiperHandle" data-index="{{index}}" formType="submit" hoverClass="none">
+                        <image class="swiper-image" mode="aspectFill" src="{{item.image}}"></image>
+                    </button>
+                    <text wx:if="{{item.DataType===2}}">小程序推荐</text>
+                </swiper-item>
+            </swiper>
+        </view>
+
+        <tags tags="{{tags}}"></tags>
+
+        <view class="hot-album" id="ablums">
+            <button class="module-title" bindtap='goSpecial'>
+                热门专辑
+            </button>
+            <view class="album-view">
+                <button class="hot-btn" bindtap='gohotSpecial' data-index="{{index}}" formType="submit" hoverClass="none" wx:for="{{specials}}" wx:key="{{index}}">
+                    <image mode="aspectFill" src="{{item.cover}}"></image>
+                    <!-- <text wx:if="{{item.AlbumType===3}}">话题</text> -->
+                    <!-- <text class="act" wx:if="{{item.AlbumType===4}}">活动</text> -->
+                    <view class="single-ellipsis">{{item.title}}</view>
+                </button>
+            </view>
+        </view>
+
+        <view class="recommend-pic" id="recommend">
+            <button class="module-title" catchtap="toNew" hoverClass="none">
+                推荐图片
+            </button>
+        </view>
+        <pic-list pictures="{{pictures}}" bind:toPreview="toPreview"></pic-list>
+
+    </view>
+    <view class="loading-tip" wx:if="{{isLoadMode}}">正在加载，请稍等...</view>
+    <view class="loading-tip" wx:else bindtap="refreshPictures">到底啦！点击刷新图片！</view>
+</scroll-view>
+<view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
+    <image src="/icon/gotop.png"></image>
+</view>

@@ -1,0 +1,17 @@
+<view class="ranks">
+  <view class="rank" wx:for="{{hotPictures}}" wx:key="{{index}}" catchtap="_toPreview" data-index="{{index}}" data-id="{{item.id}}">
+    <view class="sort">
+      {{index + 1}}
+    </view>
+    <view class="pic">
+      <image src="{{item.url}}" mode="aspectFill"></image>
+    </view>
+    <view class="pic-info">
+      <view class="title">{{item.title}}</view>
+      <view class="author">{{item.author}}</view>
+      <view class="num" wx:if="{{hotIndex == 0}}">{{item.hot}} 热度</view>
+      <view class="num" wx:if="{{hotIndex == 1}}">{{item.collect_fans_count}} 收藏</view>
+      <view class="num" wx:if="{{hotIndex == 2}}">{{item.like_fans_count}} 点赞</view>
+    </view>
+  </view>
+</view>

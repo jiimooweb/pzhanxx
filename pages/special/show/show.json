@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "",
+    "usingComponents": {
+        "loading": "/components/loading/loading",
+        "login-panel": "/components/login-panel/index",
+        "tab-bar": "/components/tabBar/tabBar",
+        "report": "/components/report/report",
+        "pic-list": "/components/pic-list/pic-list"
+    }
+}

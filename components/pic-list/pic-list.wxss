@@ -1,0 +1,22 @@
+
+.pic-list {
+  box-sizing: border-box;
+  padding:20rpx 16rpx 0rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.pic {
+  width: 230rpx;
+  height: 410rpx;
+  margin-bottom: 16rpx;
+  box-sizing: border-box;
+}
+
+.pic image {
+  height: 100%;
+  width: 100%;
+}

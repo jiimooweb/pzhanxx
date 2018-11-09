@@ -1,0 +1,101 @@
+<login-panel id="loginPanel" bind:hide="loginHide"></login-panel>
+<view class="header" style="background: url({{bgImages[id]}}) center/cover no-repeat" bindtap="changeBgId">
+<view class="mask"></view>
+</view>
+<view class="user-panel">
+  <view class="user">
+    <view class="user-info" wx:if="{{authorize_status}}">
+      <view class="avatar">
+        <image src="{{userInfo.avatarUrl}}"></image>
+      </view>
+      <view class="name">
+        <view class="nickname">{{userInfo.nickName}}</view>
+        <view class="member">积分:{{point}}</view>
+      </view>
+    </view>
+    <view class="user-info" catchtap="login" wx:else>
+      <view class="avatar">
+        <image src="http://download.rdoorweb.com/pzhan/no_profile.png"></image>
+      </view>
+      <view class="login-tips"> 
+        <view>授权登录</view>
+      </view>
+    </view>
+    <view class="sign" wx:if="{{loading}}">
+      <view wx:if="{{signButtonFlag}}" class="sign-in" catchtap="showSignPanel">签到</view>
+      <view wx:else class="sign-end">已签到</view>
+    </view>
+  </view>
+</view>
+
+<view class="list">
+  <view class="row" catchtap="toNotice">
+    <view class="right">
+      <image src="/icon/me/notice.png"></image>
+      <view class="row-name">消息通知</view>
+    </view>
+    <view class="dot" wx:if="{{notice_count > 0}}"></view>
+  </view>
+</view> 
+<view class="list">
+  <view class="row" catchtap="toShare">
+    <view class="right">
+      <image src="/icon/me/gift.png"></image>    
+      <view class="row-name">邀请有礼</view>
+    </view>
+    <view class="left">邀请好友助力即可获取积分</view>
+  </view>
+</view> 
+<view class="list">
+  <view class="row" bindtap="toCollect">
+    <view class="right">
+      <image src="/icon/me/collect.png"></image> 
+      <view class="row-name">我的收藏</view>
+    </view>
+    <view class="left"></view>
+  </view>
+  <!-- <view class="row">
+    <view class="right">
+      <image src="/icon/me/download.png"></image>
+      <view class="row-name">我的下载</view>
+    </view>
+    <view class="left"></view>
+  </view> -->
+  <view class="row" bindtap="toSocial">
+    <view class="right">
+      <image src="/icon/me/dongtai.png"></image>
+      <view class="row-name">我的动态</view>
+    </view>
+    <view class="left"></view>
+  </view> 
+</view>
+<view id="suggest">
+  <button class="btn-list" open-type="contact">
+    <view class="row">
+      <view class="right">
+        <image src="/icon/me/suggest.png"></image>
+        <view class="row-name">意见反馈</view>
+      </view>
+      <view class="left"></view>
+    </view>
+  </button> 
+</view>
+
+<view class='signInPage' wx:if="{{signPanelFlag}}">
+  <view class='signWindow'>
+    <view class='closeWindow' bindtap="hideSignPanel">
+      <image src="/icon/cancel.png"></image>
+    </view>
+    <view class='signTitle'>
+      <image class='signTitleIme' src='/icon/me/signTitle.png'></image>
+    </view>
+    <view class='signAvatar'>
+      <image class='avatarImg' src='/icon/me/signImg.png'></image>
+    </view>
+    <view class='signText'>
+      <text class='signGet'>连续签到<text class='signPoint'>{{continuity_day}}</text>天,恭喜获得<text class='signPoint'>{{addpoint}}</text>点积分</text>
+      <text class='signGet'>请再接再厉~</text>
+    </view>
+    <!-- <view class='shareBtn'>与他人分享~</view> -->
+  </view>
+</view>

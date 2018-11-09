@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "评论详情",
+    "usingComponents": {
+        "loading": "/components/loading/loading",
+        "login-panel": "/components/login-panel/index",
+        "tab-bar": "/components/tabBar/tabBar",
+        "report": "/components/report/report"
+    }
+}

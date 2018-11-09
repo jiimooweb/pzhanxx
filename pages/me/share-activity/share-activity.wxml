@@ -1,0 +1,20 @@
+<tab-bar bgColor="rgba(0,0,0,0)" block="{{false}}"></tab-bar>
+<scroll-view class='scrollPage' scroll-y="true">
+  <view class='fxPage' style='background:url(http://download.rdoorweb.com/pzhan/WechatIMG5934.jpeg) no-repeat;background-size:100%;'>
+    <view class='pageTitle'></view>
+    <view class='fenxiangBtn'>
+      <button  open-type="share" class='fenxiangBtnText'>我要分享</button>
+    </view>
+    <view class='rules'>
+      <text class='rulesTitle'>活动细则</text>
+      <text class='rulesText'>1.每个人只能给每个好友各加一次分</text>
+      <text class='rulesText'>2.自己无法给自己分享加分</text>
+      <text class='rulesText'> 3.加过分还可以再次点击我也要分享让其他好友为自己加分     </text>
+      <text class='rulesText'> 4.获取的积分可用来解锁下载喜欢的图片</text>
+
+    </view>
+    <view class='afterTip'>本活动最终解释权归p站精选所有</view>
+  </view>
+</scroll-view>
+
+

@@ -1,0 +1,8 @@
+{
+  "disableScroll": true,
+  "navigationBarTitleText": "发布",
+  "usingComponents": {
+    "tab-bar": "/components/tabBar/tabBar"
+  }
+  
+}

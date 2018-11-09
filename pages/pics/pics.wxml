@@ -1,0 +1,10 @@
+<tab-bar title="{{title}}" block id="tab"></tab-bar>
+<scroll-view enableBackToTop scroll-y bindscrolltolower="loadMore" class="index-scroll-view" lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" scroll-with-animation>
+<view id="anchor"></view>
+<pic-list pictures="{{pictures}}" ></pic-list>
+<view class="loading-tip" wx:if="{{isLoadMode}}">正在加载，请稍等...</view>
+<view class="loading-tip" wx:else>没有了啊!</view>
+</scroll-view>
+<view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
+  <image src="/icon/gotop.png"></image>
+</view>
