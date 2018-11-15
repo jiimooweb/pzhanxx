@@ -4,7 +4,7 @@
   <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
   <view class="bar" style="height:{{barHeight}}px;background:{{bgColor}}">
     <view class="back" bindtap="_back" wx:if="{{backFlag}}">
-      <image src="/icon/back.png"></image>
+      <image src="/icon/back.svg"></image>
     </view>
     <view class="tab">{{title}}</view>
   </view>
