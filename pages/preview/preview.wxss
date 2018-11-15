@@ -593,8 +593,6 @@ swiper .loadingSvg {
     font-weight: 500;
 }
 
-
-
 .success-container .body .tip {
     font-size: 30rpx;
     color: #4C4C4C;
@@ -826,15 +824,8 @@ swiper .loadingSvg {
 .tags-relative .title {
   padding: 0 20rpx 10rpx 20rpx;
   box-sizing: border-box;
-  color: #303133;
-  
-}
-
-.tags-relative .author {
-  padding: 0 20rpx 10rpx 25rpx;
-  box-sizing: border-box;
   color: #606266;
-  font-size: 26rpx;
+  
 }
 
 .border {

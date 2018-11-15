@@ -1,13 +1,13 @@
 <!-- 主页 -->
 <view>
-<loading loading="{{loading}}"></loading>
-<login-panel id="loginPanel"></login-panel>
+    <loading loading="{{loading}}"></loading>
+    <login-panel id="loginPanel"></login-panel>
 
     <view class='navigation'>
-      <view class='startBar' style='height:{{statusBarHeight}}px'></view>
+        <view class='startBar' style='height:{{statusBarHeight}}px'></view>
     </view>
     <!-- 日期选择 -->
-    <view bindtap="openPopup" data-show="{{headtap}}" style='height:{{barHeight}}px'class="pop-tab">
+    <view bindtap="openPopup" data-show="{{headtap}}" style='height:{{barHeight}}px' class="pop-tab">
         <view class="all-container">
             <view class="index-container">
                 <text class="plain" style='float:right'>No.</text>
@@ -24,7 +24,7 @@
     </view>
 
     <!-- 日期 -->
-    <view class="popup-content" style="width:100vw;height:100%;" hidden='{{headtap}}'>
+    <view class="popup-content" style="height:{{scrollHeight}}px;width:100vw;" hidden='{{headtap}}'>
         <view class="ui-row">
             <view class="ui-col ui-col-3" style="flex: 0 0 25%;">
                 <view class="ui-col-content">
@@ -41,7 +41,7 @@
             </view>
             <view class="ui-col">
                 <view class="ui-col-content">
-                    <scroll-view scrollY class="popup-scroll-view" style="height:100vh">
+                    <scroll-view scrollY class="popup-scroll-view" style="height:height:{{scrollHeight}}px">
                         <view class="month-box">
                             <view class="month-year-box" wx:for="{{years}}" wx:key="id" hidden='{{showY}}'>
                                 <view bindtap="getYearTap" class="year-list" data-year="{{item}}">
@@ -73,18 +73,18 @@
         </view>
     </view>
     <!-- 图 话 -->
-    <view id="id"  bindtouchstart="handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style="width : 100%; height:{{scrollHeight}}px;" data-sub="{{sub}}" hidden='{{!headtap}}'>
+    <view id="id" bindtouchstart="handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style="width : 100%; height:{{scrollHeight}}px;" data-sub="{{sub}}" hidden='{{!headtap}}'>
         <!-- 图 -->
         <view style="width:750rpx;height:{{scrollHeight-120}}px;margin-top:5px;background-color:#FFF;" hidden="{{list[sub].text!=null&&nowGesture==1}}" bindtap='toPreview' data-sub='{{sub}}' data-id='{{list[sub].img_id}}'>
             <image wx:if="{{list[sub].picture.url}}" src="{{list[sub].picture.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim" mode="aspectFit" style="width:100%;height:100%;"></image>
         </view>
 
         <!-- 话 -->
-        <view class='text-content' style='height:{{scrollHeight-120}}px'hidden="{{list[sub].text==null ||nowGesture!=1}}">
-            <view class='text-content2' >
+        <view class='text-content' style='height:{{scrollHeight-120}}px' hidden="{{list[sub].text==null ||nowGesture!=1}}">
+            <view class='text-content2'>
                 <view style='width:100%'>
                     <view class='text-info'>
-                        <text >
+                        <text>
                              {{list[sub].text}} 
                         </text>
                     </view>
