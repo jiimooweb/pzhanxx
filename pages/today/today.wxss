@@ -136,7 +136,8 @@ ui-popup-mask {
     background-color: #fff;
     padding-left: 80rpx;
     padding-right: 80rpx;
-    margin-top:5px;
+    padding-top:5px;
+    box-sizing: border-box;
 }
 
 .text-content2 {
