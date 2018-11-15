@@ -47,6 +47,8 @@ Page({
     }
     if (this.data.index) {
       this.isCollectdAndLiked()
+      this.getPicture()    
+      
     }
   },
 
@@ -105,7 +107,8 @@ Page({
         app.globalData.collect_ids = res.data.collect_ids
         app.globalData.like_ids = res.data.like_ids
         this.isCollectdAndLiked()
-        this.addHot()        
+        this.addHot()
+        this.getPicture()                    
       }
     })
   },
@@ -146,28 +149,30 @@ Page({
     var collect_ids = app.globalData.collect_ids
     var like_ids = app.globalData.like_ids
 
+    var collect_fans_count = pictures[index].collect_fans_count
+    var like_fans_count = pictures[index].collect_fans_count
+
     var collect_status = 0
     var like_status = 0
     if (collect_ids.indexOf(id) > -1) {
       collect_status = 1
     } else {
-      collect_status = 0
+      collect_status = 0   
     }
 
     if (like_ids.indexOf(id) > -1) {
       like_status = 1
     }else {
-      like_status = 0
+      like_status = 0  
     }
 
     this.setData({
       ['pictures[' + index + '].collect']: collect_status,
-      ['pictures[' + index + '].like']: like_status
+      ['pictures[' + index + '].like']: like_status,
       
     })
     app.globalData.pictures[pindex][index].collect = collect_status
     app.globalData.pictures[pindex][index].like = like_status
-    
 
   },
 
@@ -216,6 +221,7 @@ Page({
     })
     this.isCollectdAndLiked()
     this.addHot()
+    this.getPicture()        
   },
 
   collectHandle: function(e) {
@@ -230,12 +236,21 @@ Page({
       success: res => {
         if(res.data.status == 'success') {
           var key = 'pictures[' + this.data.index + '].collect'
+          var count_key = 'pictures[' + this.data.index + '].collect_fans_count'
           var status = this.data.pictures[this.data.index].collect ? 0 : 1
+          var collect_fans_count = this.data.pictures[this.data.index].collect_fans_count
+          if (status) {
+            collect_fans_count++
+          } else {
+            collect_fans_count--
+          }
           this.setData({
             [key]: status,
+            [count_key]: collect_fans_count,
           })
           var pindex = getCurrentPages().length - 2
           app.globalData.pictures[pindex][this.data.index].collect = status
+          app.globalData.pictures[pindex][this.data.index].collect_fans_count = collect_fans_count
 
           if(status == 0) {
             var collect_index = app.globalData.collect_ids.indexOf(parseInt(this.data.id))
@@ -261,12 +276,21 @@ Page({
       success: res => {
         if (res.data.status == 'success') {
           var key = 'pictures[' + this.data.index + '].like'
+          var count_key = 'pictures[' + this.data.index + '].like_fans_count'
           var status = this.data.pictures[this.data.index].like ? 0 : 1
+          var like_fans_count = this.data.pictures[this.data.index].like_fans_count
+          if (status) {
+            like_fans_count++
+          } else {
+            like_fans_count--
+          }
           this.setData({
-            [key]: status
+            [key]: status,
+            [count_key]: like_fans_count
           })
           var pindex = getCurrentPages().length - 2
-          app.globalData.pictures[pindex][this.data.index].like = status                 
+          app.globalData.pictures[pindex][this.data.index].like = status   
+          app.globalData.pictures[pindex][this.data.index].like_fans_count = like_fans_count                 
           if (status == 0) {
             var like_index = app.globalData.collect_ids.indexOf(parseInt(this.data.id))
             app.globalData.collect_ids.splice(like_index, 1)

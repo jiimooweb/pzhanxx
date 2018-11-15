@@ -38,7 +38,7 @@
   </button>
   <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
     <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{pictures[index].collect?'-active':''}}.svg"></image>
-    <text style="{{pictures[index].collect?'color: #F32B2B;':''}}">{{pictures[index].collect? '取消收藏' : '收藏'}}</text>
+    <text style="{{pictures[index].collect?'color: #F32B2B;':''}}">{{pictures[index].collect_fans_count > 0 ? pictures[index].collect_fans_count : '收藏'}}</text>
   </button>
   <!-- <button class="btn-download btn" data-event="downloadInit" formType="submit" hoverClass="none">
     <view></view>
@@ -47,7 +47,7 @@
   </button> -->
   <button catchtap="likeHandle" hoverClass="none">
     <image src="/icon/like{{pictures[index].like?'-active':''}}.png"></image>
-    <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like ? '取消点赞' : '点赞'}}</text>
+    <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like_fans_count > 0 ? pictures[index].like_fans_count : '点赞'}}</text>
   </button>
   <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
     <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-share.svg"></image>
