@@ -27,7 +27,7 @@ Page({
     },
 
     onShow: function() {
-        if (app.globalData.mySocials.length > 0 && this.data.isShow) {
+        if (this.data.isShow) {
             this.setData({
                 socials: app.globalData.mySocials,
                 isLoadMore: app.globalData.mySocialIsLoadMode
