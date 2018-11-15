@@ -93,7 +93,7 @@
                     <view class="section">
                         <!-- <view class="header">评论</view> -->
                         <view class="reply-input">
-                            <textarea placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" cursor-spacing="120" focus="{{commentPanleFlag}}" fixed />
+                            <textarea placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" cursor-spacing="120" focus="{{commentPanleFlag}}" fixed value="{{textValue}}"/>
                         </view>
                         <button class="send" formType="submit">发表</button>
                     </view>
@@ -107,7 +107,7 @@
                     <view class="section">
                         <!-- <view class="header">回复</view> -->
                         <view class="reply-input">
-                            <textarea type="text" placeholder="回复 @{{comment.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="120" focus="{{replyPanleFlag}}" />
+                            <textarea type="text" placeholder="回复 @{{comment.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="120" focus="{{replyPanleFlag}}" value="{{textValue}}"/>
                         </view>
                         <button class="send" formType="submit">发表</button>
                     </view>

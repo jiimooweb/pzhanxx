@@ -140,7 +140,8 @@ Page({
 
                     this.setData({
                         replys: replys,
-                        ['comment.replys_count']: parseInt(this.data.comment.replys_count) + 1
+                        ['comment.replys_count']: parseInt(this.data.comment.replys_count) + 1,
+                      text: ''
                     })
 
                     wx.showToast({

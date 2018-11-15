@@ -191,7 +191,8 @@ Page({
           var key = 'comments[' + length + ']'
           this.setData({
             [key]: res.data.data,
-            comment_count: parseInt(this.data.comment_count) + 1
+            comment_count: parseInt(this.data.comment_count) + 1,
+            text: ''
           })
           wx.showToast({
             title: '评论成功',
@@ -244,7 +245,8 @@ Page({
           this.setData({
             [key]: replys,
             [count_key]: parseInt(comment.replys_count) + 1,
-            comment_count: parseInt(this.data.comment_count) + 1
+            comment_count: parseInt(this.data.comment_count) + 1,
+            text: ''
           })
 
           wx.showToast({

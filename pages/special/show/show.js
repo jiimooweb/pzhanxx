@@ -24,7 +24,8 @@ Page({
         replyPanleFlag: false,
         replyUser: false,
         loading: true,
-        notice_fans: []
+        notice_fans: [],
+        textValue: ''
     },
 
     onLoad: function(options) {
@@ -222,7 +223,8 @@ Page({
                     var key = 'comments[' + length + ']'
                     this.setData({
                         [key]: res.data.data,
-                        comment_count: parseInt(this.data.comment_count) + 1
+                        comment_count: parseInt(this.data.comment_count) + 1,
+                        textValue: ''
                     })
                     wx.showToast({
                         title: '评论成功',
@@ -272,7 +274,8 @@ Page({
                     this.setData({
                         [key]: replys,
                         [count_key]: parseInt(comment.replys_count) + 1,
-                        comment_count: parseInt(this.data.comment_count) + 1
+                        comment_count: parseInt(this.data.comment_count) + 1,
+                        textValue: ''
                     })
                     wx.showToast({
                         title: '回复成功',
