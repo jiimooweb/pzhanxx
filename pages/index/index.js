@@ -222,7 +222,13 @@ Page({
         wx.navigateTo({
             url: '../special/show/show?sid=' + sid + '&curl=' + curl + '&title=' + title,
         })
+    },
+
+  onShareAppMessage: function () {
+    return {
+      title: 'P站星选',
     }
+  },
  
 
 })
