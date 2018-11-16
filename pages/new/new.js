@@ -339,7 +339,6 @@ Page({
     });
   },
   loadFirst: function () {
-    console.log('1');
     var that = this;
     that.setData({
       hidden: false
