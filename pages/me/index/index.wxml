@@ -81,6 +81,17 @@
   </button> 
 </view>
 
+<view class="list">
+  <view class="row" bindtap="toStatement">
+    <view class="right">
+      <image src="/icon/me/statement.png"></image>    
+      <view class="row-name">声明</view>
+    </view>
+    <view class="left"></view>
+  </view>
+</view> 
+
+
 <view class='signInPage' wx:if="{{signPanelFlag}}">
   <view class='signWindow'>
     <view class='closeWindow' bindtap="hideSignPanel">
