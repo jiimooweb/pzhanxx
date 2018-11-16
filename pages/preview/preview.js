@@ -325,7 +325,50 @@ Page({
       'path': 'pages/preview/preview?id=' + this.data.id + '&key=share' 
     }
     
-    
+  },
+
+  download: function() {
+    wx.showLoading({
+      title: '正在下载...',
+    })
+    wx.request({
+      url: Config.restUrl + '/pictures/' + this.data.id + '/download',
+      header: { 'token': wx.getStorageSync('token') },
+      method: 'post',
+      success: res => {
+        if(res.data.status == 'success') {
+          var url = res.data.url
+          wx.downloadFile({
+            url: url,
+            success: res => {
+              var tempFilePath = res.tempFilePath;
+              wx.saveImageToPhotosAlbum({
+                filePath: tempFilePath,
+                success: res => {
+                  wx.hideLoading()
+                  wx.showToast({
+                    title: '已保存到相册',
+                    icon: 'none'
+                  })
+                  this.delPic()
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
+  delPic: function() {
+    wx.request({
+      url: Config.restUrl + '/pictures/' + this.data.id + '/del-pic',
+      header: { 'token': wx.getStorageSync('token') },
+      method: 'post',
+      success: res => {
+
+      }
+    })
   }
 
 // https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=http%3a%2f%2fp8r2g6z46.bkt.clouddn.com%2f20181025%2fca34d094b08eefc14dca8eb83eae2ebe.png

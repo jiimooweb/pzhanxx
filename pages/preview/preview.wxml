@@ -41,11 +41,11 @@
     <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{pictures[index].collect?'-active':''}}.svg"></image>
     <text style="{{pictures[index].collect?'color: #F32B2B;':''}}">{{pictures[index].collect_fans_count > 0 ? pictures[index].collect_fans_count : '收藏'}}</text>
   </button>
-  <!-- <button class="btn-download btn" data-event="downloadInit" formType="submit" hoverClass="none">
+  <button class="btn-download btn" catchtap="download" hoverClass="none">
     <view></view>
     <image src="https://minibizhi.313515.com/BiZhiStatic/icon-preview-download.svg"></image>
     <text>下载</text>
-  </button> -->
+  </button>
   <button catchtap="likeHandle" hoverClass="none">
     <image src="/icon/like{{pictures[index].like ? '-active' : ''}}.png"></image>
     <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like_fans_count > 0 ? pictures[index].like_fans_count : '点赞'}}</text>
