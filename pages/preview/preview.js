@@ -353,6 +353,13 @@ Page({
                   this.delPic()
                 }
               })
+            },
+            fail: res => {
+              this.delPic()
+              wx.showToast({
+                title: '拒绝授权',
+                icon: 'none'
+              })      
             }
           })
         }
