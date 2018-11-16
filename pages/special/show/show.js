@@ -259,7 +259,7 @@ Page({
             data: {
                 'fan_id': fan_id,
                 'content': content,
-                pid: comment.id,
+                'pid': comment.id,
                 'special_id': special_id,
                 'to_fan_id': to_fan_id
             },
@@ -281,13 +281,13 @@ Page({
                         title: '回复成功',
                         icon: 'success'
                     })
-                    this.addCommentNotice(special_id, comment.fan_id, content)
+                  this.addCommentNotice(special_id, comment.id,comment.fan_id, content)
                     app.globalData.special_comments = this.data.comments
                 }
             }
         })
     },
-    addCommentNotice: function(special_id, to_fan_id, content) {
+  addCommentNotice: function (special_id, comment_id,to_fan_id, content) {
         wx.request({
             url: Config.restUrl + '/specials/' + special_id + '/addCommentNotice',
             header: {
@@ -296,6 +296,7 @@ Page({
             data: {
                 'to_fan_id': to_fan_id,
                 'module_id': special_id,
+                'module_comment_id': comment_id,
                 'module': 'special',
                 'content': content
             },

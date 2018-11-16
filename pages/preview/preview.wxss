@@ -828,6 +828,13 @@ swiper .loadingSvg {
   
 }
 
+.tags-relative .author {
+  padding: 0 20rpx 10rpx 25rpx;
+  box-sizing: border-box;
+  color: #909399;
+  font-size: 28rpx;
+}
+
 .border {
     margin: 0 16rpx;
     height: 24rpx;

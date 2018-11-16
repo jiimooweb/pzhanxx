@@ -10,6 +10,7 @@
 
         <view class="tags-relative">
           <view class="title">{{picture.title}}</view>
+          <view class="author">{{picture.author}}</view>
           <tags tags="{{picture.tags}}"></tags>
         </view>
         <view class="border"></view>

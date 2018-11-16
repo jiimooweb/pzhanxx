@@ -32,6 +32,10 @@ App({
 
     },
 
+    // onHide: function() {
+    //   this.globalData.socials = []
+    // },
+
     globalData: {
         userInfo: null,
         socials: [],

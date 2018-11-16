@@ -1,6 +1,10 @@
 import { Config } from "../../../utils/config.js"
+import { Token } from "../../../utils/token.js"
+
 
 var app = getApp()
+const token = new Token
+
 // const dir = wx.env.USER_DATA_PATH
 Page({
 
@@ -17,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    token.verify(this.callback)
   },
 
   // onShareAppMessage: function () {
@@ -139,6 +143,10 @@ Page({
       return
     }
    
+  },
+
+  callback: function() {
+    
   }
 
 

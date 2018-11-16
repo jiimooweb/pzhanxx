@@ -1,7 +1,10 @@
 import { Config } from "../../../utils/config.js"
+import { Token } from "../../../utils/token.js"
+
 
 
 var app = getApp()
+const token = new Token
 
 Page({
 
@@ -14,6 +17,7 @@ Page({
     social_index: 0,
     comment_count: 0,
     comments: {},
+    social: {},
     commentPanleFlag:false,
     operatePanleFlag:false,
     replyPanleFlag: false,
@@ -30,15 +34,23 @@ Page({
     var id = options.id
     var index = options.index
     var key = options.key ? options.key : 'socials'
+
+    if (key == 'socials') {
+      var social = app.globalData.socials[index]
+    } else {
+      var social = app.globalData.mySocials[index]
+    }
   
     this.setData({
       social_id: id,
       social_index: index,
-      key: key
+      key: key,
+      social: social
     })
-    this.getUid()
-    this.setCommentCount()    
-    this.getComment(id)
+
+    
+
+    token.verify(this.getComment)
   },
 
   onShow: function() {
@@ -94,7 +106,8 @@ Page({
 
   },
 
-  getComment: function(id) {
+  getComment: function() {
+    var id = this.data.social_id
     wx.request({
       url: Config.restUrl + '/socials/' + id + '/comments',
       header: { 'token': wx.getStorageSync('token') },
@@ -107,6 +120,9 @@ Page({
             loading: false
           })
         }
+
+        this.setCommentCount()    
+        this.getUid()        
 
         app.globalData.comments = this.data.comments
         
@@ -187,10 +203,11 @@ Page({
       success: res => {
         if(res.data.status == 'success') {
           var comments = this.data.comments 
+          var comment = res.data.data
           var length = Object.keys(comments).length;
           var key = 'comments[' + length + ']'
           this.setData({
-            [key]: res.data.data,
+            [key]: comment,
             comment_count: parseInt(this.data.comment_count) + 1,
             text: ''
           })
@@ -199,7 +216,7 @@ Page({
             icon: 'success'
           })
 
-          this.addCommentNotice(social_id, 0, content)
+          this.addCommentNotice(social_id, comment.id, 0, content)
           
 
           //刷新评论数
@@ -254,7 +271,7 @@ Page({
             icon: 'success'
           })
 
-          this.addCommentNotice(social_id, comment.fan_id, content)          
+          this.addCommentNotice(social_id, comment.id,comment.fan_id, content)          
           
           //刷新评论数
           this.refershCommentCount(this.data.comment_count)
@@ -267,17 +284,18 @@ Page({
   },
 
 
-  addCommentNotice: function (social_id,to_fan_id,content) {
+  addCommentNotice: function (social_id,comment_id,to_fan_id,content) {
       wx.request({
         url: Config.restUrl + '/socials/' + social_id + '/addCommentNotice',
         header: { 'token': wx.getStorageSync('token') },
-        data: { 'to_fan_id': to_fan_id,'module_id': social_id, 'module': 'social', 'content': content},
+        data: { 'to_fan_id': to_fan_id, 'module_id': social_id, 'module_comment_id': comment_id,'module': 'social', 'content': content},
         method: 'POST',
         success: res => {
           
         }
       })
     },
+
 
   operate: function(e) {
     
@@ -309,6 +327,7 @@ Page({
       method: 'POST',
       success: res => {
         if(res.data.status == 'success') {
+
           var count = res.data.count
 
           var comments = this.data.comments

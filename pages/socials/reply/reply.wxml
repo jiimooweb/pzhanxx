@@ -101,7 +101,7 @@
     <view class="operate">
       <view bindtap="changeReplyFlag"  wx:if="{{operate.fan_id != fan_id}}" >回复</view>
       <view bindtap="setClipboardData">复制</view>
-      <view style="color:#F56C6C" wx:if="{{operate.fan_id == fan_id}}" bindtap="deleteComment">删除</view>
+      <view style="color:#F56C6C" wx:if="{{operate.fan_id == fan_id || social.fan_id == fan_id}}" bindtap="deleteComment">删除</view>
       <view wx:else bindtap="reportShow">举报</view>
     </view>
     <view class="cancel" catchtap="changeOperateFlag">取消</view>

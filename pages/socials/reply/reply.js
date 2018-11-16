@@ -6,6 +6,7 @@ Page({
     fan_id:0,
     id: 0,
     social_id: 0,
+    social: {},
     comment: {},
     replys: {},
     commentPanleFlag: false,
@@ -22,13 +23,26 @@ Page({
     var social_index = options.social_index
     var comment_index = options.comment_index
     var key = options.key ? options.key : 'socials'
+    if (key == 'socials') {
+      var social = app.globalData.socials[social_index]
+    } else {
+      var social = app.globalData.mySocials[social_index]
+    }
     this.setData({
       id: id,
       social_id: social_id,
       social_index: social_index,
       comment_index: comment_index,
-      key: key
+      key: key,
+      social: social
     })
+
+   
+
+    this.setData({
+      social: social
+    })
+
     this.getUid()
     this.getCommentAndReplys(id)
   },
@@ -170,7 +184,7 @@ Page({
             icon: 'success'
           })
           
-          this.addReplyNotice(social_id, this.data.comment.fan_id, to_fan_id, content)
+          this.addReplyNotice(social_id, res.data.data.id,this.data.comment.fan_id, to_fan_id, content)
           //刷新评论数
           if (this.data.key == 'socials') {
             var count = app.globalData.socials[this.data.social_index].comments_count + 1
@@ -189,17 +203,18 @@ Page({
     })
   },
 
-  addReplyNotice: function (social_id, comment_fan_id,to_fan_id, content) {
+  addReplyNotice: function (social_id, comment_id,comment_fan_id,to_fan_id, content) {
     wx.request({
       url: Config.restUrl + '/socials/' + social_id + '/addReplyNotice',
       header: { 'token': wx.getStorageSync('token') },
-      data: { 'to_fan_id': to_fan_id, 'module_id': social_id, 'content': content, 'comment_fan_id': comment_fan_id},
+      data: { 'to_fan_id': to_fan_id, 'module_id': social_id, 'module_comment_id': comment_id,'content': content, 'comment_fan_id': comment_fan_id},
       method: 'POST',
       success: res => {
 
       }
     })
   },
+
 
   getUid: function () {
     wx.request({
@@ -241,6 +256,7 @@ Page({
       method: 'POST',
       success: res => {
         if (res.data.status == 'success') {
+
           var count = res.data.count
 
           var replys = this.data.replys

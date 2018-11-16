@@ -149,7 +149,7 @@ Page({
                         icon: 'success'
                     })
 
-                    this.addReplyNotice(special_id, this.data.comment.fan_id, to_fan_id, content)
+                  this.addReplyNotice(special_id, res.data.data.id ,this.data.comment.fan_id, to_fan_id, content)
 
                     //刷新回复数
                     this.refershReplyCount(this.data.comment.replys_count)
@@ -159,7 +159,8 @@ Page({
             }
         })
     },
-    addReplyNotice: function (special_id, comment_fan_id, to_fan_id, content) {
+
+    addReplyNotice: function (special_id, comment_id,comment_fan_id, to_fan_id, content) {
         wx.request({
             url: Config.restUrl + '/specials/' + special_id + '/addReplyNotice',
             header: {
@@ -168,6 +169,7 @@ Page({
             data: {
                 'to_fan_id': to_fan_id,
                 'module_id': special_id,
+                'module_comment_id': comment_id,
                 'content': content,
                 'comment_fan_id': comment_fan_id
             },

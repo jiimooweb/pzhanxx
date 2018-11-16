@@ -42,7 +42,6 @@
   </view>
 </view>
 <view class="no-comment" wx:if="{{comments.length == 0}}">
-  <image src="/icon/socials/no-comment.png"></image>
   <text>暂无评论</text>
 </view>
 
@@ -87,7 +86,7 @@
     <view class="operate">
       <view bindtap="changeReplyFlag">回复</view>
       <view bindtap="setClipboardData">复制</view>
-      <view style="color:#F56C6C" wx:if="{{comment.fan.id == fan_id}}" bindtap="deleteComment">删除</view>
+      <view style="color:#F56C6C" wx:if="{{comment.fan.id == fan_id || social.fan_id == fan_id}}" bindtap="deleteComment">删除</view>
       <view wx:else bindtap="reportShow">举报</view>
     </view>
     <view class="cancel" catchtap="changeOperateFlag">取消</view>
