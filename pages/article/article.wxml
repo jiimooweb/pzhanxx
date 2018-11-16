@@ -1,0 +1,13 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<tab-bar title="文章详情" block id="tab"></tab-bar>
+
+<view class="container">
+  <!-- <image class="thumb" src="{{article.thumb}}" mode="aspectFill"></image> -->
+  <view class="main">
+    <text class="title">{{article.title}}</text>
+    <text class="basic-info">
+      {{article.author}} 发表于 {{article.created_at}}
+    </text>
+    <template is="wxParse" data="{{wxParseData:wxParse.nodes}}"/> 
+  </view>
+</view>

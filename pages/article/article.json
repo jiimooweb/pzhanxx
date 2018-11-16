@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "文章详情",
+  "usingComponents": {
+    "tab-bar": "/components/tabBar/tabBar"
+  }
+
+}
