@@ -47,7 +47,7 @@
     <text>下载</text>
   </button> -->
   <button catchtap="likeHandle" hoverClass="none">
-    <image src="/icon/like{{pictures[index].like?'-active':''}}.png"></image>
+    <image src="/icon/like{{pictures[index].like ? '-active' : ''}}.png"></image>
     <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like_fans_count > 0 ? pictures[index].like_fans_count : '点赞'}}</text>
   </button>
   <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
