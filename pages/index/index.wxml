@@ -4,7 +4,7 @@
     <view id="outside">
         <view class="swipers" id="swipers">
             <swiper autoplay circular="true" class="swiper" duration="500" interval="3000" nextMargin="50rpx" previousMargin="50rpx" current="0"  bindchange='onSlideChangeEnd'>
-                <swiper-item wx:for="{{swpiers}}" wx:key="{{index}}" bindtap="toOther" data-url="{{item.url}}">
+                <swiper-item wx:for="{{swpiers}}" wx:key="{{index}}" bindtap="toOther" data-url="{{item.url}}" data-type="{{item.type}}">
                     <button class="swiper-btn {{carouselIndex===index?'ori':''}}" data-albumId="{{item.AlbumId}}" data-event="swiperHandle" data-index="{{index}}" formType="submit" hoverClass="none">
                         <image class="swiper-image" mode="aspectFill" src="{{item.image}}"></image>
                     </button>

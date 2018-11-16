@@ -192,9 +192,17 @@ Page({
 
   toOther: function(e) {
     var url = e.currentTarget.dataset.url
-    wx.navigateTo({
-      url: url,
-    })
+    var to_type = e.currentTarget.dataset.type
+    if (to_type == 0) {
+      wx.navigateTo({
+        url: url,
+      })
+    } else {
+      wx.switchTab({
+        url: url,
+      })
+    }
+    
   },
 
   refreshPictures: function() {
