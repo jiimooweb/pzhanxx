@@ -15,7 +15,7 @@
                 </view>
                 <view class="content">
                     <view class="text">点赞了你的动态</view>
-                    <view class="module" catchtap="toSocial" data-id="{{notice.module_id}}" wx:if="{{notice.module_content.content}}">
+                    <view class="module" catchtap="toSocial" data-id="{{notice.module_id}}" wx:if="{{notice.module_content}}">
                         <view class="module-avatar">
                             <image src="{{notice.fan.avatarUrl}}"></image>
                         </view>
@@ -62,7 +62,7 @@
                         <view class="text">
                             <text wx:if="{{notice.to_fan_id > 0}}">回复<text style="color:#409EFF">@{{notice.to_fan.nickname}}</text></text> {{notice.content}}</view>
                         <block wx:if="{{notice.module=='social'}}">
-                            <view class="module" catchtap="toSocial" data-id="{{notice.module_id}}" wx:if="{{notice.module_content.content}}">
+                            <view class="module" catchtap="toSocial" data-id="{{notice.module_id}}" wx:if="{{notice.module_content}}">
                                 <view class="module-avatar">
                                     <image src="{{notice.module_content.fan.avatarUrl}}"></image>
                                 </view>
