@@ -1,35 +1,22 @@
-/* .pic-list {
-  column-count: 2;
-  column-gap: 0;
-  padding:20rpx 10rpx;
-  box-sizing: border-box;  
-} */
-
 
 .pic-list{
   box-sizing: border-box;    
   padding:20rpx 10rpx;
-  /* column-count: 2;
-  column-gap: 0; */
   display: flex;
   flex-direction: row;
 }
+
 .item-view {
   width: 100%;
   float: left;
 }
 
 .pic-row {
-  /* break-inside: avoid;  */
-  /* box-sizing: border-box;
-  padding: 10rpx;
-  border-radius: 4px;  */
   width: 100%;
   box-sizing: border-box;    
   padding:10rpx;
   border-radius: 5px;
   display: inline-block;
-  
 }
 
 .pic {
