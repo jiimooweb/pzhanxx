@@ -14,15 +14,18 @@ Component({
    * 组件的初始数据
    */
   data: {
-    pictures: []
+    lpictures: [],
+    rpictures: []
   },
 
   ready: function() {
+    
   },
 
+
   pageLifetimes: {
-    show: function() {
-      this.setLayout();      
+    show: function () {
+      this.setLayout();
     }
   },
 
@@ -31,7 +34,6 @@ Component({
    */
   methods: {
 
-    
     _toPreview: function(e) {
       this.triggerEvent('toPreview')      
       this.toPreview(e)
@@ -45,15 +47,24 @@ Component({
       })
     },
 
-    setLayout: function() {
+    setLayout: function () {
       var pictures = this.properties.pictures
-      if (pictures.length % 3 == 2) {
-        pictures.push({url: "" })
-        this.setData({
-          pictures: pictures
-        })
-        this.properties.pictures = pictures
+      var lpictures = []
+      var rpictures = []
+      for (var i in pictures) {
+        if(i % 2 == 0) {
+          lpictures.push(pictures[i])
+        }else {
+          rpictures.push(pictures[i])
+        }
       }
+      this.setData({
+        lpictures: lpictures,
+        rpictures: rpictures
+      })
+      
     }
+
+   
   }
 })

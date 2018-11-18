@@ -23,7 +23,8 @@ Page({
     newPictures: [],
     newParams: {
       page: 1,
-      isLoadMode: true,
+      isloadMore: true,
+      loadFlag: true,
       topShow: false
     },
     hotPictures: [],
@@ -34,19 +35,22 @@ Page({
     hots: {
       'pictures': [],
       page: 1,
-      isLoadMode: true,
+      isloadMore: true,
+      loadFlag: true,      
       topShow: false
     },
     collects: {
       'pictures': [],
       page: 1,
-      isLoadMode: true,
+      isloadMore: true,
+      loadFlag: true,      
       topShow: false
     },
     likes: {
       'pictures': [],
       page: 1,
-      isLoadMode: true,
+      isloadMore: true,
+      loadFlag: true,      
       topShow: false
     },
     // 专辑
@@ -80,6 +84,12 @@ Page({
 
   getNewPictures: function () {
     var page = this.data.newParams.page
+    if (page == 1) {
+      this.getHotPictures(this.data.hotIndex)
+      //   专辑
+      this.loadFirst();
+    }
+    this.data.newParams.isloadMore = false    
     wx.request({
       url: Config.restUrl + '/pictures/app_list',
       header: {
@@ -94,22 +104,23 @@ Page({
         var newPictures = [];
         if (pictures.length > 0) {
           newPictures = oPictures.concat(pictures)
+
+          this.data.newParams.page = page + 1                 
+          this.data.newParams.isloadMore = true    
+          
           this.setData({
             newPictures: newPictures,
-            ['newParams.isLoadMode']: true,
-            ['newParams.page']: page + 1,
           });
           var pindex = getCurrentPages().length - 1;
           app.globalData.pictures[pindex] = newPictures
         }
         if (newPictures.length >= 500 || newPictures.length == res.data.data.total) {
+          this.data.newParams.isloadMore = false   
           this.setData({
-            ['newParams.isLoadMode']: false
-          });
+            ['newParams.loadFlag']: false
+          })
         }
-        this.getHotPictures(this.data.hotIndex)
-        //   专辑
-        this.loadFirst();
+        
       }
     })
   },
@@ -121,19 +132,19 @@ Page({
     if (hotIndex == 0) {
       keyword = 'hot'
       page = this.data.hots.page
-      if (!this.data.hots.isLoadMode) {
+      if (!this.data.hots.isloadMore) {
         return
       }
     } else if (hotIndex == 1) {
       keyword = 'collect'
       page = this.data.collects.page
-      if (!this.data.collects.isLoadMode) {
+      if (!this.data.collects.isloadMore) {
         return
       }
     } else {
       keyword = 'like'
       page = this.data.likes.page
-      if (!this.data.likes.isLoadMode) {
+      if (!this.data.likes.isloadMore) {
         return
       }
     }
@@ -154,45 +165,49 @@ Page({
           var oPictures = this.data.hots.pictures
           if (pictures.length > 0) {
             newPictures = oPictures.concat(pictures)
+            this.data.hots.isloadMore = true
+            this.data.hots.page =page + 1
             this.setData({
               ['hots.pictures']: newPictures,
-              ['hots.isLoadMode']: true,
-              ['hots.page']: page + 1,
+             
             });
           }
           if (newPictures.length == 100 || newPictures.length == total) {
+            this.data.hots.isloadMore = false
             this.setData({
-              ['hots.isLoadMode']: false
+              ['hots.loadFlag']: false,
             });
           }
         } else if (hotIndex == 1) {
           var oPictures = this.data.collects.pictures
           if (pictures.length > 0) {
             newPictures = oPictures.concat(pictures)
+            this.data.collects.isloadMore = true
+            this.data.collects.page = page + 1
             this.setData({
               ['collects.pictures']: newPictures,
-              ['collects.isLoadMode']: true,
-              ['collects.page']: page + 1,
             });
           }
           if (newPictures.length == 100 || newPictures.length == total) {
+            this.data.collects.isloadMore = false
             this.setData({
-              ['collects.isLoadMode']: false
+              ['collects.loadFlag']: false,
             });
           }
         } else {
           var oPictures = this.data.likes.pictures
           if (pictures.length > 0) {
             newPictures = oPictures.concat(pictures)
+            this.data.likes.isloadMore = true
+            this.data.likes.page = page + 1
             this.setData({
               ['likes.pictures']: newPictures,
-              ['likes.isLoadMode']: true,
-              ['likes.page']: page + 1
             });
 
             if (newPictures.length == 100 || newPictures.length == total) {
+              this.data.likes.isloadMore = false
               this.setData({
-                ['likes.isLoadMode']: false
+                ['likes.loadFlag']: false,
               });
             }
           }
@@ -208,10 +223,8 @@ Page({
 
 
   loadNewPictures: function () {
-    if (!this.data.newParams.isLoadMode) {
-      this.setData({
-        ['newParams.isLoadMode']: false
-      })
+    
+    if (!this.data.newParams.isloadMore) {
       return
     }
     this.getNewPictures()

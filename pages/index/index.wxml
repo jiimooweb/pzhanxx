@@ -37,8 +37,8 @@
         <pic-list pictures="{{pictures}}" bind:toPreview="toPreview"></pic-list>
 
     </view>
-    <view class="loading-tip" wx:if="{{isLoadMode}}">正在加载，请稍等...</view>
-    <view class="loading-tip" wx:else bindtap="refreshPictures">到底啦！点击刷新图片！</view>
+    <view class="loading-tip" wx:if="{{loadFlag}}">正在加载，请稍等...</view>
+    <view class="loading-tip" wx:else bindtap="refreshPictures">点击重新加载图片！</view>
 </scroll-view>
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
     <image src="/icon/gotop.png"></image>

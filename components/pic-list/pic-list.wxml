@@ -1,5 +1,28 @@
 <view class="pic-list">
-  <view class="pic" wx:for="{{pictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
-    <image wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFill"></image>
+  
+  <view class="item-view">
+    <view class="pic-row" wx:for="{{lpictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
+      <view class="pic">
+        <image class="{{item.show ? 'active': ''}}" wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!70p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+        <view class="title">{{item.title}}</view>
+        <view class="row">
+          <view class="author">{{item.author}}</view>
+        </view>
+      </view>
+    </view>
   </view>
+
+  <view class="item-view">
+    <view class="pic-row" wx:for="{{rpictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
+      <view class="pic">
+        <image class="img {{item.show ? 'active': ''}}" wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!40p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+        <view class="title">{{item.title}}</view>
+
+        <view class="row">
+          <view class="author">{{item.author}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
 </view>

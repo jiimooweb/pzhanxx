@@ -18,6 +18,7 @@ Page({
     title: 'P站星选',
     page: 1,
     isLoadMode: true,
+    loadFlag: true,
     topShow: false,
     anchor: '',
     carouselIndex:0
@@ -99,30 +100,37 @@ Page({
     })
   },
 
-  getPictures: function () {
+  getPictures: function (page) {
     var random_picture_ids = this.data.random_picture_ids
+    this.data.isLoadMode = false
+
     wx.request({
       url: Config.restUrl + '/pictures/random',
       header: { 'token': wx.getStorageSync('token') },
-      data: { random_picture_ids: random_picture_ids},
+      data: { random_picture_ids: random_picture_ids, page: page},
       method:'post',
       success: res => {
         var pictures = res.data.data
         var oPictures = this.data.pictures
         var newPictures = [];
+        var index = oPictures.length
+
         if (pictures.length > 0) {
           newPictures = oPictures.concat(pictures)
+          this.data.isLoadMode = true
+          this.data.page = page + 1
+          this.data.random_picture_ids = res.data.random_picture_ids
           this.setData({
             pictures: newPictures,
-            random_picture_ids: res.data.random_picture_ids,
-            isLoadMode: true
+                   
           });
         } 
-        if (newPictures.length >= 500 || pictures.length == 0) {
+
+        if (newPictures.length >= 300 || pictures.length == 0) {
+          this.data.isLoadMode = false
           this.setData({
-            isLoadMode: false,
-            page: 1
-          });
+            loadFlag: false
+          })
         }
       }
     })
@@ -171,9 +179,6 @@ Page({
 
   loadMore: function(e) {
     if (!this.data.isLoadMode) {
-      this.setData({
-        isLoadMode: false
-      })
       return
     }
     this.getPictures()
@@ -209,6 +214,7 @@ Page({
     this.setData({
       pictures: [],
       random_picture_ids: [],
+      loadFlag: true
     })
     this.getPictures()
   },
@@ -237,6 +243,11 @@ Page({
       title: 'P站星选',
     }
   },
+
+  
+
+
+  
  
 
 })

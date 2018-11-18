@@ -1,11 +1,10 @@
 <tab-bar bgColor="rgba(0,0,0,0)"></tab-bar>
 
-<swiper bindchange="change" circular skip-hidden-item-layout class="swiper-preview preview-wallpaper" duration="300" current="{{index}}" >
-  <swiper-item wx:for="{{pictures}}" wx:for-item="picture" wx:key="{{index}}">
-    <scroll-view scrollY bindscrolltolower="onReachBottom_" scrollTop="0" bindscroll="scroll">
+
+    <scroll-view scrollY  scrollTop="0" bindscroll="scroll">
       <view class="preview-box">
         <view class="preview-image">
-          <image bindtap="previewImage" src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="aspectFill"></image>
+          <image bindtap="previewImage" src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="widthFix"></image>
         </view>
 
         <view class="tags-relative">
@@ -29,8 +28,6 @@
         </view>
       </view>
     </scroll-view>
-  </swiper-item>
-</swiper>
 
 <view class="bottom-nav-container">
   <button class="btn-home btn" catchtap="toHome" hoverClass="none">
@@ -38,8 +35,8 @@
     <text>首页</text>
   </button>
   <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{pictures[index].collect?'-active':''}}.svg"></image>
-    <text style="{{pictures[index].collect?'color: #F32B2B;':''}}">{{pictures[index].collect_fans_count > 0 ? pictures[index].collect_fans_count : '收藏'}}</text>
+    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{picture.collect?'-active':''}}.svg"></image>
+    <text style="{{picture.collect?'color: #F32B2B;':''}}">{{picture.collect_fans_count > 0 ? picture.collect_fans_count : '收藏'}}</text>
   </button>
   <button class="btn-download btn" catchtap="download" hoverClass="none">
     <view></view>
@@ -47,8 +44,8 @@
     <text>下载</text>
   </button>
   <button catchtap="likeHandle" hoverClass="none">
-    <image src="/icon/like{{pictures[index].like ? '-active' : ''}}.png"></image>
-    <text style="{{pictures[index].like?'color: #409EFF;':''}}">{{pictures[index].like_fans_count > 0 ? pictures[index].like_fans_count : '点赞'}}</text>
+    <image src="/icon/like{{picture.like ? '-active' : ''}}.png"></image>
+    <text style="{{picture.like?'color: #409EFF;':''}}">{{picture.like_fans_count > 0 ? picture.like_fans_count : '点赞'}}</text>
   </button>
   <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
     <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-share.svg"></image>
