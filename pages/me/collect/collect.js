@@ -49,21 +49,38 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // var pindex = getCurrentPages().length - 1
-    // if (app.globalData.pictures.length > 1 && this.data.fan_id > 0) {
-    //   var pictures = app.globalData.pictures[pindex]
+   
+    if(this.data.id > 0 ) {
+      token.verify(this.getPicture)
+    }
 
-    //   for(var i in pictures) {
-    //     if(pictures[i].collect == 0) {
-    //       pictures.splice(i,1)
-    //     }
-    //   }      
-    //   this.setData({
-    //     pictures: pictures
-    //   })      
-    // }
+  },
 
+  getPicture: function () {
+    var id = this.data.id
+    wx.request({
+      url: Config.restUrl + '/pictures/' + id,
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var picture = res.data.data
 
+        var pictures = this.data.pictures
+        for (var i in pictures) {
+          if (pictures[i].id == id) {
+            var key = 'pictures[' + i + ']'
+            this.setData({
+              [key]: picture
+            })
+            break;
+          }
+        }
+
+      }
+    })
+  },
+
+  toPreview: function(e) {
+    this.data.id = e.detail.id
   },
 
   /**

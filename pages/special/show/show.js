@@ -42,7 +42,37 @@ Page({
             comments: app.globalData.special_comments
         })
         this.setCommentCount()
+        if(this.data.id > 0){
+          token.verify(this.getPicture)
+        }
     },
+
+  toPreview: function(e) {
+    this.data.id = e.detail.id    
+  },
+
+  getPicture: function () {
+    var id = this.data.id
+    wx.request({
+      url: Config.restUrl + '/pictures/' + id,
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var picture = res.data.data
+
+        var pictures = this.data.imgs
+        for (var i in pictures) {
+          if (pictures[i].id == id) {
+            var key = 'imgs[' + i + ']'
+            this.setData({
+              [key]: picture
+            })
+            break;
+          }
+        }
+
+      }
+    })
+  },
 
     onReady: function() {
         this.loginPanel = this.selectComponent("#loginPanel");

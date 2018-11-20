@@ -46,6 +46,9 @@ Page({
     if(this.data.swipers.length > 0) {
       this.getTags();      
     }
+    if (this.data.id > 0) {
+      token.verify(this.getPicture)
+    }
   },
 
   onSlideChangeEnd:function(e){
@@ -184,9 +187,29 @@ Page({
     this.getPictures()
   },
 
+  getPicture: function () {
+    var id = this.data.id
+    wx.request({
+      url: Config.restUrl + '/pictures/' + id,
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var picture = res.data.data
+        var pictures = this.data.pictures
+        for (var i in pictures) {
+          if (pictures[i].id == id) {
+            var key = 'pictures[' + i + ']'
+            this.setData({
+              [key]: picture
+            })
+            break;
+          }
+        }
+      }
+    })
+  },
+
   toPreview: function(e) {
-    var pindex = getCurrentPages().length - 1;
-    app.globalData.pictures[pindex] = this.data.pictures
+    this.data.id = e.detail.id
   },
 
   toNew: function(e) {

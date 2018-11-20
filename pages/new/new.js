@@ -286,6 +286,7 @@ Page({
               this.setData({
                 [key]: picture
               })
+              break;              
             }
           }
         }
