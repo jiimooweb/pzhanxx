@@ -72,7 +72,7 @@
   <view class="section">
     <!-- <view class="header">评论</view> -->
     <view class="reply-input">
-      <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="120" focus="{{commentPanleFlag}}" value="{{text}}"/>
+      <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="200" focus="{{commentPanleFlag}}" value="{{text}}" auto-height/>
     </view>
     <button class="send" formType="submit">发表</button>
   </view>

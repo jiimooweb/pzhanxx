@@ -1,63 +1,80 @@
 <tab-bar bgColor="rgba(0,0,0,0)"></tab-bar>
 
+<scroll-view scrollY scrollTop="0" bindscroll="scroll">
+  <view class="preview-box">
+    <view class="preview-image">
+      <image src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="widthFix"></image>
+    </view>
 
-    <scroll-view scrollY  scrollTop="0" bindscroll="scroll">
-      <view class="preview-box">
-        <view class="preview-image">
-          <image bindtap="previewImage" src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="widthFix"></image>
-        </view>
+    <view class="tags-relative">
+      <view class="title">{{picture.title}}</view>
+      <view class="author">{{picture.author}}</view>
+      <tags tags="{{picture.tags}}"></tags>
+      <view class="border"></view>
 
-        <view class="tags-relative">
-          <view class="title">{{picture.title}}</view>
-          <view class="author">{{picture.author}}</view>
-          <tags tags="{{picture.tags}}"></tags>
+      <view class="data-list">
+        <view class="row">
+          <image src="/icon/preview/click.png"></image>
+          <text>{{picture.click}}</text>
         </view>
-        <view class="border"></view>
-        
-        <view class="similar-wallpaper">
-          <view class="title">相关推荐</view>
-            <view wx:if="{{recommends.length > 0}}">
-              <pic-list pictures="{{recommends}}"></pic-list>
-            </view>
-            <view class="tips" wx:elif="{{recommends.length == 0 && load}}">
-              相关推荐内容为空，敬请期待新的内容！
-            </view>
-            <view class="tips" wx:else>
-              正在加载相关推荐，请稍等...
-            </view>
+        <view class="row">
+          <image src="/icon/preview/liked.png"></image>
+          <text>{{picture.like_fans_count}}</text>
+        </view>
+        <view class="row">
+          <image src="/icon/preview/collect.png"></image>
+          <text>{{picture.collect_fans_count}}</text>
         </view>
       </view>
-    </scroll-view>
+    </view>
+    <view class="segmentation"></view>
+    <view class="similar-wallpaper">
+      <view class="title">相关推荐</view>
+      <view wx:if="{{recommends.length > 0}}">
+        <pic-list pictures="{{recommends}}"></pic-list>
+      </view>
+      <view class="tips" wx:elif="{{recommends.length == 0 && load}}">
+        相关推荐内容为空，敬请期待新的内容！
+      </view>
+      <view class="tips" wx:else>
+        正在加载相关推荐，请稍等...
+      </view>
+    </view>
+  </view>
+</scroll-view>
 
-<view class="bottom-nav-container">
+<view class="bottom-nav">
   <button class="btn-home btn" catchtap="toHome" hoverClass="none">
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-home.svg"></image>
-    <text>首页</text>
+    <image class="fbtn" src="/icon/preview/home.png"></image>
   </button>
   <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-collect{{picture.collect?'-active':''}}.svg"></image>
-    <text style="{{picture.collect?'color: #F32B2B;':''}}">{{picture.collect_fans_count > 0 ? picture.collect_fans_count : '收藏'}}</text>
+    <image class="fbtn" src="/icon/preview/collect{{picture.collect ? '-active' : ''}}.png" style="margin-top:3rpx;"></image>
   </button>
-  <button class="btn-download btn" catchtap="download" hoverClass="none">
-    <view></view>
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-preview-download.svg"></image>
-    <text>下载</text>
+  <button class="btn-download btn" catchtap="showDownloadPanel" hoverClass="none">
+    <image class="fbtn" src="/icon/preview/download.png"></image>
   </button>
   <button catchtap="likeHandle" hoverClass="none">
-    <image src="/icon/like{{picture.like ? '-active' : ''}}.png"></image>
-    <text style="{{picture.like?'color: #409EFF;':''}}">{{picture.like_fans_count > 0 ? picture.like_fans_count : '点赞'}}</text>
+    <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
   </button>
   <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-bottom-nav-share.svg"></image>
-    <text>分享</text>
+
+    <image class="fbtn" src="/icon/preview/share.png" style="margin-top:3rpx;"></image>
   </button>
 </view>
-<!-- <view class="open-buy-btn-box {{isShareUnlock?'shareUnlock':''}}" wx:else>
-  <button data-type="1" openType="share" wx:if="{{isShareUnlock}}">
-    <image src="https://minibizhi.313515.com/BiZhiStatic/icon-preview-unlock-share.svg"></image>
-    <text>分享解锁</text>
-  </button>
-</view> -->
 
-<!-- <import src="../../utils/tpl.wxml"></import> -->
-<!-- <import src="../../utils/ad.wxml"></import> -->
+<view class="download-panel" wx:if="{{downloadFlag}}">
+  <view class="cancel" bindtap="hideDownloadPanel">
+    <image src="/icon/preview/cancel.png"></image>
+  </view>
+  <view class="panel">
+    <view class="title">请选择下载方式</view>
+    <view class="row">
+      <view class="btn1">积分下载</view>
+      <text>需要{{picture.point}}积分</text>
+    </view>
+    <view class="row">
+      <view class="btn2">分享下载</view>
+      <text>今日可分享免费下载5次</text>      
+    </view>
+  </view>
+</view>

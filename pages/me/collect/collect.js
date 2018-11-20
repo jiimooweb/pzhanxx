@@ -49,19 +49,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var pindex = getCurrentPages().length - 1
-    if (app.globalData.pictures.length > 1 && this.data.fan_id > 0) {
-      var pictures = app.globalData.pictures[pindex]
+    // var pindex = getCurrentPages().length - 1
+    // if (app.globalData.pictures.length > 1 && this.data.fan_id > 0) {
+    //   var pictures = app.globalData.pictures[pindex]
 
-      for(var i in pictures) {
-        if(pictures[i].collect == 0) {
-          pictures.splice(i,1)
-        }
-      }      
-      this.setData({
-        pictures: pictures
-      })      
-    }
+    //   for(var i in pictures) {
+    //     if(pictures[i].collect == 0) {
+    //       pictures.splice(i,1)
+    //     }
+    //   }      
+    //   this.setData({
+    //     pictures: pictures
+    //   })      
+    // }
 
 
   },

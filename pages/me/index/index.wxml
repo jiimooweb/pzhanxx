@@ -54,13 +54,13 @@
     </view>
     <view class="left"></view>
   </view>
-  <!-- <view class="row">
+  <view class="row">
     <view class="right">
       <image src="/icon/me/download.png"></image>
       <view class="row-name">我的下载</view>
     </view>
     <view class="left"></view>
-  </view> -->
+  </view>
   <view class="row" bindtap="toSocial">
     <view class="right">
       <image src="/icon/me/dongtai.png"></image>

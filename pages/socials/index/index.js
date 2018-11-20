@@ -8,11 +8,11 @@ Page({
   data: {
     socials:[],
     loading: true,
-    loadMore: false,
+    loadMore: true,
     isLoadMode: true,
-    tipFlag:false,
     scrollHeight: 0,
     page: 1,
+    tipFlag: !wx.getStorageSync('tip_staus')
   },
   
 
@@ -24,8 +24,7 @@ Page({
   onShow: function() {
     if (app.globalData.socials.length > 0) {
       this.setData({
-        socials: app.globalData.socials,
-        isLoadMore: app.globalData.socialIsLoadMode
+        socials: app.globalData.socials
       })
       var update_social = [app.globalData.socials[0]]
       if (update_social[0] != undefined) {
@@ -46,6 +45,7 @@ Page({
   },
 
   getSocials: function(page) {
+    this.data.isLoadMode = false
     if (page === undefined) {
       page = this.data.page
     }else {
@@ -61,10 +61,11 @@ Page({
         var new_socoals = []
         if (socials.length > 0) {
           new_socoals = o_socials.concat(socials)
+          this.data.isLoadMode = true
+          this.data.page = page + 1
           this.setData({
             socials: new_socoals,
-            isLoadMode: true,
-            page: page + 1
+            
           });
     
           app.globalData.socials = this.data.socials
@@ -72,16 +73,16 @@ Page({
         }
         
         this.setData({
-            loading: false
+          loading: false
         })
         
         if (new_socoals.length === res.data.data.total) {
+          this.data.isLoadMode = false
+          
           this.setData({
-            isLoadMode: false,
             loadMore: false,
             tipFlag: true,
           })
-          app.globalData.socialIsLoadMode = false
           return
         }
 
@@ -230,19 +231,23 @@ Page({
   },
 
   lower: function(e) {
-    if (this.data.isLoadMode) {
-      this.setData({
-        loadMore: true,
-        isLoadMode: false,
-      })
-
-      this.getSocials()
+    if (!this.data.isLoadMode) {
+      return 
     }
+    this.getSocials()
+    
   },
 
   getUserInfo: function(e) {
 
   },
+
+  colseTip: function(e) {
+    wx.setStorageSync('tip_staus', true)
+    this.setData({
+      tipFlag: false
+    })
+  }
 
   
 })

@@ -14,14 +14,14 @@
 .pic-row {
   width: 100%;
   box-sizing: border-box;    
-  padding:10rpx;
+  padding:12.5rpx;
   border-radius: 5px;
   display: inline-block;
 }
 
 .pic {
   border-radius: 4px;
-  box-shadow: 1px 1px 3px 2px #EBEEF5;
+  box-shadow: 1px 1px 3px 2px #E4E7ED;
 }
 
 .pic image {
@@ -51,5 +51,33 @@
   color: #909399;
   font-size: 22rpx;
   padding: 10rpx 10rpx 15rpx 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 } 
 
+
+.pic .row .author{
+  width: 250rpx;
+  white-space: nowrap;
+  overflow: hidden;  /*超出宽度部分隐藏*/
+  text-overflow: ellipsis;  /*超出部分以点号代替*/
+} 
+
+.pic .row image{
+  width: 40rpx;
+  height: 40rpx;
+} 
+
+
+.collect {
+  animation: collect 1s linear;
+}
+
+
+@keyframes collect
+{
+ 	0%{opacity: 0;}
+	100%{opacity: 1;}
+}

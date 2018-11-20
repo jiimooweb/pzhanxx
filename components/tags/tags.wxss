@@ -10,54 +10,17 @@
 }
 
 .wallpaper-relative .labels button {
-  border: 1rpx solid #239efe;
+  border: 0;
   height: 49rpx;
   border-radius: 25rpx;
   font-size: 24rpx;
-  color: #239efe;
+  font-weight: 500;
   line-height: 49rpx;
   text-align: center;
   padding: 0 20rpx;
   margin-left: 20rpx;
   margin-bottom: 16rpx;
+  background-color: #E4E7ED;
+  color:#303133;
 }
 
-.wallpaper-relative .labels button:nth-child(2) {
-  color: #fc8c00;
-  border-color: #fc8c00;
-}
-
-.wallpaper-relative .labels button:nth-child(3) {
-  color: #3fc38b;
-  border-color: #3fc38b;
-}
-
-.wallpaper-relative .labels button:nth-child(4) {
-  color: #ff6168;
-  border-color: #ff6168;
-}
-
-.wallpaper-relative .labels button:nth-child(5) {
-  color: #bd10e0;
-  border-color: #bd10e0;
-}
-
-.wallpaper-relative .labels button:nth-child(6) {
-  color: #fc8c00;
-  border-color: #fc8c00;
-}
-
-.wallpaper-relative .labels button:nth-child(7) {
-  color: #3fc38b;
-  border-color: #3fc38b;
-}
-
-.wallpaper-relative .labels button:nth-child(8) {
-  color: #ff6168;
-  border-color: #ff6168;
-}
-
-.wallpaper-relative .labels button:nth-child(9) {
-  color: #bd10e0;
-  border-color: #bd10e0;
-}

@@ -7,6 +7,8 @@
         <view class="title">{{item.title}}</view>
         <view class="row">
           <view class="author">{{item.author}}</view>
+          <image wx:if="{{item.collect}}"  class="collect"  catchtap="uncollect" data-index="{{index}}" data-key="left" data-id="{{item.id}}"  src="/icon/collect-active.png"></image>
+          <image wx:else catchtap="collect" data-index="{{index}}" data-key="left" data-id="{{item.id}}"  src="/icon/collect.png"></image>
         </view>
       </view>
     </view>
@@ -20,6 +22,8 @@
 
         <view class="row">
           <view class="author">{{item.author}}</view>
+          <image wx:if="{{item.collect}}" class="collect" catchtap="uncollect" data-index="{{index}}" data-key="right" data-id="{{item.id}}"  src="/icon/collect-active.png"></image>
+          <image wx:else catchtap="collect" data-index="{{index}}"data-key="right" data-id="{{item.id}}"  src="/icon/collect.png"></image>
         </view>
       </view>
     </view>

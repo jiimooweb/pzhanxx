@@ -15,6 +15,8 @@ Page({
     recommends: [],
     isLoad: true,
     load: false,
+    downloadFlag: false,
+    recommend_ids: []
   },
 
   /**
@@ -34,12 +36,14 @@ Page({
       token.verify(this.getPicture)
       return
     }
-    token.verify(this.getPicture)
+    token.verify(this.getPictureAndRecommends)
     
   },
 
   onShow: function() {
-
+    if(this.data.recommend_ids.length > 0) {
+      token.verify(this.getPictureAndRecommendsByIds)
+    }
   },
 
 
@@ -50,30 +54,36 @@ Page({
 
   },
 
-  // getPicture: function() {
-  //   wx.request({
-  //     url: Config.restUrl + '/pictures/' + this.data.id,
-  //     header: { 'token': wx.getStorageSync('token') },
-  //     success: res => {
-  //       var picture = res.data.data
-  //       this.setData({
-  //         picture: picture
-  //       })
-  //       wx.hideLoading()
-  //     }
-  //   })
-  // },
+  getPictureAndRecommendsByIds: function() {
+    wx.request({
+      url: Config.restUrl + '/pictures/' + this.data.id + '/app_show',
+      header: { 'token': wx.getStorageSync('token') },
+      data: { recommend_ids: this.data.recommend_ids},
+      method: 'POST',
+      success: res => {
+        var picture = res.data.data
+        var recommends = res.data.recommends
+        this.setData({
+          picture: picture,
+          recommends: recommends,
+          load: true
+        })
+      }
+    })
+  },
 
 
-  getPicture: function() {
+  getPictureAndRecommends: function() {
     wx.request({
       url: Config.restUrl + '/pictures/'+ this.data.id +'/app_show',
       header: { 'token': wx.getStorageSync('token') },
       success: res => {
         var recommends = res.data.recommends
+        var recommend_ids = res.data.recommend_ids
         this.setData({
           picture: res.data.data,
           recommends: recommends,
+          recommend_ids: recommend_ids,
           load: true
         })      
         
@@ -83,17 +93,17 @@ Page({
   },
 
 
-  previewImage: function(e) {
-    var picture = this.data.picture
-    var index = this.data.index
+  // previewImage: function(e) {
+  //   var picture = this.data.picture
+  //   var index = this.data.index
     
-    var url = picture.url
-    var urls = [url]
-    wx.previewImage({
-      urls: urls,
-      current: url
-    })
-  },
+  //   var url = picture.url
+  //   var urls = [url]
+  //   wx.previewImage({
+  //     urls: urls,
+  //     current: url
+  //   })
+  // },
 
 
  
@@ -112,7 +122,7 @@ Page({
 
   collectHandle: function(e) {
     var op = 'collect'          
-    if(this.data.pictures[this.data.index].collect) {
+    if(this.data.picture.collect) {
       op = 'uncollect'
     }
     wx.request({
@@ -142,7 +152,7 @@ Page({
 
   likeHandle: function (e) {
     var op = 'like'
-    if (this.data.pictures[this.data.index].like) {
+    if (this.data.picture.like) {
       op = 'unlike'
     }
     wx.request({
@@ -152,7 +162,7 @@ Page({
       success: res => {
         if (res.data.status == 'success') {
           var key = 'picture.like'
-          var count_key = 'pictures.like_fans_count'
+          var count_key = 'picture.like_fans_count'
           var status = this.data.picture.like ? 0 : 1
           var like_fans_count = this.data.picture.like_fans_count
           if (status) {
@@ -177,15 +187,27 @@ Page({
   },
 
   onShareAppMessage: function() {
-    var picture = this.data.pictures[this.data.index]
-    var url = 'https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=' + encodeURI(picture.url)
+    var picture = this.data.picture
+    // var url = 'https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=' + encodeURI(this.data.picture.url)
 
     return {
       'title': picture.title,
-      'imageUrl': url,
+      'imageUrl': picture.url,
       'path': 'pages/preview/preview?id=' + this.data.id + '&key=share' 
     }
     
+  },
+
+  showDownloadPanel: function() {
+    this.setData({
+      downloadFlag: true
+    })
+  },
+
+  hideDownloadPanel: function () {
+    this.setData({
+      downloadFlag: false
+    })
   },
 
   download: function() {

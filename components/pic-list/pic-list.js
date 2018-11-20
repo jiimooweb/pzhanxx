@@ -1,4 +1,5 @@
-// components/pic-list/pic-list.js
+import { Config } from "../../utils/config.js"
+
 Component({
   /**
    * 组件的属性列表
@@ -35,7 +36,9 @@ Component({
   methods: {
 
     _toPreview: function(e) {
-      this.triggerEvent('toPreview')      
+      var index = e.currentTarget.dataset.index
+      var id = e.currentTarget.dataset.id
+      this.triggerEvent('toPreview', {id: id})      
       this.toPreview(e)
     },
 
@@ -63,7 +66,59 @@ Component({
         rpictures: rpictures
       })
       
-    }
+    },
+
+    collect: function(e) {
+      var index = e.currentTarget.dataset.index
+      var key = e.currentTarget.dataset.key
+      var id = e.currentTarget.dataset.id
+
+      wx.request({
+        url: Config.restUrl + '/pictures/' + id + '/collect' ,
+        header: { 'token': wx.getStorageSync('token') },
+        method: 'post',
+        success: res => {
+          if(res.data.status == 'success') {
+            if (key == 'left') {
+              var data_key = 'lpictures[' + index + '].collect'
+            } else {
+              var data_key = 'rpictures[' + index + '].collect'
+            }
+            this.setData({
+              [data_key]: 1
+            })
+          }
+        }
+      })
+    },
+
+    uncollect: function (e) {
+      var index = e.currentTarget.dataset.index
+      var key = e.currentTarget.dataset.key
+      var id = e.currentTarget.dataset.id
+      wx.request({
+        url: Config.restUrl + '/pictures/' + id + '/uncollect',
+        header: { 'token': wx.getStorageSync('token') },
+        method: 'post',
+        success: res => {
+          if (res.data.status == 'success') {
+            if (key == 'left') {
+              var data_key = 'lpictures[' + index + '].collect'
+            } else {
+              var data_key = 'rpictures[' + index + '].collect'
+            }
+            this.setData({
+              [data_key]: 0
+            })
+          }
+        }
+      })
+    },
+
+  
+      
+
+     
 
    
   }

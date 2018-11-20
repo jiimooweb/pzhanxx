@@ -7,7 +7,7 @@
     </view>
     <view class='rules'>
       <text class='rulesTitle'>活动细则</text>
-      <text class='rulesText'>1.每个人只能给每个好友各加一次分</text>
+      <text class='rulesText'>1.每个人只能给每个好友各加一次分（10~20分）</text>
       <text class='rulesText'>2.自己无法给自己分享加分</text>
       <text class='rulesText'> 3.加过分还可以再次点击我也要分享让其他好友为自己加分     </text>
       <text class='rulesText'> 4.获取的积分可用来解锁下载喜欢的图片</text>

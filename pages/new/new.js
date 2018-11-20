@@ -79,7 +79,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(this.data.id > 0) {
+      token.verify(this.getPicture)
+    }
   },
 
   getNewPictures: function () {
@@ -265,16 +267,31 @@ Page({
   },
 
   toPreview: function (e) {
-    var pictures = []
-    var pindex = getCurrentPages().length - 1;
+    this.data.id = e.detail.id
+  },
 
-    if (this.data.tabIndex == 0) {
-      pictures = this.data.hotPictures
-    } else {
-      pictures = this.data.newPictures
-    }
-
-    app.globalData.pictures[pindex] = pictures
+  getPicture: function() {
+    var id = this.data.id
+    wx.request({
+      url: Config.restUrl + '/pictures/' + id,
+      header: {'token': wx.getStorageSync('token')},
+      success: res => {
+        var picture = res.data.data
+        
+        if(this.data.tabIndex == 1) {
+          var pictures = this.data.newPictures 
+          for (var i in pictures) {
+            if (pictures[i].id == id) {
+              var key = 'newPictures[' + i + ']'
+              this.setData({
+                [key]: picture
+              })
+            }
+          }
+        }
+        
+      }
+    })
   },
 
   getHotIndex: function (e) {

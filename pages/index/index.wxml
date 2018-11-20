@@ -22,8 +22,6 @@
             <view class="album-view">
                 <button class="hot-btn" bindtap='gohotSpecial' data-index="{{index}}" formType="submit" hoverClass="none" wx:for="{{specials}}" wx:key="{{index}}">
                     <image mode="aspectFill" src="{{item.cover}}"></image>
-                    <!-- <text wx:if="{{item.AlbumType===3}}">话题</text> -->
-                    <!-- <text class="act" wx:if="{{item.AlbumType===4}}">活动</text> -->
                     <view class="single-ellipsis">{{item.title}}</view>
                 </button>
             </view>

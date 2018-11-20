@@ -71,7 +71,7 @@
 .dot {
   height:15rpx;
   width: 15rpx;
-  background: #F56C6C;
+  background: #d81e06;
   border-radius: 50%;
   position: absolute;
   margin-top: -24rpx;
