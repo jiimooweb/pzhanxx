@@ -6,7 +6,7 @@
   <image src="/icon/socials/write_comment.png"></image>
   <text>发布</text>
 </view>
-<view class="tip" bindtap="colseTip" wx:if="{{tipFlag}}">每人每天首次发布动态，可获得随机5~50积分(点击不再显示)</view>
+<view class="tip" bindtap="colseTip" wx:if="{{tipFlag}}">每人每天首次发布动态，可获得随机5~50积分(点击隐藏)</view>
 
 <scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true" style="height:{{scrollHeight}}px">
 

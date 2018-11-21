@@ -31,6 +31,15 @@ Page({
         this.formatSocialImg(update_social)
       }
     }
+
+    console.log(wx.getStorageSync('point'))
+    if (wx.getStorageSync('point') > 0) {
+      wx.showToast({
+        title: '发布成功,获得' + wx.getStorageSync('point') + '积分',
+        icon: 'none'
+      })
+      wx.setStorageSync('point', 0)
+    }
     
   },
 

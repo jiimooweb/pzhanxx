@@ -19,6 +19,13 @@
   border-radius: 15rpx;
   text-align: center;
   box-sizing: border-box;
+  animation: show 0.5s linear;
+}
+
+@keyframes show
+{
+ 	0%{transform: translateY(50px);opacity: 0;}
+	100%{ transform: translateY(0px);opacity: 1;}
 }
 
 .cancel {
@@ -28,6 +35,8 @@
   margin-left:50rpx;
   text-align: right;
   z-index:10;
+  animation: show 0.5s linear;
+  
 }
 
 

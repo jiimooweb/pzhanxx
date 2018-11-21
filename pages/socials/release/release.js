@@ -91,6 +91,7 @@ Page({
       success: res => {
         if (res.data.status == 'success') {
           var social = res.data.data
+          var point = res.data.point
           var new_photos = []
           for(var i=0; i < photos.length; i++) {
             new_photos[i] = {}
@@ -108,6 +109,10 @@ Page({
           social['photos_count'] = new_photos.length
           social['new'] = 1
           app.globalData.socials.unshift(social)
+
+          if (point > 0) {
+            wx.setStorageSync('point', point)
+          }
 
           wx.navigateBack({
             delta: 1

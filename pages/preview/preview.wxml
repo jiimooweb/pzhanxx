@@ -3,7 +3,7 @@
 <scroll-view scrollY scrollTop="0" bindscroll="scroll">
   <view class="preview-box">
     <view class="preview-image">
-      <image src="{{picture.url}}" wx:key="pic{{picture.id}}" mode="widthFix"></image>
+      <image src="{{picture.url}}?imageMogr2/auto-orient/thumbnail/!70p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
     </view>
 
     <view class="tags-relative">

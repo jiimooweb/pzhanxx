@@ -942,7 +942,7 @@ swiper .loadingSvg {
   /* justify-content: center; */
   align-items: center;
   border-radius: 5px;
-  animation: show 1s ease;
+  animation: show 0.5s linear;
   /* opacity: 1; */
 }
 
@@ -967,7 +967,7 @@ swiper .loadingSvg {
   border-radius: 50%;
   right: 115rpx;
   border: 0;  
-  animation: show 1s ease;
+  animation: show 0.5s linear;
   z-index:10;
   
 }

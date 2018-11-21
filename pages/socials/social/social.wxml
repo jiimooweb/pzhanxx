@@ -84,7 +84,6 @@
   </view>
 </view>
 <view class="no-comment" wx:if="{{comments.length == 0}}">
-  <image src="/icon/socials/no-comment.png"></image>
   <text>暂无评论</text>
 </view>
 </scroll-view>

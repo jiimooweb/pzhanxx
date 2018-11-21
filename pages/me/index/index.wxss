@@ -226,7 +226,15 @@ page {
   display: block;
   box-shadow: 15rpx 10rpx 25rpx 1rpx rgba(0, 0, 0, 0.2);
   margin: calc((100% - 600rpx)*2) auto 0;
+  animation: show 0.5s linear;
 }
+
+@keyframes show
+{
+ 	0%{transform: translateY(50px);opacity: 0;}
+	100%{ transform: translateY(0px);opacity: 1;}
+}
+
 
 .closeWindow {
   float: right;

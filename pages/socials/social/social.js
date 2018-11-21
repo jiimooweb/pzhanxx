@@ -45,7 +45,7 @@ Page({
       this.getSocial() 
     }
     this.getUid()
-    
+   
   },
   
   onShow: function (options) {
