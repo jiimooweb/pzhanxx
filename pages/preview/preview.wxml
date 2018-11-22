@@ -1,14 +1,18 @@
 <tab-bar bgColor="rgba(0,0,0,0)"></tab-bar>
+<login-panel id="loginPanel" bind:hide="loginHide"></login-panel>
 
-<scroll-view scrollY scrollTop="0" bindscroll="scroll">
+<scroll-view scrollY scrollTop="0" bindscroll="scroll" style='height:{{scrollHeight}}px'>
   <view class="preview-box">
     <view class="preview-image">
-      <image src="{{picture.url}}?imageMogr2/auto-orient/thumbnail/!70p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+      <image bindload="loadImage" lazy-load="{{true}}" src="{{picture.url}}?imageMogr2/auto-orient/thumbnail/!90p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
     </view>
 
     <view class="tags-relative">
       <view class="title">{{picture.title}}</view>
-      <view class="author">{{picture.author}}</view>
+      <view class="author">
+        <view>{{picture.author}}</view>
+        <view>ID:{{picture.pic_id}}</view>
+      </view>
       <tags tags="{{picture.tags}}"></tags>
       <view class="border"></view>
 
@@ -48,16 +52,16 @@
     <image class="fbtn" src="/icon/preview/home.png"></image>
   </button>
   <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
-    <image class="fbtn" src="/icon/preview/collect{{picture.collect ? '-active' : ''}}.png" style="margin-top:3rpx;"></image>
+    <image class="fbtn" src="/icon/preview/collect{{picture.collect ? '-active' : ''}}.png" style="margin-top:5rpx;width:55rpx;height:55rpx;"></image>
   </button>
   <button class="btn-download btn" catchtap="showDownloadPanel" hoverClass="none">
     <image class="fbtn" src="/icon/preview/download.png"></image>
   </button>
+  
   <button catchtap="likeHandle" hoverClass="none">
     <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
   </button>
-  <button class="btn-share btn" data-type="2" hoverClass="none" openType="share">
-
+  <button class="btn-share btn" openType="share">
     <image class="fbtn" src="/icon/preview/share.png" style="margin-top:3rpx;"></image>
   </button>
 </view>
@@ -68,13 +72,32 @@
   </view>
   <view class="panel">
     <view class="title">请选择下载方式</view>
-    <view class="row">
+    <view class="row" wx:if="{{picture.point <= point}}" catchtap="download" index-type="0">
       <view class="btn1">积分下载</view>
       <text>需要{{picture.point}}积分</text>
     </view>
-    <view class="row">
-      <view class="btn2">分享下载</view>
-      <text>今日可分享免费下载5次</text>      
+    <view class="row" wx:else>
+      <view class="btn3">积分下载</view>
+      <text>需要{{picture.point}}积分,积分不足下载</text>
+    </view>
+    <view class="row" wx:if="{{share_count > 0}}" catchtap="download" index-type="1">
+      <button class="btn2" open-type='share' bindtap="setShareFlag">分享下载</button>
+      <text>今日可分享免费下载{{share_count}}次</text>      
+    </view>
+     <view class="row" wx:else>
+      <view class="btn3">分享下载</view>
+      <text>今日分享免费下载次数已用完</text>
+    </view>
+  </view>
+</view>
+
+<view class="authore-panel" wx:if="{{authorizeFlag}}">
+  <view class="panel">
+    <view class="title">授权请求</view>
+    <view class="content">请允许图片保存到相册</view>
+    <view class="btn" catchtap="hideAuthorizePanel">
+      <button class="cancel" >拒绝</button>
+      <button class="authorize" open-type='openSetting'>去授权</button>
     </view>
   </view>
 </view>

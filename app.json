@@ -1,69 +1,71 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/article/article",
-        "pages/new/new",
-        "pages/pics/pics",
-        "pages/preview/preview",
-        "pages/me/index/index",
-        "pages/me/share/share",
-        "pages/me/share-activity/share-activity",
-        "pages/me/notice/notice",
-        "pages/me/social/social",
-        "pages/me/collect/collect",
-        "pages/socials/index/index",
-        "pages/socials/social/social",
-        "pages/socials/release/release",
-        "pages/socials/reply/reply",
-        "pages/socials/comment/comment",
-        "pages/special/index/index",
-        "pages/special/show/show",
-        "pages/special/search/search",
-        "pages/special/reply/reply",
-        "pages/today/today"
-    ],
-    "window": {
-        "backgroundTextStyle": "black",
-        "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black",
-        "navigationStyle": "custom"
-    },
-    "tabBar": {
-        "backgroundColor": "#fff",
-        "borderStyle": "white",
-        "selectedColor": "#239EFE",
-        "color": "#6A7883",
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "text": "精选",
-                "iconPath": "icon/tabbar/index.png",
-                "selectedIconPath": "icon/tabbar/index_on.png"
-            },
-            {
-                "pagePath": "pages/new/new",
-                "text": "最新",
-                "iconPath": "icon/tabbar/new.png",
-                "selectedIconPath": "icon/tabbar/new_on.png"
-            },
-            {
-                "pagePath": "pages/today/today",
-                "text": "今日",
-                "iconPath": "icon/tabbar/today.png",
-                "selectedIconPath": "icon/tabbar/today_on.png"
-            },
-            {
-                "pagePath": "pages/socials/index/index",
-                "text": "社区",
-                "iconPath": "icon/tabbar/social.png",
-                "selectedIconPath": "icon/tabbar/social_on.png"
-            },
-            {
-                "pagePath": "pages/me/index/index",
-                "text": "我的",
-                "iconPath": "icon/tabbar/me.png",
-                "selectedIconPath": "icon/tabbar/me_on.png"
-            }
-        ]
-    }
+  "pages": [
+    "pages/index/index",
+    "pages/article/article",
+    "pages/new/new",
+    "pages/pics/pics",
+    "pages/preview/preview",
+    "pages/me/index/index",
+    "pages/me/share/share",
+    "pages/me/share-activity/share-activity",
+    "pages/me/notice/notice",
+    "pages/me/social/social",
+    "pages/me/collect/collect",
+    "pages/socials/index/index",
+    "pages/socials/social/social",
+    "pages/socials/release/release",
+    "pages/socials/reply/reply",
+    "pages/socials/comment/comment",
+    "pages/special/index/index",
+    "pages/special/show/show",
+    "pages/special/search/search",
+    "pages/special/reply/reply",
+    "pages/today/today",
+    "pages/rule/rule",
+    "pages/me/download/download"
+  ],
+  "window": {
+    "backgroundTextStyle": "black",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "selectedColor": "#239EFE",
+    "color": "#6A7883",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "精选",
+        "iconPath": "icon/tabbar/index.png",
+        "selectedIconPath": "icon/tabbar/index_on.png"
+      },
+      {
+        "pagePath": "pages/new/new",
+        "text": "最新",
+        "iconPath": "icon/tabbar/new.png",
+        "selectedIconPath": "icon/tabbar/new_on.png"
+      },
+      {
+        "pagePath": "pages/today/today",
+        "text": "今日",
+        "iconPath": "icon/tabbar/today.png",
+        "selectedIconPath": "icon/tabbar/today_on.png"
+      },
+      {
+        "pagePath": "pages/socials/index/index",
+        "text": "社区",
+        "iconPath": "icon/tabbar/social.png",
+        "selectedIconPath": "icon/tabbar/social_on.png"
+      },
+      {
+        "pagePath": "pages/me/index/index",
+        "text": "我的",
+        "iconPath": "icon/tabbar/me.png",
+        "selectedIconPath": "icon/tabbar/me_on.png"
+      }
+    ]
+  }
 }

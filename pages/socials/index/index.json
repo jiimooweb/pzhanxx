@@ -4,5 +4,6 @@
     "loading": "/components/loading/loading",
     "login-panel": "/components/login-panel/index",
     "tab-bar": "/components/tabBar/tabBar"
-  }
+  },
+  "disableScroll": true
 }

@@ -30,13 +30,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   height: auto;
-  transition: all .3s ease;
-  /* opacity: 0; */
 
-}
-
-.active{
-  opacity: 1;
 }
 
 

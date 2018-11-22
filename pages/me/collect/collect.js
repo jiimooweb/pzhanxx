@@ -49,9 +49,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
-    if(this.data.id > 0 ) {
-      token.verify(this.getPicture)
+    if (this.data.id > 0 && app.globalData.pictures.length > 0) {
+      // token.verify(this.getPicture)
+      this.setData({
+        pictures: app.globalData.pictures
+      })
+      app.globalData.pictures = []
     }
 
   },
@@ -79,8 +82,32 @@ Page({
     })
   },
 
-  toPreview: function(e) {
+  toPreview: function (e) {
     this.data.id = e.detail.id
+    app.globalData.pictures = this.data.pictures
+  },
+
+  collect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(1)
+  },
+
+  uncollect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(0)
+  },
+
+  setPictures: function (status) {
+    var pictures = this.data.pictures
+    for (var i in pictures) {
+      if (pictures[i].id == this.data.id) {
+        var key = 'pictures[' + i + '].collect'
+        this.setData({
+          [key]: status
+        })
+        break;
+      }
+    }
   },
 
   /**

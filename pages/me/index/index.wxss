@@ -220,7 +220,7 @@ page {
 .signWindow {
   border: 1px solid rgba(0,0,0,0);
   width: 80%;
-  height: 540rpx;
+  height: 580rpx;
   border-radius: 25rpx;
   background: #fff;
   display: block;
@@ -301,4 +301,9 @@ page {
   color: #fff;
   text-align: center;
   line-height: 80rpx;
+}
+
+.ruleText {
+  font-size: 25rpx;
+  color:#909399;
 }

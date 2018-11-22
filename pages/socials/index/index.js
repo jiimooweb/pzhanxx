@@ -32,7 +32,6 @@ Page({
       }
     }
 
-    console.log(wx.getStorageSync('point'))
     if (wx.getStorageSync('point') > 0) {
       wx.showToast({
         title: '发布成功,获得' + wx.getStorageSync('point') + '积分',
@@ -218,7 +217,6 @@ Page({
   toSocial: function(e) {
     var id = e.currentTarget.dataset.id
     var index = e.currentTarget.dataset.index
-
     wx.navigateTo({
       url: '/pages/socials/social/social?id=' + id + '&index=' + index + '&key=socials',
     })
@@ -235,7 +233,7 @@ Page({
 
   setScrollHeight: function(height) {
     this.setData({
-      scrollHeight: height
+      scrollHeight: height - 100
     })
   },
 

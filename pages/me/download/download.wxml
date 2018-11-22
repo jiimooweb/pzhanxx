@@ -3,7 +3,7 @@
     <view id="anchor"></view>
     <pic-list pictures="{{pictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
     <view class="loading-tip" wx:if="{{isLoadMode}}">正在加载，请稍等...</view>
-    <view class="no-tip" wx:if="{{!isLoadMode && pictures.length==0}}"><text>没有更多了...</text></view>
+    <view class="no-tip" wx:if="{{ !isLoadMode && pictures.length==0}}"><text>没有更多了...</text></view>
 </scroll-view>
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
     <image src="/icon/gotop.png"></image>

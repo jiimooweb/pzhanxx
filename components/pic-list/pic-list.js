@@ -1,5 +1,7 @@
 import { Config } from "../../utils/config.js"
 
+const app = getApp()
+
 Component({
   /**
    * 组件的属性列表
@@ -65,7 +67,15 @@ Component({
         lpictures: lpictures,
         rpictures: rpictures
       })
+
+      // app.globalData.pictures = pictures      
       
+    },
+
+    _collect: function(e) {
+      var id = e.currentTarget.dataset.id
+      this.triggerEvent('collect', { id: id })            
+      this.collect(e)
     },
 
     collect: function(e) {
@@ -79,17 +89,25 @@ Component({
         method: 'post',
         success: res => {
           if(res.data.status == 'success') {
+            var status = 1
             if (key == 'left') {
               var data_key = 'lpictures[' + index + '].collect'
             } else {
               var data_key = 'rpictures[' + index + '].collect'
             }
             this.setData({
-              [data_key]: 1
+              [data_key]: status
             })
+            this.setGPictures(id, status)
           }
         }
       })
+    },
+
+    _uncollect: function (e) {
+      var id = e.currentTarget.dataset.id
+      this.triggerEvent('uncollect', { id: id })
+      this.uncollect(e)
     },
 
     uncollect: function (e) {
@@ -102,24 +120,34 @@ Component({
         method: 'post',
         success: res => {
           if (res.data.status == 'success') {
+            var status = 0            
             if (key == 'left') {
               var data_key = 'lpictures[' + index + '].collect'
             } else {
               var data_key = 'rpictures[' + index + '].collect'
             }
             this.setData({
-              [data_key]: 0
+              [data_key]: status
             })
+
+            this.setGPictures(id, status)
+            // app.globalData.pictures = this.data.pictures
           }
         }
       })
+
     },
 
-  
-      
+    setGPictures: function (id,status) {
+      var gPitures = app.globalData.pictures
+      for (var i in gPitures) {
+        if (gPitures[i].id == id) {  
+          app.globalData.pictures[i].collect = status
+          break;
+        }
+      }
+    }
 
-     
 
-   
   }
 })

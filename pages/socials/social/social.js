@@ -420,6 +420,7 @@ Page({
                 } else {
                   app.globalData.mySocials.splice(this.data.social_index, 1)
                 }
+                this.refreshSocial(id)
                 wx.navigateBack({
                   delta: 1
                 })
@@ -433,7 +434,26 @@ Page({
       }
     })
         
-  }
+  },
+
+  refreshSocial: function(id) {
+    if (this.data.key == 'socials') {
+      var socials = app.globalData.mySocials
+    } else {
+      var socials = app.globalData.socials
+    }
+    for (var i in socials) {
+      if (socials[i].id == id) {
+        if (this.data.key == 'socials') {
+          app.globalData.mySocials.splice(i, 1)
+        } else {
+          app.globalData.socials.splice(i, 1)
+        }
+        break;
+      }
+    }
+  },
+
 
 
 

@@ -1,4 +1,4 @@
-<tab-bar title="" block></tab-bar>
+<tab-bar title="回复详情" block></tab-bar>
 <login-panel id="loginPanel"></login-panel>
 <report id="reportPanel" bind:select="reportSelect"></report>
 

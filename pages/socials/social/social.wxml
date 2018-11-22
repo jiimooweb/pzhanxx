@@ -2,7 +2,7 @@
 <report id="reportPanel" bind:select="reportSelect"></report>
 
 
-<scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true" style="height:{{scrollHeight}}px">
+<scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true">
   <view class="social">
     <view class="user">
       <view class="avatar">

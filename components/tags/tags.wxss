@@ -9,7 +9,7 @@
   flex-wrap: wrap;
 }
 
-.wallpaper-relative .labels button {
+.wallpaper-relative .labels view {
   border: 0;
   height: 49rpx;
   border-radius: 25rpx;

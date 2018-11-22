@@ -1,0 +1,58 @@
+page {
+  background-color: #F2F6FC;
+  color:#606266;
+}
+
+.title {
+  margin-top: 30rpx;
+  font-size: 36rpx;
+  color:#303133;
+}
+
+.point-table-one-one {
+  float: left;
+  width: 200rpx;
+  border: 1rpx solid #000;
+  border-right: none;
+  text-align: center;
+}
+
+.point-table-one-two {
+  float: left;
+  width: 200rpx;
+  border: 1rpx solid #000;
+  text-align: center;
+}
+
+.point-table-center-one {
+  float: left;
+  width: 200rpx;
+  border: 1rpx solid #000;
+  border-right: none;
+  border-top: none;
+  text-align: center;
+}
+
+.point-table-center-two {
+  float: left;
+  width: 200rpx;
+  border: 1rpx solid #000;
+  border-top: none;
+  text-align: center;
+}
+
+.rulesText {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  line-height: 44rpx;
+  font-size: 28rpx;
+}
+
+.footer {
+  font-size: 25rpx;
+  position: absolute;
+  bottom: 50rpx;
+  width: 100%;
+  text-align: center;
+}

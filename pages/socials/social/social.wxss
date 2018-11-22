@@ -1,3 +1,7 @@
+scroll-view {
+  height: 100%;
+}
+
 .social {
   display: flex;
   flex-direction: column;

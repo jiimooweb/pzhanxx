@@ -21,7 +21,9 @@ Page({
     loadFlag: true,
     topShow: false,
     anchor: '',
-    carouselIndex:0
+    carouselIndex:0,
+    tipFlag: !wx.getStorageSync('tip_staus')
+    
   },
 
   /**
@@ -46,8 +48,12 @@ Page({
     if(this.data.swipers.length > 0) {
       this.getTags();      
     }
-    if (this.data.id > 0) {
-      token.verify(this.getPicture)
+    if (this.data.id > 0 && app.globalData.pictures.length > 0) {
+      // token.verify(this.getPicture)
+      this.setData({
+        pictures: app.globalData.pictures
+      })
+      app.globalData.pictures = []
     }
   },
 
@@ -127,8 +133,9 @@ Page({
             pictures: newPictures,
                    
           });
+          
         } 
-
+        
         if (newPictures.length >= 300 || pictures.length == 0) {
           this.data.isLoadMode = false
           this.setData({
@@ -198,18 +205,42 @@ Page({
         for (var i in pictures) {
           if (pictures[i].id == id) {
             var key = 'pictures[' + i + ']'
-            this.setData({
-              [key]: picture
-            })
             break;
           }
         }
+        this.setData({
+          [key]: picture
+        })
       }
     })
   },
 
   toPreview: function(e) {
     this.data.id = e.detail.id
+    app.globalData.pictures = this.data.pictures
+  },
+
+  collect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(1)
+  },
+
+  uncollect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(0)
+  },
+
+  setPictures: function(status) {
+    var pictures = this.data.pictures
+    for (var i in pictures) {
+      if (pictures[i].id == this.data.id) {
+        var key = 'pictures[' + i + '].collect'
+        this.setData({
+          [key]: status
+        })
+        break;
+      }
+    }
   },
 
   toNew: function(e) {
@@ -266,6 +297,13 @@ Page({
       title: 'P站星选',
     }
   },
+
+  colseTip: function (e) {
+    wx.setStorageSync('tip_staus', true)
+    this.setData({
+      tipFlag: false
+    })
+  }
 
   
 

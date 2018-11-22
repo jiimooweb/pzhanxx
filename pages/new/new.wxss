@@ -1,5 +1,5 @@
 swiper {
-  height: 100vh;
+  height: calc(100vh - 120rpx);
   width: 100%;
 }
 

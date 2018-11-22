@@ -79,8 +79,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(this.data.id > 0) {
-      token.verify(this.getPicture)
+    if (this.data.id > 0 && app.globalData.pictures.length > 0) {
+      this.setData({
+        newPictures: app.globalData.pictures
+      })
+      app.globalData.pictures = []
     }
   },
 
@@ -102,7 +105,7 @@ Page({
       },
       success: res => {
         var pictures = res.data.data.data
-        var oPictures = this.data.newPictures
+        var oPictures = this.data.newPictures.length > 0 ? app.globalData.pictures : this.data.newPictures
         var newPictures = [];
         if (pictures.length > 0) {
           newPictures = oPictures.concat(pictures)
@@ -113,8 +116,8 @@ Page({
           this.setData({
             newPictures: newPictures,
           });
-          var pindex = getCurrentPages().length - 1;
-          app.globalData.pictures[pindex] = newPictures
+
+          app.globalData.pictures = newPictures
         }
         if (newPictures.length >= 500 || newPictures.length == res.data.data.total) {
           this.data.newParams.isloadMore = false   
@@ -268,6 +271,30 @@ Page({
 
   toPreview: function (e) {
     this.data.id = e.detail.id
+    app.globalData.pictures = this.data.newPictures
+  },
+
+  collect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(1)
+  },
+
+  uncollect: function (e) {
+    this.data.id = e.detail.id
+    this.setPictures(0)
+  },
+
+  setPictures: function (status) {
+    var pictures = this.data.pictures
+    for (var i in pictures) {
+      if (pictures[i].id == this.data.id) {
+        var key = 'newPictures[' + i + '].collect'
+        this.setData({
+          [key]: status
+        })
+        break;
+      }
+    }
   },
 
   getPicture: function() {

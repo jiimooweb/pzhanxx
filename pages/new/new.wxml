@@ -31,7 +31,7 @@
   <swiper-item>
     <scroll-view scrollY bindscrolltolower="loadNewPictures" scrollTop="0" bindscroll="scroll" lowerThreshold="100" scroll-into-view="{{anchor}}">
       <view id="anchor"></view>
-      <pic-list pictures="{{newPictures}}" bind:toPreview="toPreview"></pic-list>
+      <pic-list pictures="{{newPictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
       <view class="loading-tip" wx:if="{{newParams.loadFlag}}">正在加载，请稍等...</view>
       <view class="loading-tip" wx:if="{{!newParams.loadFlag}}">只显示最新的500张!</view>
     </scroll-view>

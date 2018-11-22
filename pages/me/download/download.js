@@ -1,5 +1,5 @@
-import { Config } from "../../utils/config.js"
-import { Token } from "../../utils/token.js"
+import { Config } from "../../../utils/config.js"
+import { Token } from "../../../utils/token.js"
 
 const token = new Token
 const app = getApp()
@@ -11,39 +11,45 @@ Page({
    */
   data: {
     pictures: [],
-    tag_id: 0,
-    title: '精选',
+    fan_id: 0,
+    title: '我的下载',
     page: 1,
     isLoadMode: true,
     topShow: false,
     anchor: '',
-    page: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var tag_id = options.tag_id
-    var name = options.name
-    this.setData({
-      tag_id: tag_id,
-      title: name
+    token.verify(this.getUid)
+  },
+
+  getUid: function () {
+    wx.request({
+      url: Config.restUrl + '/getUid',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        this.setData({
+          fan_id: res.data.uid
+        })
+        this.getPictures()
+      },
     })
-    token.verify(this.getPictures)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     if (this.data.id > 0 && app.globalData.pictures.length > 0) {
       // token.verify(this.getPicture)
       this.setData({
@@ -51,42 +57,28 @@ Page({
       })
       app.globalData.pictures = []
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
   },
 
-  getPictures: function() {
-    var tag_id = this.data.tag_id;
-    var page = this.data.page
+  getPicture: function () {
+    var id = this.data.id
     wx.request({
-      url: Config.restUrl + '/pictures/getListByTags?tag_id=' + tag_id,
+      url: Config.restUrl + '/pictures/' + id,
       header: { 'token': wx.getStorageSync('token') },
-      data: {page: page},
       success: res => {
-        var pictures = res.data.data.data
-        var oPictures = this.data.pictures
-        var newPictures = [];
-        if (pictures.length > 0) {
-          newPictures = oPictures.concat(pictures)
-          this.setData({
-            pictures: newPictures,
-            page: page + 1,
-            isLoadMode: true
-          });
-          var pindex = getCurrentPages().length - 1
-          app.globalData.pictures[pindex] = newPictures
+        var picture = res.data.data
+
+        var pictures = this.data.pictures
+        for (var i in pictures) {
+          if (pictures[i].id == id) {
+            var key = 'pictures[' + i + ']'
+            this.setData({
+              [key]: picture
+            })
+            break;
+          }
         }
 
-        if (newPictures.length == res.data.data.total) {
-          this.setData({
-            isLoadMode: false
-          });
-        }
       }
     })
   },
@@ -119,6 +111,44 @@ Page({
     }
   },
 
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  getPictures: function () {
+    var fan_id = this.data.fan_id;
+    var page = this.data.page
+    wx.request({
+      url: Config.restUrl + '/fans/' + fan_id + '/download',
+      header: { 'token': wx.getStorageSync('token') },
+      data: { page: page },
+      success: res => {
+        var pictures = res.data.data
+        var oPictures = this.data.pictures
+        var newPictures = [];
+        if (pictures.length > 0) {
+          newPictures = oPictures.concat(pictures)
+          this.setData({
+            pictures: newPictures,
+            page: page + 1,
+            isLoadMode: true
+          });
+          var pindex = getCurrentPages().length - 1
+          app.globalData.pictures[pindex] = newPictures
+        }
+
+        if (newPictures.length == res.data.total) {
+          this.setData({
+            isLoadMode: false
+          });
+        }
+      }
+    })
+  },
+
   scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
 
@@ -148,5 +178,7 @@ Page({
       return
     }
     this.getPictures()
-  }
+  },
+
+
 })

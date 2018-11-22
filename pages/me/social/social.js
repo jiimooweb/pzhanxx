@@ -162,7 +162,6 @@ Page({
     toSocial: function(e) {
         var id = e.currentTarget.dataset.id
         var index = e.currentTarget.dataset.index
-
         wx.navigateTo({
             url: '/pages/socials/social/social?id=' + id + '&index=' + index + '&key=mySocials',
         })

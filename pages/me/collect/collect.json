@@ -3,5 +3,6 @@
     "tab-bar": "/components/tabBar/tabBar",
     "loading": "/components/loading/loading",
     "pic-list": "/components/pic-list/pic-list"
-  }
+  },
+  "disableScroll": true
 }

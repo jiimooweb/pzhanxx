@@ -1,5 +1,9 @@
-import { Config } from "../../utils/config.js"
-import { Token } from "../../utils/token.js"
+import {
+  Config
+} from "../../utils/config.js"
+import {
+  Token
+} from "../../utils/token.js"
 const token = new Token
 const app = getApp()
 
@@ -16,33 +20,67 @@ Page({
     isLoad: true,
     load: false,
     downloadFlag: false,
-    recommend_ids: []
+    recommend_ids: [],
+    writePhotosAlbum: false,
+    authorizeFlag: false,
+    share: false,
+    scrollHeight: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
-
+  onLoad: function(options) {
     var id = options.id
     var index = options.index
     this.setData({
       id: id
     })
-    if(options.key != undefined) {
-      token.verify(this.getPicture)
+
+    wx.getSystemInfo({
+      success: res => {
+        this.setData({
+          scrollHeight: res.windowHeight
+        });
+      }
+    });
+
+    if (options.key != undefined) {
+      token.verify(this.getPictureAndRecommends)
       return
     }
     token.verify(this.getPictureAndRecommends)
-    
+
+
   },
+  
 
   onShow: function() {
-    if(this.data.recommend_ids.length > 0) {
+    var that = this
+
+    if (this.data.recommend_ids.length > 0) {
       token.verify(this.getPictureAndRecommendsByIds)
+    }
+    
+    setTimeout(this.init, 400);
+    
+
+  },
+
+  init: function() {
+    wx.getSetting({
+      success: res => {
+        this.data.writePhotosAlbum = res.authSetting['scope.writePhotosAlbum']
+      },
+    })
+
+    //分享后进入页面的时候
+    if (this.data.share && this.data.picture.download == 0) {
+      wx.showLoading({
+        title: '正在下载...',
+      })
+      this.downloadPicture()
+      this.data.share = false
     }
   },
 
@@ -50,15 +88,20 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function() {
+    this.loginPanel = this.selectComponent("#loginPanel");    
   },
+
 
   getPictureAndRecommendsByIds: function() {
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/app_show',
-      header: { 'token': wx.getStorageSync('token') },
-      data: { recommend_ids: this.data.recommend_ids},
+      header: {
+        'token': wx.getStorageSync('token')
+      },
+      data: {
+        recommend_ids: this.data.recommend_ids
+      },
       method: 'POST',
       success: res => {
         var picture = res.data.data
@@ -74,9 +117,14 @@ Page({
 
 
   getPictureAndRecommends: function() {
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.request({
-      url: Config.restUrl + '/pictures/'+ this.data.id +'/app_show',
-      header: { 'token': wx.getStorageSync('token') },
+      url: Config.restUrl + '/pictures/' + this.data.id + '/app_show',
+      header: {
+        'token': wx.getStorageSync('token')
+      },
       success: res => {
         var recommends = res.data.recommends
         var recommend_ids = res.data.recommend_ids
@@ -85,9 +133,8 @@ Page({
           recommends: recommends,
           recommend_ids: recommend_ids,
           load: true
-        })      
-        
-        wx.hideLoading()
+        })
+
       }
     })
   },
@@ -96,7 +143,7 @@ Page({
   // previewImage: function(e) {
   //   var picture = this.data.picture
   //   var index = this.data.index
-    
+
   //   var url = picture.url
   //   var urls = [url]
   //   wx.previewImage({
@@ -106,31 +153,33 @@ Page({
   // },
 
 
- 
+
 
   scroll: function(e) {
     var scrollHeight = e.detail.scrollTop
     if (scrollHeight > 250) {
-      if(this.data.recommends.length === 0 && this.data.isLoad) {
-        this.getRecommends()         
+      if (this.data.recommends.length === 0 && this.data.isLoad) {
+        this.getRecommends()
         this.setData({
           isLoad: false
         })
       }
-    } 
+    }
   },
 
   collectHandle: function(e) {
-    var op = 'collect'          
-    if(this.data.picture.collect) {
+    var op = 'collect'
+    if (this.data.picture.collect) {
       op = 'uncollect'
     }
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/' + op,
-      header: { 'token': wx.getStorageSync('token') },
+      header: {
+        'token': wx.getStorageSync('token')
+      },
       method: 'post',
       success: res => {
-        if(res.data.status == 'success') {
+        if (res.data.status == 'success') {
           var key = 'picture.collect'
           var count_key = 'picture.collect_fans_count'
           var status = this.data.picture.collect ? 0 : 1
@@ -144,20 +193,22 @@ Page({
             [key]: status,
             [count_key]: collect_fans_count,
           })
-
+          this.setGPictures(this.data.id, status)
         }
       }
     })
   },
 
-  likeHandle: function (e) {
+  likeHandle: function(e) {
     var op = 'like'
     if (this.data.picture.like) {
       op = 'unlike'
     }
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/' + op,
-      header: { 'token': wx.getStorageSync('token') },
+      header: {
+        'token': wx.getStorageSync('token')
+      },
       method: 'post',
       success: res => {
         if (res.data.status == 'success') {
@@ -174,93 +225,170 @@ Page({
             [key]: status,
             [count_key]: like_fans_count
           })
-        
+
         }
       }
     })
   },
 
-  toHome: function () {
+  toHome: function() {
     wx.switchTab({
       url: '/pages/index/index',
     })
   },
 
+  setShareFlag: function() {
+    this.data.share = true
+    this.data.type = 1
+  },
+
   onShareAppMessage: function() {
     var picture = this.data.picture
-    // var url = 'https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=' + encodeURI(this.data.picture.url)
-
+    
     return {
       'title': picture.title,
-      'imageUrl': picture.url,
-      'path': 'pages/preview/preview?id=' + this.data.id + '&key=share' 
+      'imageUrl': picture.url + '?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim',
+      'path': 'pages/preview/preview?id=' + this.data.id + '&key=share'
     }
-    
+
   },
 
   showDownloadPanel: function() {
-    this.setData({
-      downloadFlag: true
-    })
+
+    if (!wx.getStorageSync('authorize_status')) {
+      this.loginPanel.show()
+      return
+    }
+
+    if(this.data.writePhotosAlbum === false) {
+      this.showAuthorizePanel()
+      return 
+    }
+    if (this.data.picture.download) {
+      this.downloadPicture()
+      return
+    }
+
+    this.getPointAndShareCount()
+
   },
 
-  hideDownloadPanel: function () {
+  hideDownloadPanel: function() {
     this.setData({
       downloadFlag: false
     })
   },
 
-  download: function() {
-    wx.showLoading({
-      title: '正在下载...',
+  showAuthorizePanel: function () {
+    this.setData({
+      authorizeFlag: true
     })
+  },
+
+  hideAuthorizePanel: function() {
+    this.setData({
+      authorizeFlag: false
+    })
+  },
+
+  getPointAndShareCount: function() {
+    wx.request({
+      url: Config.restUrl + '/fan/point-and-share-count',
+      header: {
+        'token': wx.getStorageSync('token')
+      },
+      success: res => {
+        this.setData({
+          point: res.data.point,
+          share_count: res.data.share_count
+        })
+        this.setData({
+          downloadFlag: true
+        })
+      }
+    })
+  },
+
+  download: function(e) {
+    var dtype = this.data.type ? 1 : 0;
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/download',
-      header: { 'token': wx.getStorageSync('token') },
+      header: {
+        'token': wx.getStorageSync('token')
+      },
+      data: { 'type': dtype},
       method: 'post',
       success: res => {
-        if(res.data.status == 'success') {
-          var url = res.data.url
-          wx.downloadFile({
-            url: url,
-            success: res => {
-              var tempFilePath = res.tempFilePath;
-              wx.saveImageToPhotosAlbum({
-                filePath: tempFilePath,
-                success: res => {
-                  wx.hideLoading()
-                  wx.showToast({
-                    title: '已保存到相册',
-                    icon: 'none'
-                  })
-                  this.delPic()
-                }
-              })
-            },
-            fail: res => {
-              this.delPic()
-              wx.showToast({
-                title: '拒绝授权',
-                icon: 'none'
-              })      
-            }
-          })
+        console.log(res)
+        if (res.data.status == 'success') {
+          if (res.data.flag) {
+            this.downloadPicture()
+            this.data.picture.download = 1
+          }
         }
       }
     })
   },
 
-  delPic: function() {
-    wx.request({
-      url: Config.restUrl + '/pictures/' + this.data.id + '/del-pic',
-      header: { 'token': wx.getStorageSync('token') },
-      method: 'post',
-      success: res => {
 
-      }
+  downloadPicture: function() {
+    this.hideDownloadPanel()
+    wx.showLoading({
+      title: '正在下载...',
     })
+    var url = this.data.picture.url
+    wx.downloadFile({
+      url: url,
+      success: res => {
+        var tempFilePath = res.tempFilePath;
+        wx.saveImageToPhotosAlbum({
+          filePath: tempFilePath,
+          success: res => {
+            wx.hideLoading()
+            this.hideDownloadPanel()
+            wx.showToast({
+              title: '已保存到相册',
+              icon: 'none'
+            })
+          },
+          fail: res => {
+            wx.hideLoading()
+            this.hideDownloadPanel() 
+            this.data.writePhotosAlbum = false            
+            wx.showToast({
+              title: '拒绝授权',
+              icon: 'none'
+            })
+          }
+        })
+      },
+      fail: res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '下载失败',
+          icon: 'none'
+        })
+      }
+
+    })
+
+  },
+
+  setGPictures: function (id, status) {
+    var gPitures = app.globalData.pictures
+    for (var i in gPitures) {
+      if (gPitures[i].id == id) {
+        app.globalData.pictures[i].collect = status
+        break;
+      }
+    }
+  },
+
+  loadImage: function(e) {
+    wx.hideLoading()
   }
 
-// https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=http%3a%2f%2fp8r2g6z46.bkt.clouddn.com%2f20181025%2fca34d094b08eefc14dca8eb83eae2ebe.png
- 
+
+  // https://minibizhi.313515.com/WeChat/GenerateSharePicStream?picType=1&picUrl=http%3a%2f%2fp8r2g6z46.bkt.clouddn.com%2f20181025%2fca34d094b08eefc14dca8eb83eae2ebe.png
+
 })

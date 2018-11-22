@@ -2,6 +2,7 @@ import { Config } from "../../../utils/config.js"
 import { Token } from "../../../utils/token.js"
 
 const token = new Token
+const app = getApp()
 
 Page({
 
@@ -12,14 +13,14 @@ Page({
     userInfo: {},
     authorize_status: false,
     bgImages: [
-      'http://download.rdoorweb.com/pzhan/bg/shuijiao.jpg','http://download.rdoorweb.com/pzhan/bg/%E5%90%90%E5%8F%B8.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E7%83%AD%E7%8B%97.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E6%B0%B4%E6%9E%9C.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E5%8D%88%E9%A4%90.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E5%92%96%E5%95%A1.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E6%8A%B9%E8%8C%B6.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/gali.jpg',
-    'http://download.rdoorweb.com/pzhan/bg/%E8%9B%8B%E7%B3%95.jpg'
+      'http://download.rdoorweb.com/pzhan/bg/shuijiao.jpg', 'http://download.rdoorweb.com/pzhan/bg/%E5%90%90%E5%8F%B8.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E7%83%AD%E7%8B%97.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E6%B0%B4%E6%9E%9C.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E5%8D%88%E9%A4%90.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E5%92%96%E5%95%A1.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E6%8A%B9%E8%8C%B6.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/gali.jpg',
+      'http://download.rdoorweb.com/pzhan/bg/%E8%9B%8B%E7%B3%95.jpg'
 
     ],
     id: 0,
@@ -38,13 +39,14 @@ Page({
     this.init()
   },
 
-  onShow: function() {
+  onShow: function () {
     this.getNotices()
+    this.getPointAndShareCount()
     this.setData({
       userInfo: wx.getStorageSync('userInfo'),
       authorize_status: wx.getStorageSync('authorize_status')
     })
-    
+
   },
 
   /**
@@ -54,7 +56,7 @@ Page({
     this.loginPanel = this.selectComponent("#loginPanel");
   },
 
-  init: function() {
+  init: function () {
     wx.showLoading({
       title: '正在加载',
       mask: true
@@ -64,10 +66,12 @@ Page({
   },
 
 
-  toSocial: function() {
+  toSocial: function () {
+    app.globalData.gsocials = this.data.socials
     wx.navigateTo({
       url: '/pages/me/social/social'
     })
+    
   },
 
   toShare: function () {
@@ -82,13 +86,13 @@ Page({
     }
   },
 
-  changeBgId: function() {
-    var id = this.data.id +  1
-    if(id > 8) {
+  changeBgId: function () {
+    var id = this.data.id + 1
+    if (id > 8) {
       id = 0
     }
     this.setData({
-      id: id 
+      id: id
     })
   },
 
@@ -109,8 +113,24 @@ Page({
     })
   },
 
+  getPointAndShareCount: function () {
+    wx.request({
+      url: Config.restUrl + '/fan/point-and-share-count',
+      header: {
+        'token': wx.getStorageSync('token')
+      },
+      success: res => {
+        this.setData({
+          point: res.data.point,
+          share_count: res.data.share_count
+        })
+      }
+    })
+  },
 
-  getBgIdByTime: function() {
+
+
+  getBgIdByTime: function () {
     wx.request({
       url: Config.restUrl + '/getBgIdByTime',
       success: res => {
@@ -121,26 +141,26 @@ Page({
     })
   },
 
-  toNotice: function() {
+  toNotice: function () {
     wx.navigateTo({
       url: '/pages/me/notice/notice?comment_count=' + this.data.comment_count
     })
   },
 
-  hideSignPanel: function() {
+  hideSignPanel: function () {
     this.setData({
       signPanelFlag: false
     })
   },
 
-  login: function() {
+  login: function () {
     if (!wx.getStorageSync('authorize_status')) {
       this.loginPanel.show()
       return
     }
   },
 
-  showSignPanel: function() {
+  showSignPanel: function () {
     if (!wx.getStorageSync('authorize_status')) {
       this.loginPanel.show()
       return
@@ -186,20 +206,20 @@ Page({
             signButtonFlag: data.signButtonFlag,
             loading: true,
           });
-        }else {
+        } else {
           this.setData({
             signButtonFlag: true,
             loading: true,
           });
         }
         this.getNotices()
-        
+
         wx.hideLoading();
       }
     })
   },
 
-  loginHide: function(e) {
+  loginHide: function (e) {
     if (e.detail.userInfo != null) {
       this.setData({
         userInfo: e.detail.userInfo,
@@ -208,21 +228,34 @@ Page({
     }
   },
 
-  toCollect: function() {
+  toCollect: function () {
     wx.navigateTo({
       url: '/pages/me/collect/collect',
     })
   },
-    toStatement:function(){
-        wx.showModal({
-            title: '声明',
-            showCancel:'false',
-            content: '本小程序所有图片均来自互联网收集而来，版权归原创者所有，如果侵犯了你的权益，请通知我们（rd@rdoorweb.com），我们会及时删除侵权内容，谢谢！',
-            success: function (res) {
-            }
-        })  
-    }
 
-  
-  
+  toDownload: function () {
+    wx.navigateTo({
+      url: '/pages/me/download/download',
+    })
+  },
+
+  toStatement: function () {
+    wx.showModal({
+      title: '声明',
+      showCancel: 'false',
+      content: '本小程序所有图片均来自互联网收集而来，版权归原创者所有，如果侵犯了你的权益，请通知我们（rd@rdoorweb.com），我们会及时删除侵权内容，谢谢！',
+      success: function (res) {
+      }
+    })
+  },
+
+  toRule: function () {
+    wx.navigateTo({
+      url: '/pages/rule/rule',
+    })
+  }
+
+
+
 })
