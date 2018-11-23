@@ -3,7 +3,7 @@
 } */
 
 .cimg {
-    height: 398rpx !important;
+    height: auto;
     width: 100%;
     display: block;
 }

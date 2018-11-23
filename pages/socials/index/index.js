@@ -233,7 +233,7 @@ Page({
 
   setScrollHeight: function(height) {
     this.setData({
-      scrollHeight: height - 100
+      scrollHeight: height
     })
   },
 

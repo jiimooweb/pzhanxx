@@ -25,7 +25,7 @@
       <view class="photos">
         <block wx:for="{{social.photos}}" wx:for-item="photo" wx:key="{{index}}">
           <image wx:if="{{social.new == 1}}"  src="{{photo.url}}"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}" ></image>
-          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
        </block>
       </view>
     </view>

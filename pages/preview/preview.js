@@ -247,7 +247,7 @@ Page({
     
     return {
       'title': picture.title,
-      'imageUrl': picture.url + '?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim',
+      'imageUrl': picture.url,
       'path': 'pages/preview/preview?id=' + this.data.id + '&key=share'
     }
 

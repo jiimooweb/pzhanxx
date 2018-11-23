@@ -134,24 +134,20 @@ Page({
     var keyword = ''
     var page = 1
     var hotIndex = index;
+    
     if (hotIndex == 0) {
       keyword = 'hot'
       page = this.data.hots.page
-      if (!this.data.hots.isloadMore) {
-        return
-      }
+      this.data.hots.isloadMore = false        
+      
     } else if (hotIndex == 1) {
       keyword = 'collect'
       page = this.data.collects.page
-      if (!this.data.collects.isloadMore) {
-        return
-      }
+      this.data.collects.isloadMore = false
     } else {
       keyword = 'like'
       page = this.data.likes.page
-      if (!this.data.likes.isloadMore) {
-        return
-      }
+      this.data.likes.isloadMore = false
     }
     wx.request({
       url: Config.restUrl + '/pictures/rank?keyword=' + keyword,
@@ -328,13 +324,18 @@ Page({
     var hotPictures = []
     if (index == 0) {
       fixedText = '热度榜'
+      console.log(this.data.hots.isloadMore)
+    
       if (this.data.hots.pictures.length == 0) {
         this.getHotPictures(index)
       } else {
         hotPictures = this.data.hots.pictures
       }
     } else if (index == 1) {
-      fixedText = '收藏榜'
+      fixedText = '收藏榜'     
+      if (!this.data.collects.isloadMore) {
+        return
+      } 
       if (this.data.collects.pictures.length == 0) {
         this.getHotPictures(index)
       } else {
@@ -342,6 +343,9 @@ Page({
       }
     } else {
       fixedText = '点赞榜'
+      if (!this.data.likes.isloadMore) {
+        return
+      }
       if (this.data.likes.pictures.length == 0) {
         this.getHotPictures(index)
       } else {
@@ -379,6 +383,20 @@ Page({
 
   loadHotPictures: function () {
     var hotIndex = this.data.hotIndex
+    if(hotIndex == 0) {
+      if (!this.data.hots.isloadMore) {
+        return
+      }
+    } else if (hotIndex == 1) {
+      if (!this.data.collects.isloadMore) {
+        return
+      }
+    } else {
+      if (!this.data.likes.isloadMore) {
+        return
+      }
+    }
+    
     this.getHotPictures(hotIndex)
   },
 
