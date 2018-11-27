@@ -17,7 +17,7 @@ Page({
     random_picture_ids: [],
     title: 'P站星选',
     page: 1,
-    isLoadMode: true,
+    isLoadMore: true,
     loadFlag: true,
     topShow: false,
     anchor: '',
@@ -111,7 +111,7 @@ Page({
 
   getPictures: function (page) {
     var random_picture_ids = this.data.random_picture_ids
-    this.data.isLoadMode = false
+    this.data.isLoadMore = false
 
     wx.request({
       url: Config.restUrl + '/pictures/random',
@@ -126,7 +126,7 @@ Page({
 
         if (pictures.length > 0) {
           newPictures = oPictures.concat(pictures)
-          this.data.isLoadMode = true
+          this.data.isLoadMore = true
           this.data.page = page + 1
           this.data.random_picture_ids = res.data.random_picture_ids
           this.setData({
@@ -137,7 +137,7 @@ Page({
         } 
         
         if (newPictures.length >= 300 || pictures.length == 0) {
-          this.data.isLoadMode = false
+          this.data.isLoadMore = false
           this.setData({
             loadFlag: false
           })
@@ -188,7 +188,7 @@ Page({
   },
 
   loadMore: function(e) {
-    if (!this.data.isLoadMode) {
+    if (!this.data.isLoadMore) {
       return
     }
     this.getPictures()
@@ -302,6 +302,12 @@ Page({
     wx.setStorageSync('tip_staus', true)
     this.setData({
       tipFlag: false
+    })
+  },
+
+  toSearch: function() {
+    wx.navigateTo({
+      url: '/pages/search/search',
     })
   }
 

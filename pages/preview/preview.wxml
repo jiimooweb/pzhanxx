@@ -4,7 +4,7 @@
 <scroll-view scrollY scrollTop="0" bindscroll="scroll" style='height:{{scrollHeight}}px'>
   <view class="preview-box">
     <view class="preview-image">
-      <image bindload="loadImage" lazy-load="{{true}}" src="{{picture.url}}?imageMogr2/auto-orient/thumbnail/!90p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+      <image bindload="loadImage" lazy-load="{{true}}" src="{{picture.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
     </view>
 
     <view class="tags-relative">

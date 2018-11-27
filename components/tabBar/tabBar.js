@@ -7,7 +7,9 @@ Component({
     tabs: Array,
     title: String,
     bgColor: String,
-    block: Boolean
+    block: Boolean,
+    diyIcon:Boolean,
+    icon: String
   },
 
   /**
@@ -20,7 +22,8 @@ Component({
     tabIndex: 0,
     bgColor: "#fff",
     backFlag: true,
-    block: true
+    block: true,
+    icon: ''
   },
 
   ready: function () {
@@ -43,6 +46,10 @@ Component({
     _back: function(e) {
       this.back()
       this.triggerEvent('back');
+    },
+
+    _iconTap: function(e) {
+      this.triggerEvent('iconTap');
     },
 
     _init: function () {

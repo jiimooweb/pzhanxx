@@ -1,4 +1,4 @@
-<tab-bar title="{{title}}" block></tab-bar>
+<tab-bar title="{{title}}" block icon="/icon/index-search.png" bind:iconTap="toSearch"></tab-bar>
 <view class="addTip" wx:if="{{tipFlag}}">
   <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image>
   <view class="know" bindtap="colseTip" >我知道了</view>
@@ -9,7 +9,7 @@
   <view id="outside">
     <view class="swipers" id="swipers">
       <swiper autoplay circular="true" class="swiper" duration="500" interval="3000" nextMargin="50rpx" previousMargin="50rpx" current="0" bindchange='onSlideChangeEnd'>
-        <swiper-item wx:for="{{swpiers}}" wx:key="{{index}}" bindtap="toOther" data-url="{{item.url}}" data-type="{{item.type}}">
+        <swiper-item wx:for="{{swpiers}}" wx:key="{{index}}" bindtap="toOther" data-url="{{item.url}}?imageMogr2/auto-orient/thumbnail/!60p/blur/1x0/quality/75|imageslim" data-type="{{item.type}}">
           <button class="swiper-btn {{carouselIndex===index?'ori':''}}" data-albumId="{{item.AlbumId}}" data-event="swiperHandle" data-index="{{index}}" formType="submit" hoverClass="none">
             <image class="swiper-image" mode="aspectFill" src="{{item.image}}"></image>
           </button>
@@ -26,7 +26,7 @@
       </button>
       <view class="album-view">
         <button class="hot-btn" bindtap='gohotSpecial' data-index="{{index}}" formType="submit" hoverClass="none" wx:for="{{specials}}" wx:key="{{index}}">
-          <image mode="aspectFill" src="{{item.cover}}"></image>
+          <image mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
           <view class="single-ellipsis">{{item.title}}</view>
         </button>
       </view>

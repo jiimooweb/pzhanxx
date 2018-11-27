@@ -30,7 +30,7 @@ Page({
       title: '加载中',
     })
     wx.request({
-      url: Config.restUrl + '/articles/' + 1,
+      url: Config.restUrl + '/articles/' + id,
       method: 'GET',
       header: {'token': wx.getStorageSync('token')},
       success: res => {

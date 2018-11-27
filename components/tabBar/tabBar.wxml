@@ -6,6 +6,9 @@
     <view class="back" bindtap="_back" wx:if="{{backFlag}}">
       <image src="/icon/back.svg"></image>
     </view>
+    <view class="back" bindtap="_iconTap" wx:if="{{icon}}">
+      <image src="{{icon}}"></image>
+    </view>
     <view class="tab">{{title}}</view>
   </view>
 </view>

@@ -20,7 +20,8 @@ Component({
    */
   methods: {
     _toPreview: function (e) {
-      this.triggerEvent('toPreview')
+      var id = e.currentTarget.dataset.id
+      this.triggerEvent('toPreview', { id: id })
       this.toPreview(e)
     },
 

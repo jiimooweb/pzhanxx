@@ -168,6 +168,10 @@ Page({
   },
 
   collectHandle: function(e) {
+    if (!wx.getStorageSync('authorize_status')) {
+      this.loginPanel.show()
+      return
+    }
     var op = 'collect'
     if (this.data.picture.collect) {
       op = 'uncollect'
@@ -200,6 +204,10 @@ Page({
   },
 
   likeHandle: function(e) {
+    if (!wx.getStorageSync('authorize_status')) {
+      this.loginPanel.show()
+      return
+    }
     var op = 'like'
     if (this.data.picture.like) {
       op = 'unlike'

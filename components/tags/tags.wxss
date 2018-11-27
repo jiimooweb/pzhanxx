@@ -2,6 +2,8 @@
   /* height: 100rpx; */
   margin-top: 10rpx;
   width: 100%;
+  box-sizing: border-box;
+  padding-right: 20rpx;
 }
 
 .wallpaper-relative .labels {

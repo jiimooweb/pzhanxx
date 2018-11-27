@@ -1,0 +1,159 @@
+
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.result-panel {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+ .order {
+  display: flex;
+  flex-direction: row;
+  height:75rpx;
+  font-size: 28rpx;
+  color:#909399;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.active {
+  font-weight: 500;
+  color:#E6A23C;
+}
+
+.result-panel .result {
+  flex: 1;
+  height: 100px;
+}
+
+.result-panel .result scroll-view {
+  height: 90%;
+  padding-bottom: 10rpx;
+}
+
+.loading-tip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color:#909399;
+  height:100rpx;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.bar .back {
+  height: 45rpx;
+  width: 45rpx;
+}
+
+.bar .back image{
+  height: 100%;
+  width: 100%;
+}
+
+.bar .search{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 65%;
+  height:100%;
+  padding: 2rpx 20rpx;
+  box-sizing: border-box;  
+}
+
+.bar .search .search-icon{
+  width: 35rpx;
+  height: 35rpx;
+  position: absolute;
+  margin-left: 10rpx;
+}
+
+.bar .search .cancel-icon{
+  width: 35rpx;
+  height: 35rpx;
+  position: absolute;
+  margin-left: 50%;
+}
+
+.bar .search input{
+  width: 100%;
+  height:100%;
+  padding: 5rpx 55rpx 5rpx 55rpx;
+  box-sizing: border-box;  
+  background: #f1f1f2;
+  border-radius: 6px;
+  font-size: 26rpx;
+  line-height: calc(100% - 10rpx);
+}
+
+.placeholder {
+  font-size: 26rpx;  
+  line-height: calc(100% - 10rpx);
+}
+
+.tip {
+  font-size: 22rpx;
+  margin-left: 25rpx;
+  margin-top: 30rpx;
+  margin-bottom: 40rpx;
+  color: #606266;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+}
+
+.history .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height:80rpx;
+  box-sizing: border-box;
+  padding: 10rpx 30rpx;
+}
+
+.history .row .keyword{
+  font-size: 32rpx;
+  color: #303133;
+}
+
+.history .row image{
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.del-all {
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.del-all image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+
+

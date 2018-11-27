@@ -5,6 +5,5 @@
     "login-panel": "/components/login-panel/index",
     "tab-bar": "/components/tabBar/tabBar",
     "report": "/components/report/report"
-  },
-  "disableScroll": true
+  }
 }
