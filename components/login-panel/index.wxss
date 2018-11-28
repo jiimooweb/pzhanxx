@@ -28,7 +28,7 @@
 	100%{ transform: translateY(0px);opacity: 1;}
 }
 
-.cancel {
+.cancel-panel {
   width: 540rpx;
   height:100rpx;
   margin-top:220rpx;
@@ -40,7 +40,7 @@
 }
 
 
-.cancel image{
+.cancel-panel image{
   width: 65rpx;
   height:65rpx;
   background-color: rgba(0, 0, 0, 0.3);

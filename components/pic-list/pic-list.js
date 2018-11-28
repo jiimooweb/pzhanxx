@@ -22,7 +22,7 @@ Component({
   },
 
   ready: function() {
-    
+    this.loginPanel = this.selectComponent("#loginPanel");    
   },
 
 
@@ -73,6 +73,10 @@ Component({
     },
 
     _collect: function(e) {
+      if (!wx.getStorageSync('authorize_status')) {
+        this.loginPanel.show()
+        return
+      }
       var id = e.currentTarget.dataset.id
       this.triggerEvent('collect', { id: id })            
       this.collect(e)

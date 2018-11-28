@@ -14,7 +14,7 @@
     <text class="text-tips">部分功能需要微信授权才可使用</text>
   </view>
 
-  <view class="cancel" bindtap="_hide">
+  <view class="cancel-panel" bindtap="_hide">
     <image src="/icon/cancel.png"></image>
   </view>
 </view>

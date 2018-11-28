@@ -36,10 +36,10 @@ form {
     height: 100%;
     box-sizing: border-box;
 }
-
+/* 
 image {
     display: block;
-}
+} */
 
 .multi-ellipsis {
     overflow: hidden;
