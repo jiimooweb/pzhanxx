@@ -341,12 +341,12 @@ Page({
 
   downloadPicture: function() {
     this.hideDownloadPanel()
-    wx.showLoading({
-      title: '正在下载...',
-    })
+    // wx.showLoading({
+    //   title: '正在下载...',
+    // })
     var url = this.data.picture.url
-    wx.downloadFile({
-      url: url,
+    const downloadTask = wx.downloadFile({
+      url: url, //仅为示例，并非真实的资源
       success: res => {
         var tempFilePath = res.tempFilePath;
         wx.saveImageToPhotosAlbum({
@@ -361,8 +361,8 @@ Page({
           },
           fail: res => {
             wx.hideLoading()
-            this.hideDownloadPanel() 
-            this.data.writePhotosAlbum = false            
+            this.hideDownloadPanel()
+            this.data.writePhotosAlbum = false
             wx.showToast({
               title: '拒绝授权',
               icon: 'none'
@@ -370,6 +370,7 @@ Page({
           }
         })
       },
+
       fail: res => {
         wx.hideLoading()
         wx.showToast({
@@ -377,8 +378,18 @@ Page({
           icon: 'none'
         })
       }
-
     })
+
+    downloadTask.onProgressUpdate((res) => {
+      wx.showLoading({
+        title: '已下载' + res.progress + '%',
+      })
+
+      if (res.progress == 100) {
+        wx.hideLoading()
+      }
+    })
+    
 
   },
 

@@ -18,13 +18,17 @@ Page({
     news: {
       pictures: [],
       page: 1,
-      isLoadMore: true
+      isLoadMore: true,
+      topShow: false
     },
     olds: {
       pictures: [],
       page: 1,
-      isLoadMore: true
+      isLoadMore: true,
+      topShow: false
     },
+    scrollHeight: 0,
+    topShow: false
   },
 
   /**
@@ -68,6 +72,10 @@ Page({
         this.setData({
           barHeight: barHeight,
           statusBarHeight: res.statusBarHeight
+        })
+        var scrollHeight = res.windowHeight - barHeight - res.statusBarHeight - 40
+        this.setData({
+          scrollHeight: scrollHeight
         })
       },
     })
@@ -132,7 +140,6 @@ Page({
 
   delHistory: function(e) {
     var index = e.currentTarget.dataset.index
-    console.log(index)
     var history = this.data.history;
     history.splice(index, 1)
     this.setData({
@@ -232,7 +239,21 @@ Page({
   },
 
   scroll: function(e) {
-    
+    var scrollHeight = e.detail.scrollTop
+    if(this.data.orderIndex == 0 ) {
+      var key = 'news.topShow'
+    }else {
+      var key = 'olds.topShow'
+    }
+    if (scrollHeight > 2000) {
+      this.setData({
+        [key]: true
+      })
+    } else {
+      this.setData({
+        [key]: false
+      })
+    }
   },
 
   loadMore: function() {
@@ -298,7 +319,13 @@ Page({
       ['olds.isLoadMore']: true,
       orderIndex: 0
     })
-  }
+  },
+
+  toTop: function () {
+    this.setData({
+      anchor: 'anchor'
+    })
+  },
 
 
   
