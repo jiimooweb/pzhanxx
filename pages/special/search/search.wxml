@@ -43,8 +43,8 @@
 
                 <view class="flexWarp" hidden='{{flag_res}}'>
                     <view class='sview' wx:for="{{list}}">
-                        <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover_img.url}}">
-                            <image class='simg' mode="aspectFill" src="{{item.cover_img.url}}"></image>
+                        <view bindtap='showTap' data-sid="{{item.id}}" >
+                            <image class='simg' mode="aspectFill" src="{{item.cover}}"></image>
                             <text class='stext'>{{item.title}}</text>
                         </view>
 

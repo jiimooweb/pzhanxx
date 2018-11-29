@@ -108,9 +108,8 @@ Page({
     showTap: function(e) {
         var dataset = e.currentTarget.dataset;
         var sid = dataset.sid;
-        var curl = dataset.curl
         wx.navigateTo({
-            url: '../show/show?sid=' + sid + '&curl=' + curl,
+            url: '../show/show?sid=' + sid ,
         })
     },
     showSearch: function() {

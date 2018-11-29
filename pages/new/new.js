@@ -464,10 +464,8 @@ Page({
   showTap: function (e) {
     var dataset = e.currentTarget.dataset;
     var sid = dataset.sid;
-    var curl = dataset.curl;
-    var title = dataset.title;
     wx.navigateTo({
-      url: '../special/show/show?sid=' + sid + '&curl=' + curl + '&title=' + title,
+      url: '../special/show/show?sid=' + sid,
     })
   },
   // 搜索

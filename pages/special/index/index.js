@@ -33,16 +33,16 @@ Page({
             }
         });
         token.verify(this.loadFirst)
-        
+
     },
 
-    onReady: function () {
+    onReady: function() {
         this.loginPanel = this.selectComponent("#loginPanel");
     },
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         return {
             title: '热门专辑',
-            path: "/pages/special/index/index" ,
+            path: "/pages/special/index/index",
         }
     },
 
@@ -113,7 +113,8 @@ Page({
         var curl = dataset.curl;
         var title = dataset.title;
         wx.navigateTo({
-            url: '../show/show?sid=' + sid + '&curl=' + curl + '&title=' + title,
+            // url: '../show/show?sid=' + sid + '&curl=' + curl + '&title=' + title,
+            url: '../show/show?sid=' + sid,
         })
     },
     // 搜索
