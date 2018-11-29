@@ -41,7 +41,7 @@
             </view>
             <view class="ui-col">
                 <view class="ui-col-content">
-                    <scroll-view scrollY class="popup-scroll-view" style="height:height:{{scrollHeight}}px">
+                    <scroll-view scrollY class="popup-scroll-view" style="height:{{scrollHeight}}px" >
                         <view class="month-box">
                             <view class="month-year-box" wx:for="{{years}}" wx:key="id" hidden='{{showY}}'>
                                 <view bindtap="getYearTap" class="year-list" data-year="{{item}}">
@@ -67,6 +67,7 @@
                                 </view>
                             </view>
                         </view>
+                    
                     </scroll-view>
                 </view>
             </view>
