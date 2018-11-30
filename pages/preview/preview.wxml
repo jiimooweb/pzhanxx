@@ -101,3 +101,12 @@
     </view>
   </view>
 </view>
+
+<view class="ad-panel">
+  <view class="panel">
+    <ad unit-id="adunit-cbc8e3f600d0bcac"></ad>
+  </view>
+  <view class="cancel">
+    <image src="/icon/cancel.png"></image>
+  </view>
+</view>

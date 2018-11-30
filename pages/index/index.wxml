@@ -46,3 +46,4 @@
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
   <image src="/icon/gotop.png"></image>
 </view>
+
