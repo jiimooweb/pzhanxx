@@ -2,11 +2,10 @@
  <view class="hot-tab-fixed" wx:if="{{hotFlag && tabIndex == 0}}">
   <view class="hot-bar select">{{fixedText}}</view>
 </view>
-<swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}">
+<swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}" bindtouchstart="touchstart" bindtouchend="touchend">
   <swiper-item>
     <scroll-view scrollY bindscrolltolower="loadHotPictures" lowerThreshold="100" scrollTop="0" bindscroll="hotScroll" >
       <view id="anchor"></view>
-     
       <view class="hot-tab">
         <view class="hot-bar {{hotIndex == 0 ? 'select' : ''}}" catchtap="getHotIndex" data-index="0">热度榜</view>
         <view class="hot-bar {{hotIndex == 1 ? 'select' : ''}}" catchtap="getHotIndex" data-index="1">收藏榜</view>
@@ -31,6 +30,9 @@
   <swiper-item>
     <scroll-view scrollY bindscrolltolower="loadNewPictures" scrollTop="0" bindscroll="scroll" lowerThreshold="100" scroll-into-view="{{anchor}}">
       <view id="anchor"></view>
+      <view class="refresh" wx:if="{{refreshFlag}}">
+        正在刷新...
+      </view>
       <pic-list pictures="{{newPictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
       <view class="loading-tip" wx:if="{{newParams.loadFlag}}">正在加载，请稍等...</view>
       <view class="loading-tip" wx:if="{{!newParams.loadFlag}}">只显示最新的500张!</view>

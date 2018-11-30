@@ -46,7 +46,7 @@ Page({
    */
   onShow: function () {
     if(this.data.swipers.length > 0) {
-      this.getTags();      
+      this.getTags();
     }
     if (this.data.id > 0 && app.globalData.pictures.length > 0) {
       // token.verify(this.getPicture)
@@ -55,6 +55,23 @@ Page({
       })
       app.globalData.pictures = []
     }
+  },
+
+  getNotices: function () {
+    var page = this.data.page
+    wx.request({
+      url: Config.restUrl + '/notices',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        if (res.data.status == 'success') {
+          if (res.data.count > 0) {
+            wx.showTabBarRedDot({
+              index: 4
+            })
+          }
+        }
+      }
+    })
   },
 
   onSlideChangeEnd:function(e){
@@ -78,6 +95,7 @@ Page({
         this.getTags()
         this.getSpecials()
         this.getPictures()
+        this.getNotices()        
       }
     })
   },

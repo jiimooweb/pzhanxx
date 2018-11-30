@@ -19,7 +19,7 @@
     </view>
 
     <tags tags="{{tags}}"></tags>
-
+    <!-- <ad unit-id="adunit-cbc8e3f600d0bcac"></ad> -->
     <view class="hot-album" id="ablums">
       <button class="module-title" bindtap='goSpecial'>
         热门专辑

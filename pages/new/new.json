@@ -3,6 +3,5 @@
     "tab": "/components/tab/tab",
     "pic-list": "/components/pic-list/pic-list",
     "rank": "/components/rank/rank"
-  },
-  "disableScroll": true
+  }
 }

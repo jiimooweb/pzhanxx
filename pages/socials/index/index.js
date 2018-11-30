@@ -10,9 +10,11 @@ Page({
     loading: true,
     loadMore: true,
     isLoadMode: true,
-    scrollHeight: 0,
     page: 1,
-    tipFlag: !wx.getStorageSync('tip_staus')
+    scrollHeight: 0,
+    tipFlag: !wx.getStorageSync('tip_staus'),
+    refreshFlag: false,
+    anchor: ''
   },
   
 
@@ -65,6 +67,13 @@ Page({
       header: {'token': wx.getStorageSync('token')},
       success: res => {
         var socials = res.data.data.data 
+        //下拉刷新
+        if (this.data.refreshFlag) {
+          this.setData({
+            socials: [],
+            refreshFlag: false
+          })
+        }
         var o_socials = this.data.socials 
         var new_socoals = []
         if (socials.length > 0) {
@@ -84,7 +93,7 @@ Page({
           loading: false
         })
         
-        if (new_socoals.length === res.data.data.total) {
+        if (new_socoals.length == res.data.data.total) {
           this.data.isLoadMode = false
           
           this.setData({
@@ -254,7 +263,50 @@ Page({
     this.setData({
       tipFlag: false
     })
-  }
+  },
 
+  refresh: function (e) {
+    this.setData({
+      loadMore: false,
+      isLoadMode: false,
+      page: 1,
+      refreshFlag: true
+    }),
+
+    this.getSocials()
+  },
+
+  touchstart: function (e) {
+    this.data.statusY = e.changedTouches[0].pageY
+  },
+
+  touchend: function (e) {
+    this.data.endY = e.changedTouches[0].pageY
+    if (this.data.endY - this.data.statusY > 150) {
+      if (this.data.scroll <= 0 && !this.data.refreshFlag) {
+        this.refresh()
+      }
+    }
+  },
+
+  scroll: function (e) {
+    var scrollHeight = e.detail.scrollTop
+    this.data.scroll = scrollHeight
+    if (scrollHeight > 2000) {
+      this.setData({
+        topShow: true
+      })
+    } else {
+      this.setData({
+        topShow: false
+      })
+    }
+  },
+
+  toTop: function () {
+    this.setData({
+      anchor: 'anchor'
+    })
+  },
   
 })

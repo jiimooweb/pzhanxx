@@ -7,9 +7,12 @@
   <text>发布</text>
 </view>
 <view class="tip" bindtap="colseTip" wx:if="{{tipFlag}}">每人每天首次发布动态，可获得随机5~50积分(点击隐藏)</view>
-
-<scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true" style="height:{{scrollHeight}}px">
-
+<view class="scroll-view">
+<scroll-view class="scroll" scroll-y bindscroll="scroll" bindscrolltolower="lower" enable-back-to-top="true"  bindtouchstart="touchstart" bindtouchend="touchend" scroll-into-view="{{anchor}}">
+  <view id="anchor"></view>
+  <view class="refresh" wx:if="{{refreshFlag}}">
+    正在刷新...
+  </view>
   <view class="social" wx:for="{{socials}}" wx:for-item="social" wx:for-index="socialIndex" scrolltolower="100" wx:key="{{socialIndex}}">
     <view class="user">
       <view class="avatar">
@@ -17,21 +20,21 @@
       </view>
       <view class="nickname">
         <view class="name">{{social.fan.nickname}}</view>
-        <view class="time">{{social.created_at}}</view>      
+        <view class="time">{{social.created_at}}</view>
       </view>
     </view>
     <view class="content" catchtap="toSocial" data-id="{{social.id}}" data-index="{{socialIndex}}">
       <view class="text" wx:if="{{social.content != null}}">{{social.content}}</view>
       <view class="photos">
         <block wx:for="{{social.photos}}" wx:for-item="photo" wx:key="{{index}}">
-          <image wx:if="{{social.new == 1}}"  src="{{photo.url}}"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}" ></image>
-          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim"   class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
-       </block>
+          <image wx:if="{{social.new == 1}}" src="{{photo.url}}" class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim" class="photo{{social.img_type}}" mode="aspectFill" catchtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+        </block>
       </view>
     </view>
     <view class="footer">
       <view class="like" wx:if="{{social.like == 1}}">
-        <image src="/icon/socials/liked.png" ></image>
+        <image src="/icon/socials/liked.png"></image>
         <text>{{social.like_fans_count}}</text>
       </view>
       <view class="like" wx:else catchtap="like" data-id="{{social.id}}" data-index="{{socialIndex}}">
@@ -40,7 +43,7 @@
         <text wx:else>{{social.like_fans_count}}</text>
       </view>
       <view class="comment" catchtap="toComment" data-id="{{social.id}}" data-index="{{socialIndex}}">
-        <image src="/icon/socials/comment.png"></image>    
+        <image src="/icon/socials/comment.png"></image>
         <text wx:if="{{social.comments_count == 0}}">评论</text>
         <text wx:else>{{social.comments_count}}</text>
       </view>
@@ -52,11 +55,11 @@
     </view>
   </view>
   <view class="no-tip" wx:else>
-      <text>没有啦!</text>
+    <text>没有啦!</text>
   </view>
 </scroll-view>
+</view>
 
-
-
-
-
+<view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
+  <image src="/icon/gotop.png"></image>
+</view>

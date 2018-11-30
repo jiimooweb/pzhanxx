@@ -40,6 +40,9 @@ Page({
   },
 
   onShow: function () {
+    wx.hideTabBarRedDot({
+      index: 4
+    })
     this.getNotices()
     this.getPointAndShareCount()
     this.setData({

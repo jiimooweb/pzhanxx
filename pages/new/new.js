@@ -58,7 +58,8 @@ Page({
     flag_search: true,
     list: [],
     scrollTop: 0,
-    scrollHeight: 0
+    scrollHeight: 0,
+    refreshFlag: false
   },
 
   /**
@@ -88,6 +89,7 @@ Page({
   },
 
   getNewPictures: function () {
+    
     var page = this.data.newParams.page
     if (page == 1) {
       this.getHotPictures(this.data.hotIndex)
@@ -105,6 +107,13 @@ Page({
       },
       success: res => {
         var pictures = res.data.data.data
+        //下拉刷新
+        if (this.data.refreshFlag) {
+          this.setData({
+            newPictures: [],
+            refreshFlag: false
+          })
+        }
         var oPictures = this.data.newPictures
         var newPictures = [];
         if (pictures.length > 0) {
@@ -248,6 +257,7 @@ Page({
 
   scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
+    this.data.scroll = scrollHeight
     if (scrollHeight > 2000) {
       this.setData({
         topShow: true
@@ -480,4 +490,39 @@ Page({
       title: 'P站星选',
     }
   },
+
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh');
+    wx.stopPullDownRefresh();
+  },
+
+  refresh: function(e) {
+    this.setData({
+      newParams: {
+        page: 1,
+        isloadMore: true,
+        loadFlag: true,
+        topShow: false
+      },
+      refreshFlag: true
+    }),
+
+    this.getNewPictures()
+  },
+
+  touchstart: function (e) {
+    this.data.statusY = e.changedTouches[0].pageY
+  },
+
+  touchend: function(e) {
+    this.data.endY = e.changedTouches[0].pageY
+    if(this.data.endY - this.data.statusY > 150) {
+      if (this.data.tabIndex == 1 && this.data.scroll<=0  && !this.data.refreshFlag) {
+        this.refresh()
+      }
+    }
+  },
+
+  
+
 })
