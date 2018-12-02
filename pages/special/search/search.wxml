@@ -11,9 +11,6 @@
                         <text class="font-cancle bg-font-color">取消</text>
                     </button>
                 </view>
-                <view class="no-tip" wx:if="{{isnull}}">
-                    <text>查无资料</text>
-                </view>
 
                 <view class="result-search" hidden="{{searchIsHidden}}" bindtap='bindSearchHidden'>
                     <view>
@@ -40,11 +37,13 @@
                         <text class="ui-col colGray tc">清除搜索记录</text>
                     </view>
                 </view>
-
+                <view class="no-tip" wx:if="{{isnull}}">
+                    <text>查无资料</text>
+                </view>
                 <view class="flexWarp" hidden='{{flag_res}}'>
                     <view class='sview' wx:for="{{list}}">
-                        <view bindtap='showTap' data-sid="{{item.id}}" >
-                            <image class='simg' mode="aspectFill" src="{{item.cover}}"></image>
+                        <view bindtap='showTap' data-sid="{{item.id}}">
+                            <image class='simg' mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!30p/blur/1x0/quality/75|imageslim"></image>
                             <text class='stext'>{{item.title}}</text>
                         </view>
 

@@ -225,7 +225,6 @@ Page({
                     searchIsHidden: true,
                     isnull: isnull
                 });
-                //无资料反馈未写
             }
         })
 

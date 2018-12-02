@@ -6,18 +6,12 @@
     <view class="cover-content">
         <view class="top-banner">
             <view class="top">
-                <image class='cimg' mode="widthFix" src="{{cover_url}}"></image>
+                <image class='cimg' mode="widthFix" src="{{cover_url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
             </view>
             <view class="albumDesc">
                 <text wx:if="{{text!=null}}">{{text}}</text>
             </view>
             <view class="data-list-box">
-                <!-- <view class="data-list-view">
-                    <block wx:for="{{imgs}}">
-                        <image src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFill" class="vimg">
-                        </image>
-                    </block>
-                </view> -->
                 <pic-list pictures="{{imgs}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
                 <view class="loading" hidden='{{showL}}'>请稍等,正在加载中...</view>
             </view>

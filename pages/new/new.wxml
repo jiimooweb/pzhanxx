@@ -1,46 +1,46 @@
 <tab tabs="{{tabs}}" bind:choose="tabChoose" tabIndex="{{tabIndex}}" id="tabs"></tab>
- <view class="hot-tab-fixed" wx:if="{{hotFlag && tabIndex == 0}}">
-  <view class="hot-bar select">{{fixedText}}</view>
+<view class="hot-tab-fixed" wx:if="{{hotFlag && tabIndex == 0}}">
+    <view class="hot-bar select">{{fixedText}}</view>
 </view>
 <swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}" bindtouchstart="touchstart" bindtouchend="touchend">
-  <swiper-item>
-    <scroll-view scrollY bindscrolltolower="loadHotPictures" lowerThreshold="100" scrollTop="0" bindscroll="hotScroll" >
-      <view id="anchor"></view>
-      <view class="hot-tab">
-        <view class="hot-bar {{hotIndex == 0 ? 'select' : ''}}" catchtap="getHotIndex" data-index="0">热度榜</view>
-        <view class="hot-bar {{hotIndex == 1 ? 'select' : ''}}" catchtap="getHotIndex" data-index="1">收藏榜</view>
-        <view class="hot-bar {{hotIndex == 2 ? 'select' : ''}}" catchtap="getHotIndex" data-index="2">点赞榜</view>
-      </view>
+    <swiper-item>
+        <scroll-view scrollY bindscrolltolower="loadHotPictures" lowerThreshold="100" scrollTop="0" bindscroll="hotScroll">
+            <view id="anchor"></view>
+            <view class="hot-tab">
+                <view class="hot-bar {{hotIndex == 0 ? 'select' : ''}}" catchtap="getHotIndex" data-index="0">热度榜</view>
+                <view class="hot-bar {{hotIndex == 1 ? 'select' : ''}}" catchtap="getHotIndex" data-index="1">收藏榜</view>
+                <view class="hot-bar {{hotIndex == 2 ? 'select' : ''}}" catchtap="getHotIndex" data-index="2">点赞榜</view>
+            </view>
 
-      <rank hotPictures="{{hotPictures}}" bind:toPreview="toPreview" hotIndex="{{hotIndex}}"></rank>
-      <view wx:if="{{hotIndex == 0}}">
-        <view class="loading-tip" wx:if="{{hots.loadFlag}}">正在加载，请稍等...</view>
-        <view class="loading-tip" wx:else>排行榜只显示前100名</view>
-      </view>
-      <view wx:if="{{hotIndex == 1}}">
-        <view class="loading-tip" wx:if="{{collects.loadFlag}}">正在加载，请稍等...</view>
-        <view class="loading-tip" wx:else>排行榜只显示前100名</view>
-      </view>
-      <view wx:if="{{hotIndex == 2}}">
-        <view class="loading-tip" wx:if="{{likes.loadFlag}}">正在加载，请稍等...</view>
-        <view class="loading-tip" wx:else>排行榜只显示前100名</view>
-      </view>
-    </scroll-view>
-  </swiper-item>
-  <swiper-item>
-    <scroll-view scrollY bindscrolltolower="loadNewPictures" scrollTop="0" bindscroll="scroll" lowerThreshold="100" scroll-into-view="{{anchor}}">
-      <view id="anchor"></view>
-      <view class="refresh" wx:if="{{refreshFlag}}">
-        正在刷新...
-      </view>
-      <pic-list pictures="{{newPictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
-      <view class="loading-tip" wx:if="{{newParams.loadFlag}}">正在加载，请稍等...</view>
-      <view class="loading-tip" wx:if="{{!newParams.loadFlag}}">只显示最新的500张!</view>
-    </scroll-view>
+            <rank hotPictures="{{hotPictures}}" bind:toPreview="toPreview" hotIndex="{{hotIndex}}"></rank>
+            <view wx:if="{{hotIndex == 0}}">
+                <view class="loading-tip" wx:if="{{hots.loadFlag}}">正在加载，请稍等...</view>
+                <view class="loading-tip" wx:else>排行榜只显示前100名</view>
+            </view>
+            <view wx:if="{{hotIndex == 1}}">
+                <view class="loading-tip" wx:if="{{collects.loadFlag}}">正在加载，请稍等...</view>
+                <view class="loading-tip" wx:else>排行榜只显示前100名</view>
+            </view>
+            <view wx:if="{{hotIndex == 2}}">
+                <view class="loading-tip" wx:if="{{likes.loadFlag}}">正在加载，请稍等...</view>
+                <view class="loading-tip" wx:else>排行榜只显示前100名</view>
+            </view>
+        </scroll-view>
+    </swiper-item>
+    <swiper-item>
+        <scroll-view scrollY bindscrolltolower="loadNewPictures" scrollTop="0" bindscroll="scroll" lowerThreshold="100" scroll-into-view="{{anchor}}">
+            <view id="anchor"></view>
+            <view class="refresh" wx:if="{{refreshFlag}}">
+                正在刷新...
+            </view>
+            <pic-list pictures="{{newPictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
+            <view class="loading-tip" wx:if="{{newParams.loadFlag}}">正在加载，请稍等...</view>
+            <view class="loading-tip" wx:if="{{!newParams.loadFlag}}">只显示最新的500张!</view>
+        </scroll-view>
 
-  </swiper-item>
-  <swiper-item>
- <scroll-view scrollY bindscrolltolower="bindDownLoad" scrollTop="0" bindscroll="specialScroll">
+    </swiper-item>
+    <swiper-item>
+        <scroll-view scrollY bindscrolltolower="bindDownLoad" scrollTop="0" bindscroll="specialScroll">
             <view class='box-apply-spacing'>
                 <view class='box-img' bindtap="showSearch">
                     <image class='icon-search' src="../../icon/specials/icon_search.png"></image>
@@ -50,15 +50,15 @@
             <view class="flexWarp">
                 <view class='sview' wx:for="{{list}}">
                     <view bindtap='showTap' data-sid="{{item.id}}" data-curl="{{item.cover}}" data-title='{{item.title}}'>
-                        <image class='simg' mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
+                        <image class='simg' mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!35p/blur/1x0/quality/75|imageslim"></image>
                         <text class='stext'>{{item.title}}</text>
                     </view>
-
                 </view>
+                <view class="loading-tip" hidden='{{hidden}}'>正在加载，请稍等...</view>
             </view>
         </scroll-view>
-  </swiper-item>
+    </swiper-item>
 </swiper>
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
-  <image src="/icon/gotop.png"></image>
+    <image src="/icon/gotop.png"></image>
 </view>

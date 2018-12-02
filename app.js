@@ -46,6 +46,7 @@ App({
         pictures: [],
         like_ids: [],
         collect_ids: [],
-        special_comments: []
+        special_comments: [],
+        newTab:1
     }
 })

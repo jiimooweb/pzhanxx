@@ -26,7 +26,7 @@
       </button>
       <view class="album-view">
         <button class="hot-btn" bindtap='gohotSpecial' data-index="{{index}}" formType="submit" hoverClass="none" wx:for="{{specials}}" wx:key="{{index}}">
-          <image mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim"></image>
+          <image mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!30p/blur/1x0/quality/75|imageslim"></image>
           <view class="single-ellipsis">{{item.title}}</view>
         </button>
       </view>

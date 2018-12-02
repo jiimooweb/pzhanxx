@@ -77,7 +77,7 @@
     <view id="id" bindtouchstart="handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style="width : 100%; height:{{scrollHeight}}px;" data-sub="{{sub}}" hidden='{{!headtap}}'>
         <!-- 图 -->
         <view style="width:750rpx;height:{{scrollHeight-120}}px;padding-top:5px; box-sizing: border-box;background-color:#FFF;" hidden="{{list[sub].text!=null&&nowGesture==1}}" bindtap='toPreview' data-sub='{{sub}}' data-id='{{list[sub].img_id}}'>
-            <image wx:if="{{list[sub].picture.url}}" src="{{list[sub].picture.url}}?imageMogr2/auto-orient/thumbnail/!80p/blur/1x0/quality/75|imageslim" mode="aspectFit" style="width:750rpx;height:{{scrollHeight-120}}px"></image>
+            <image wx:if="{{list[sub].picture.url}}" src="{{list[sub].picture.url}}?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFit" style="width:750rpx;height:{{scrollHeight-120}}px"></image>
         </view>
 
         <!-- 话 -->
