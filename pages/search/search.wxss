@@ -178,5 +178,20 @@ page {
   height: 100%;
 }
 
+.ad-wapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ad-tips {
+  font-size: 26rpx;
+  color:#606266;
+  line-height: 55rpx;
+  padding:0 5rpx;
+  text-align: center;
+}
+
 
 

@@ -626,4 +626,17 @@ scroll-view {
   font-weight: 500;
 }
 
+.ad-wapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ad-tips {
+  font-size: 26rpx;
+  color:#606266;
+  line-height: 55rpx;
+  padding:0 5rpx;
+  text-align: center;
+}
+
 

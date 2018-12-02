@@ -14,7 +14,8 @@ Page({
     scrollHeight: 0,
     tipFlag: !wx.getStorageSync('tip_staus'),
     refreshFlag: false,
-    anchor: ''
+    anchor: '',
+    adsFlag: false
   },
   
 
@@ -103,7 +104,7 @@ Page({
           return
         }
 
-
+        this.getAds()
       }
     })
   },
@@ -308,5 +309,23 @@ Page({
       anchor: 'anchor'
     })
   },
+
+  getAds: function () {
+    wx.request({
+      url: Config.restUrl + '/ads/app',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var ads = res.data.data
+        for(var i in ads) {
+          if(ads[i].page == 'Social') {
+            this.setData({
+              adsFlag: true
+            })
+            break;
+          }
+        }
+      }
+    })
+  }
   
 })

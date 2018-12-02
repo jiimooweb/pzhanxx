@@ -22,8 +22,8 @@ Page({
     topShow: false,
     anchor: '',
     carouselIndex:0,
-    tipFlag: !wx.getStorageSync('tip_staus')
-    
+    tipFlag: !wx.getStorageSync('tip_staus'),
+    adsFlag: false
   },
 
   /**
@@ -82,7 +82,6 @@ Page({
   },
 
   getSwipers: function() {
-   
     wx.request({
       url: Config.restUrl + '/swiper_groups/display',
       header: { 'token': wx.getStorageSync('token') },
@@ -95,7 +94,8 @@ Page({
         this.getTags()
         this.getSpecials()
         this.getPictures()
-        this.getNotices()        
+        this.getNotices()
+        this.getAds()        
       }
     })
   },
@@ -159,6 +159,24 @@ Page({
           this.setData({
             loadFlag: false
           })
+        }
+      }
+    })
+  },
+
+  getAds: function() {
+    wx.request({
+      url: Config.restUrl + '/ads/app',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var ads = res.data.data
+        for (var i in ads) {
+          if (ads[i].page == 'Index') {
+            this.setData({
+              adsFlag: true
+            })
+            break;
+          }
         }
       }
     })

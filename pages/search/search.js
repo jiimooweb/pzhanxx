@@ -28,7 +28,8 @@ Page({
       topShow: false
     },
     scrollHeight: 0,
-    topShow: false
+    topShow: false,
+    adsFlag: false
   },
 
   /**
@@ -91,6 +92,7 @@ Page({
         this.setData({
           tags: tags
         })
+        this.getAds()
       }
     })
   },
@@ -117,7 +119,7 @@ Page({
     if (history.indexOf(value) == -1) {
       history.unshift(value)      
     } 
-    if(history.length > 7) {
+    if(history.length > 5) {
       history.splice(history.length - 1,1);
     }
     this.setData({
@@ -324,6 +326,24 @@ Page({
   toTop: function () {
     this.setData({
       anchor: 'anchor'
+    })
+  },
+
+  getAds: function () {
+    wx.request({
+      url: Config.restUrl + '/ads/app',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var ads = res.data.data
+        for (var i in ads) {
+          if (ads[i].page == 'Search') {
+            this.setData({
+              adsFlag: true
+            })
+            break;
+          }
+        }
+      }
     })
   },
 

@@ -24,7 +24,8 @@ Page({
     writePhotosAlbum: false,
     authorizeFlag: false,
     share: false,
-    scrollHeight: 0
+    scrollHeight: 0,
+    adsFlag: false
   },
 
   /**
@@ -134,6 +135,8 @@ Page({
           recommend_ids: recommend_ids,
           load: true
         })
+        this.getAds()
+
 
       }
     })
@@ -405,6 +408,24 @@ Page({
 
   loadImage: function(e) {
     wx.hideLoading()
+  },
+
+  getAds: function () {
+    wx.request({
+      url: Config.restUrl + '/ads/app',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var ads = res.data.data
+        for (var i in ads) {
+          if (ads[i].page == 'Preview') {
+            this.setData({
+              adsFlag: true
+            })
+            break;
+          }
+        }
+      }
+    })
   }
 
 

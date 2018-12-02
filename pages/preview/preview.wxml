@@ -31,7 +31,12 @@
         </view>
       </view>
     </view>
+    
     <view class="segmentation"></view>
+    <view class="ad-wapper" wx:if="{{adsFlag}}">
+      <view class="ad-tips">请小伙伴们点下广告！减轻我们服务器的费用负担，感谢！</view>
+      <ad unit-id="adunit-cbc8e3f600d0bcac"></ad>
+    </view>
     <view class="similar-wallpaper">
       <view class="title">相关推荐</view>
       <view wx:if="{{recommends.length > 0}}">
@@ -57,7 +62,7 @@
   <button class="btn-download btn" catchtap="showDownloadPanel" hoverClass="none">
     <image class="fbtn" src="/icon/preview/download.png"></image>
   </button>
-  
+
   <button catchtap="likeHandle" hoverClass="none">
     <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
   </button>
@@ -82,9 +87,9 @@
     </view>
     <view class="row" wx:if="{{share_count > 0}}" catchtap="download" index-type="1">
       <button class="btn2" open-type='share' bindtap="setShareFlag">分享下载</button>
-      <text>今日可分享免费下载{{share_count}}次</text>      
+      <text>今日可分享免费下载{{share_count}}次</text>
     </view>
-     <view class="row" wx:else>
+    <view class="row" wx:else>
       <view class="btn3">分享下载</view>
       <text>今日分享免费下载次数已用完</text>
     </view>
@@ -96,17 +101,17 @@
     <view class="title">授权请求</view>
     <view class="content">请允许图片保存到相册</view>
     <view class="btn" catchtap="hideAuthorizePanel">
-      <button class="cancel" >拒绝</button>
+      <button class="cancel">拒绝</button>
       <button class="authorize" open-type='openSetting'>去授权</button>
     </view>
   </view>
 </view>
 
-<view class="ad-panel">
+<!-- <view class="ad-panel">
   <view class="panel">
     <ad unit-id="adunit-cbc8e3f600d0bcac"></ad>
   </view>
   <view class="cancel">
     <image src="/icon/cancel.png"></image>
   </view>
-</view>
+</view> -->
