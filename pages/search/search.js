@@ -178,7 +178,7 @@ Page({
             });
           } 
 
-          if (newPictures.length == res.data.total) {
+          if (pictures.length == 0) {
             this.data.news.isLoadMore = false
             this.setData({
               ['news.isLoadMore']: false
@@ -198,7 +198,7 @@ Page({
             });
           }
 
-          if (newPictures.length == res.data.total) {
+          if (pictures.length == 0) {
             this.data.olds.isLoadMore = false
             this.setData({
               ['olds.isLoadMore']: false
