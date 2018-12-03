@@ -135,7 +135,8 @@ Page({
     var value = e.currentTarget.dataset.value
     this.setData({
       value: value,
-      searchFlag: true
+      searchFlag: true,
+      cancelFlag: true
     })
     this.getPictures()    
   },
