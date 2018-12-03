@@ -438,7 +438,7 @@ Page({
             hidden: false
         });
         wx.request({
-            url: Config.restUrl + '/specials/mini?page=' + page,
+            url: Config.restUrl + '/specials/mini?page=1',
             method: 'get',
             header: {
                 token: wx.getStorageSync('token')
