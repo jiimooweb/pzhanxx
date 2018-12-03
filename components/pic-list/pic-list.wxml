@@ -3,7 +3,7 @@
   <view class="item-view">
     <view class="pic-row" wx:for="{{lpictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
       <view class="pic">
-        <image lazy-load="{{true}}"  class="img" wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!40p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+        <image lazy-load="{{true}}"  class="img" wx:if="{{item.url}}" src="{{item.url ? item.url + '?imageMogr2/auto-orient/thumbnail/!35p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
         <view class="title">{{item.title}}</view>
         <view class="row">
           <view class="author">{{item.author}}</view>
@@ -17,7 +17,7 @@
   <view class="item-view">
     <view class="pic-row" wx:for="{{rpictures}}" wx:key="{{item.pic_id}}" catchtap="{{ item.url ?  '_toPreview' : ''}}" data-index="{{index}}" data-id="{{item.id}}">
       <view class="pic">
-        <image class="img {{item.show ? 'active': ''}}" wx:if="{{item.url}}" src="{{item.url}}?imageMogr2/auto-orient/thumbnail/!40p/blur/1x0/quality/75|imageslim" mode="widthFix"></image>
+        <image class="img {{item.show ? 'active': ''}}" wx:if="{{item.url}}" src="{{item.url ? item.url + '?imageMogr2/auto-orient/thumbnail/!35p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
         <view class="title">{{item.title}}</view>
         <view class="row">
           <view class="author">{{item.author}}</view>
