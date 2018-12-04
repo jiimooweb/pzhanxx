@@ -25,13 +25,14 @@ Page({
     authorizeFlag: false,
     share: false,
     scrollHeight: 0,
-    adsFlag: false
+    adsFlag: false,
+    adError: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var id = options.id
     var index = options.index
     this.setData({
@@ -54,21 +55,21 @@ Page({
 
 
   },
-  
 
-  onShow: function() {
+
+  onShow: function () {
     var that = this
 
     if (this.data.recommend_ids.length > 0) {
       token.verify(this.getPictureAndRecommendsByIds)
     }
-    
+
     setTimeout(this.init, 400);
-    
+
 
   },
 
-  init: function() {
+  init: function () {
     wx.getSetting({
       success: res => {
         this.data.writePhotosAlbum = res.authSetting['scope.writePhotosAlbum']
@@ -89,12 +90,12 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    this.loginPanel = this.selectComponent("#loginPanel");    
+  onReady: function () {
+    this.loginPanel = this.selectComponent("#loginPanel");
   },
 
 
-  getPictureAndRecommendsByIds: function() {
+  getPictureAndRecommendsByIds: function () {
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/app_show',
       header: {
@@ -117,7 +118,7 @@ Page({
   },
 
 
-  getPictureAndRecommends: function() {
+  getPictureAndRecommends: function () {
     wx.showLoading({
       title: '加载中...',
     })
@@ -158,7 +159,7 @@ Page({
 
 
 
-  scroll: function(e) {
+  scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
     if (scrollHeight > 250) {
       if (this.data.recommends.length === 0 && this.data.isLoad) {
@@ -170,7 +171,7 @@ Page({
     }
   },
 
-  collectHandle: function(e) {
+  collectHandle: function (e) {
     if (!wx.getStorageSync('authorize_status')) {
       this.loginPanel.show()
       return
@@ -206,7 +207,7 @@ Page({
     })
   },
 
-  likeHandle: function(e) {
+  likeHandle: function (e) {
     if (!wx.getStorageSync('authorize_status')) {
       this.loginPanel.show()
       return
@@ -242,20 +243,20 @@ Page({
     })
   },
 
-  toHome: function() {
+  toHome: function () {
     wx.switchTab({
       url: '/pages/index/index',
     })
   },
 
-  setShareFlag: function() {
+  setShareFlag: function () {
     this.data.share = true
     this.data.type = 1
   },
 
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     var picture = this.data.picture
-    
+
     return {
       'title': picture.title,
       'imageUrl': picture.url,
@@ -264,16 +265,16 @@ Page({
 
   },
 
-  showDownloadPanel: function() {
+  showDownloadPanel: function () {
 
     if (!wx.getStorageSync('authorize_status')) {
       this.loginPanel.show()
       return
     }
 
-    if(this.data.writePhotosAlbum === false) {
+    if (this.data.writePhotosAlbum === false) {
       this.showAuthorizePanel()
-      return 
+      return
     }
     if (this.data.picture.download) {
       this.downloadPicture()
@@ -284,7 +285,7 @@ Page({
 
   },
 
-  hideDownloadPanel: function() {
+  hideDownloadPanel: function () {
     this.setData({
       downloadFlag: false
     })
@@ -296,13 +297,13 @@ Page({
     })
   },
 
-  hideAuthorizePanel: function() {
+  hideAuthorizePanel: function () {
     this.setData({
       authorizeFlag: false
     })
   },
 
-  getPointAndShareCount: function() {
+  getPointAndShareCount: function () {
     wx.request({
       url: Config.restUrl + '/fan/point-and-share-count',
       header: {
@@ -320,14 +321,14 @@ Page({
     })
   },
 
-  download: function(e) {
+  download: function (e) {
     var dtype = this.data.type ? 1 : 0;
     wx.request({
       url: Config.restUrl + '/pictures/' + this.data.id + '/download',
       header: {
         'token': wx.getStorageSync('token')
       },
-      data: { 'type': dtype},
+      data: { 'type': dtype },
       method: 'post',
       success: res => {
         console.log(res)
@@ -342,7 +343,7 @@ Page({
   },
 
 
-  downloadPicture: function() {
+  downloadPicture: function () {
     this.hideDownloadPanel()
     // wx.showLoading({
     //   title: '正在下载...',
@@ -392,7 +393,7 @@ Page({
         wx.hideLoading()
       }
     })
-    
+
 
   },
 
@@ -406,7 +407,7 @@ Page({
     }
   },
 
-  loadImage: function(e) {
+  loadImage: function (e) {
     wx.hideLoading()
   },
 
@@ -425,6 +426,12 @@ Page({
           }
         }
       }
+    })
+  },
+
+  adError: function (e) {
+    this.setData({
+      adError: true
     })
   }
 

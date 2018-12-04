@@ -108,13 +108,16 @@
   font-size: 26rpx;
   color:#606266;
   margin-bottom: 20rpx;
+  margin-left: 10rpx;
+
 }
 
 .replys .tofan {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   font-size:28rpx;
   margin-right:15rpx;
+  margin-bottom: 20rpx;
 }
 
 .replys .tofan .name {

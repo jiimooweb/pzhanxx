@@ -28,8 +28,7 @@ Page({
       topShow: false
     },
     scrollHeight: 0,
-    topShow: false,
-    adsFlag: false
+    topShow: false
   },
 
   /**
@@ -92,7 +91,6 @@ Page({
         this.setData({
           tags: tags
         })
-        this.getAds()
       }
     })
   },
@@ -327,24 +325,6 @@ Page({
   toTop: function () {
     this.setData({
       anchor: 'anchor'
-    })
-  },
-
-  getAds: function () {
-    wx.request({
-      url: Config.restUrl + '/ads/app',
-      header: { 'token': wx.getStorageSync('token') },
-      success: res => {
-        var ads = res.data.data
-        for (var i in ads) {
-          if (ads[i].page == 'Search') {
-            this.setData({
-              adsFlag: true
-            })
-            break;
-          }
-        }
-      }
     })
   },
 

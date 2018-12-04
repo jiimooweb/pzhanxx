@@ -33,9 +33,9 @@
   </view>
   <view class="content">
     <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
-      回复<view class="name">@{{reply.to_fan.nickname}}</view>
+      <block wx:if="{{reply.to_fan_id > 0}}">回复<text class="name">@{{reply.to_fan.nickname}}</text></block>
+      <text class="text">{{reply.content}}</text>
     </view>
-    <view class="text">{{reply.content}}</view>
   </view>
 </view>
 <view class="replys" wx:for="{{replys}}" wx:for-item="reply" bindtap="operateReply" data-index="{{index}}" wx:key="{{index}}">
@@ -52,10 +52,10 @@
     </view>
   </view>
   <view class="content">
-    <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
-      回复<view class="name">@{{reply.to_fan.nickname}}</view>
+    <view class="tofan" >
+      <block wx:if="{{reply.to_fan_id > 0}}">回复<text class="name">@{{reply.to_fan.nickname}}</text></block>
+      <text class="text">{{reply.content}}</text>
     </view>
-    <view class="text">{{reply.content}}</view>
   </view>
 </view>
 

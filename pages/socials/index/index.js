@@ -15,7 +15,8 @@ Page({
     tipFlag: !wx.getStorageSync('tip_staus'),
     refreshFlag: false,
     anchor: '',
-    adsFlag: false
+    adsFlag: false,
+    adError: false
   },
   
 
@@ -326,6 +327,13 @@ Page({
         }
       }
     })
+  },
+
+  adError: function (e) {
+    this.setData({
+      adError: true
+    })
   }
+
   
 })
