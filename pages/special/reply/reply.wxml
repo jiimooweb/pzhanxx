@@ -3,110 +3,110 @@
 <report id="reportPanel" bind:select="reportSelect"></report>
 
 <view class="comment">
-    <view class="user">
-        <view class="avatar">
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{comment.fan.avatarUrl}}" mode="cover"></image>
-        </view>
-        <view class="nickname">
-            <view class="name">{{comment.fan.nickname}}</view>
-            <view class="time">{{comment.created_at}}</view>
-        </view>
+  <view class="user">
+    <view class="avatar">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{comment.fan.avatarUrl}}" mode="cover"></image>
     </view>
-    <view class="content">
-        <view class="text">{{comment.content}}</view>
+    <view class="nickname">
+      <view class="name">{{comment.fan.nickname}}</view>
+      <view class="time">{{comment.created_at}}</view>
     </view>
+  </view>
+  <view class="content">
+    <view class="text">{{comment.content}}</view>
+  </view>
 </view>
 <view class="line"></view>
 <view class="replys" wx:for="{{new_replys}}" wx:for-item="reply" bindtap="operateReply" data-index="{{index}}">
-    <view class="user">
-        <view class="avatar">
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{reply.fan.avatarUrl}}" mode="cover"></image>
-        </view>
-        <view class="nickname">
-            <view class="name">{{reply.fan.nickname}}</view>
-            <view class="time">{{reply.created_at}}</view>
-        </view>
-        <view class="reply" data-index="{{index}}">
-            <image src="/icon/socials/dian.png"></image>
-        </view>
+  <view class="user">
+    <view class="avatar">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{reply.fan.avatarUrl}}" mode="cover"></image>
     </view>
-    <view class="content">
-        <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
-            回复
-            <view class="name">@{{reply.to_fan.nickname}}</view>
-        </view>
-        <view class="text">{{reply.content}}</view>
+    <view class="nickname">
+      <view class="name">{{reply.fan.nickname}}</view>
+      <view class="time">{{reply.created_at}}</view>
     </view>
+    <view class="reply" data-index="{{index}}">
+      <image src="/icon/socials/dian.png"></image>
+    </view>
+  </view>
+  <view class="content">
+    <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
+      <block wx:if="{{reply.to_fan_id > 0}}">回复
+        <text class="name">@{{reply.to_fan.nickname}}</text>
+      </block>
+      <text class="text">{{reply.content}}</text>
+    </view>
+  </view>
 </view>
 <view class="replys" wx:for="{{replys}}" wx:for-item="reply" bindtap="operateReply" data-index="{{index}}">
-    <view class="user">
-        <view class="avatar">
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{reply.fan.avatarUrl}}" mode="cover"></image>
-        </view>
-        <view class="nickname">
-            <view class="name">{{reply.fan.nickname}}</view>
-            <view class="time">{{reply.created_at}}</view>
-        </view>
-        <view class="reply" data-index="{{index}}">
-            <image src="/icon/socials/dian.png"></image>
-        </view>
+  <view class="user">
+    <view class="avatar">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{reply.fan.avatarUrl}}" mode="cover"></image>
     </view>
-    <view class="content">
-        <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
-            回复
-            <view class="name">@{{reply.to_fan.nickname}}</view>
-        </view>
-        <view class="text">{{reply.content}}</view>
+    <view class="nickname">
+      <view class="name">{{reply.fan.nickname}}</view>
+      <view class="time">{{reply.created_at}}</view>
     </view>
+    <view class="reply" data-index="{{index}}">
+      <image src="/icon/socials/dian.png"></image>
+    </view>
+  </view>
+  <view class="content">
+    <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
+      <block wx:if="{{reply.to_fan_id > 0}}">回复<text class="name">@{{reply.to_fan.nickname}}</text></block>
+      <text class="text">{{reply.content}}</text>
+    </view>
+  </view>
 </view>
 
 <view style="height:90rpx"></view>
 <view class="send-comment" catchtap="changeFlag">
-    <view class="box">说说你的想法吧！</view>
-    <image src="/icon/socials/comment.png"></image>
-    <text>{{comment.replys_count}}</text>
+  <view class="box">说说你的想法吧！</view>
+  <image src="/icon/socials/comment.png"></image>
+  <text>{{comment.replys_count}}</text>
 </view>
 
 <view class="reply-panel" hidden="{{!commentPanleFlag}}">
-  <view style="height:100%;width:100%" bindtap="changeFlag" ></view>
-  <form bindsubmit="formReply" >
-  <view class="section">
-    <!-- <view class="header">评论</view> -->
-    <view class="reply-input">
-      <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="200" focus="{{commentPanleFlag}}" value="{{text}}" auto-height/>
+  <view style="height:100%;width:100%" bindtap="changeFlag"></view>
+  <form bindsubmit="formReply">
+    <view class="section">
+      <!-- <view class="header">评论</view> -->
+      <view class="reply-input">
+        <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="200" focus="{{commentPanleFlag}}" value="{{text}}" auto-height/>
+      </view>
+      <button class="send" formType="submit">发表</button>
     </view>
-    <button class="send" formType="submit">发表</button>
-  </view>
   </form>
 </view>
 
 <view class="reply-panel" hidden="{{!replyPanleFlag}}">
-  <view style="height:100%;width:100%" bindtap="changeReplyFlag" ></view>
+  <view style="height:100%;width:100%" bindtap="changeReplyFlag"></view>
   <form bindsubmit="formReply">
-  <view class="section">
-    <!-- <view class="header">回复</view> -->
-    <view class="reply-input">
-      <textarea type="text" placeholder="回复 @{{operate.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="120" focus="{{replyPanleFlag}}" value="{{text}}"/>
+    <view class="section">
+      <!-- <view class="header">回复</view> -->
+      <view class="reply-input">
+        <textarea type="text" placeholder="回复 @{{operate.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="120" focus="{{replyPanleFlag}}" value="{{text}}" />
+      </view>
+      <button class="send" formType="submit">发表</button>
     </view>
-    <button class="send" formType="submit">发表</button>
-  </view>
-  </form> 
+  </form>
 </view>
 
 <view class="reply-panel" wx:if="{{operatePanleFlag}}" catchtap="changeOperateFlag">
-    <view class="list">
-        <view class="content">{{operate.fan.nickname}}:
-            <block wx:if="{{operate.to_fan_id > 0}}">@{{operate.to_fan.nickname}}
-            </block>
-            {{operate.content}}</view>
-        <view class="operate">
-            <view bindtap="changeReplyFlag" wx:if="{{operate.fan_id != fan_id}}">回复</view>
-            <view bindtap="setClipboardData">复制</view>
-            <view style="color:#F56C6C" wx:if="{{operate.fan_id == fan_id}}" bindtap="deleteComment">删除</view>
-            <view wx:else bindtap="reportShow">举报</view>
-        </view>
-        <view class="cancel" catchtap="changeOperateFlag">取消</view>
+  <view class="list">
+    <view class="content">{{operate.fan.nickname}}:
+      <block wx:if="{{operate.to_fan_id > 0}}">@{{operate.to_fan.nickname}}
+      </block>
+      {{operate.content}}</view>
+    <view class="operate">
+      <view bindtap="changeReplyFlag" wx:if="{{operate.fan_id != fan_id}}">回复</view>
+      <view bindtap="setClipboardData">复制</view>
+      <view style="color:#F56C6C" wx:if="{{operate.fan_id == fan_id}}" bindtap="deleteComment">删除</view>
+      <view wx:else bindtap="reportShow">举报</view>
     </view>
+    <view class="cancel" catchtap="changeOperateFlag">取消</view>
+  </view>
 </view>
 
 <loading loading="{{loading}}"></loading>

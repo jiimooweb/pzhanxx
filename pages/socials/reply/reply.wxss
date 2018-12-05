@@ -113,8 +113,6 @@
 }
 
 .replys .tofan {
-  /* display: flex;
-  flex-direction: row; */
   font-size:28rpx;
   margin-right:15rpx;
   margin-bottom: 20rpx;

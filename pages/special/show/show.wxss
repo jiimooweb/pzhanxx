@@ -168,9 +168,6 @@
 }
 
 .reply-list {
-  /* margin-top: 10rpx; */
-  display: flex;
-  flex-direction: row;
   font-size: 26rpx;
   background-color: #f1f1f2;
   padding:15rpx 10rpx 0 20rpx;

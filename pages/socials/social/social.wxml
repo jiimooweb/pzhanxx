@@ -63,9 +63,9 @@
     <view class="text">{{comment.content}}</view>
     <view catchtap="toReply" data-id="{{comment.id}}" data-index="{{index}}">
       <view class="reply-list" wx:for="{{comment.replys}}" wx:for-item="reply">
-        <view class="fan">{{reply.fan.nickname}}</view>
-        <view class="toFan" wx:if="{{reply.to_fan_id > 0}}"><text style="font-weight:400;margin-left:4rpx;">回复</text>@{{reply.to_fan.nickname}}</view>
-        <view>：</view>
+        <text class="fan">{{reply.fan.nickname}}</text>
+        <text class="toFan" wx:if="{{reply.to_fan_id > 0}}"><text style="font-weight:400;margin-left:4rpx;">回复</text>@{{reply.to_fan.nickname}}</text>
+        <text>：</text>
         <text>{{reply.content}}</text>
       </view>
       <view  wx:if="{{comment.replys_count == 0}}">
