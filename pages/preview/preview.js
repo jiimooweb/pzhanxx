@@ -33,6 +33,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const scene = decodeURIComponent(options.scene)
+    if (scene != undefined) {
+      options.id = this.urlToArr(scene)['id']
+    }
     var id = options.id
     var index = options.index
     this.setData({
@@ -433,6 +437,16 @@ Page({
     this.setData({
       adError: true
     })
+  },
+
+  urlToArr: function (url) {
+    var ret = [];
+    var urls = url.split('&');
+    for (var i = 0; i < urls.length; i++) {
+      var arr = urls[i].split('=');
+      ret[arr[0]] = arr[1];
+    }
+    return ret;
   }
 
 
