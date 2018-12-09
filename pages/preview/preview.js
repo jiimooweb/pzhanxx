@@ -34,9 +34,10 @@ Page({
    */
   onLoad: function (options) {
     const scene = decodeURIComponent(options.scene)
-    if (scene != undefined) {
-      options.id = this.urlToArr(scene)['id']
+    if (scene != 'undefined') {
+      options.id = this.urlToArr(scene)['id'] 
     }
+    
     var id = options.id
     var index = options.index
     this.setData({
