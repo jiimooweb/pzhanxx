@@ -180,7 +180,7 @@ Page({
     this.setData({
       comment: comment,
       comment_index: index,
-      replyUser:false
+      replyUser:true
     })
     this.changeReplyFlag()
   },
@@ -263,7 +263,8 @@ Page({
             [key]: replys,
             [count_key]: parseInt(comment.replys_count) + 1,
             comment_count: parseInt(this.data.comment_count) + 1,
-            text: ''
+            text: '',
+            replyUser: false
           })
 
           wx.showToast({

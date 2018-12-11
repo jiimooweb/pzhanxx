@@ -181,7 +181,7 @@ Page({
         this.setData({
             comment: comment,
             comment_index: index,
-            replyUser: false
+            replyUser: true
         })
         this.changeReplyFlag()
     },
