@@ -130,8 +130,6 @@ Page({
                     this.setData({
                         newPictures: newPictures,
                     });
-
-                    app.globalData.pictures = newPictures
                 }
                 if (newPictures.length >= 500 || newPictures.length == res.data.data.total) {
                     this.data.newParams.isloadMore = false

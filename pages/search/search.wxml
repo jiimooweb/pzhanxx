@@ -28,6 +28,7 @@
   <view class="order" bindtap="changeOrder">
     <view class="{{orderIndex == 0 ? 'active' : ''}}" data-index="0">从新到旧</view>
     <view class="{{orderIndex == 1 ? 'active' : ''}}" data-index="1">从旧到新</view>
+    <view class="{{orderIndex == 2 ? 'active' : ''}}" data-index="2">用户</view>
   </view>
   <view class="result">
     <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 1}}" style="height:{{scrollHeight}}px" scroll-with-animation>
