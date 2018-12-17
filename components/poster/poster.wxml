@@ -9,7 +9,7 @@
         <view class="save" bindtap="save">保存</view>
       </view>
     </view>
-
+    <view style="height:100rpx;"></view>
   </scroll-view>
 
 </view>

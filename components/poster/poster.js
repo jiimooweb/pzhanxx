@@ -59,6 +59,7 @@ Component({
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: res => {
+              this.cancel()
               wx.showToast({
                 title: '已保存到相册',
                 icon: 'none'
