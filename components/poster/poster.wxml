@@ -1,0 +1,15 @@
+<view class="container" wx:if="{{show}}">
+  <scroll-view scroll-y>
+    <view class="content">
+      <view class="poster">
+        <image src="{{url}}" mode="widthFix" bindload="load"></image>
+      </view>
+      <view class="btns" wx:if="{{loadFlag}}">
+        <view class="cancel" bindtap="cancel">取消</view>
+        <view class="save" bindtap="save">保存</view>
+      </view>
+    </view>
+
+  </scroll-view>
+
+</view>

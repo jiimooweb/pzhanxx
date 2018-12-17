@@ -1,1 +1,8 @@
-{}
+{
+  "usingComponents": {
+    "tab-bar": "/components/tabBar/tabBar",
+    "pic-list": "/components/pic-list/pic-list",
+    "tags": "/components/tags/tags",
+    "login-panel": "/components/login-panel/index"
+  }
+}

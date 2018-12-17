@@ -26,7 +26,9 @@ Page({
     share: false,
     scrollHeight: 0,
     adsFlag: false,
-    adError: false
+    adError: false,
+    shareFlag: false,
+    posterUrl: ''
   },
 
   /**
@@ -97,6 +99,7 @@ Page({
    */
   onReady: function () {
     this.loginPanel = this.selectComponent("#loginPanel");
+    this.posterPanel = this.selectComponent("#posterPanel");
   },
 
 
@@ -448,6 +451,47 @@ Page({
       ret[arr[0]] = arr[1];
     }
     return ret;
+  },
+
+  showSharePanel: function() {
+    this.setData({
+      shareFlag: true
+    })
+  },
+
+  hideSharePanel: function() {
+    this.setData({
+      shareFlag: false
+    })
+  },
+
+  getPoster: function() {
+    wx.showLoading({
+      title: '生成中...',
+    })
+    this.setData({
+      shareFlag: false
+    })
+    if(this.data.posterUrl == '') {
+      wx.request({
+        url: Config.restUrl + '/pictures/' + this.data.id + '/poster',
+        header: { 'token': wx.getStorageSync('token') },
+        success: res => {
+          this.setData({
+            posterUrl: res.data.url,
+
+          })
+          this.posterPanel.show()
+        }
+      })
+    } else {
+      this.setData({
+        posterUrl: res.data.url,
+
+      })
+      this.posterPanel.show()
+    }
+    
   }
 
 

@@ -279,7 +279,7 @@ botton {
 
 .to-top {
   position: fixed;
-  right: 50rpx;
+  right: 48rpx;
   bottom: 200rpx;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.45);

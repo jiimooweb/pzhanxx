@@ -9,7 +9,8 @@ Component({
     bgColor: String,
     block: Boolean,
     diyIcon:Boolean,
-    icon: String
+    icon: String,
+    back: Boolean
   },
 
   /**
@@ -23,7 +24,8 @@ Component({
     bgColor: "#fff",
     backFlag: true,
     block: true,
-    icon: ''
+    icon: '',
+    back: false
   },
 
   ready: function () {
@@ -73,7 +75,7 @@ Component({
       this.setData({
         tabs: this.properties.tabs
       })
-      if(getCurrentPages().length == 1) {
+      if (getCurrentPages().length == 1 && !this.data.back) {
         this.setData({
           backFlag: false
         })

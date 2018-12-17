@@ -376,4 +376,10 @@ Page({
     })
   },
 
+  toToday: function() {
+    wx.navigateTo({
+      url: '/pages/today2/today',
+    })
+  }
+
 })

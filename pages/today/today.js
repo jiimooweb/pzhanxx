@@ -33,6 +33,7 @@ Page({
         loading: true,
     },
     onLoad: function (options) {
+      
         var that = this;
         if (options.date){
             shareDate = options.date;

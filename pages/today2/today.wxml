@@ -1,3 +1,5 @@
+<tab-bar back="{{true}}" bgColor="rgba(0,0,0,0)" bind:back="back"></tab-bar>
+
 <swiper>
   <swiper-item>
     <view class="bg-image">

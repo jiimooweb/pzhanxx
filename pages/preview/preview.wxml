@@ -66,7 +66,7 @@
   <button catchtap="likeHandle" hoverClass="none">
     <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
   </button>
-  <button class="btn-share btn" openType="share">
+  <button class="btn-share btn" catchtap="showSharePanel">
     <image class="fbtn" src="/icon/preview/share.png" style="margin-top:3rpx;"></image>
   </button>
 </view>
@@ -107,6 +107,23 @@
   </view>
 </view>
 
+<view class="download-panel" wx:if="{{shareFlag}}">
+  <view class="cancel" bindtap="hideSharePanel">
+    <image src="/icon/preview/cancel.png"></image>
+  </view>
+  <view class="panel">
+    <view class="title">请选择分享方式</view>
+    <view class="row">
+      <button class="btn2" openType="share">分享给好友</button> 
+      <text>分享给好友或者群</text>
+    </view>
+    <view class="row">
+      <view class="btn1" bindtap="getPoster">分享到朋友圈</view>
+      <text>生成海报，保存分享到朋友圈</text>
+    </view>
+  </view>
+</view>
+<poster id="posterPanel" url="{{posterUrl}}"></poster>
 <!-- <view class="ad-panel">
   <view class="panel">
     <ad unit-id="adunit-cbc8e3f600d0bcac"></ad>

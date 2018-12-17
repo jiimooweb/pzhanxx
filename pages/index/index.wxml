@@ -1,4 +1,5 @@
 <tab-bar title="{{title}}" block icon="/icon/index-search.png" bind:iconTap="toSearch"></tab-bar>
+
 <view class="addTip" wx:if="{{tipFlag}}">
   <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image>
   <view class="know" bindtap="colseTip">我知道了</view>
@@ -46,6 +47,12 @@
   <view class="loading-tip" wx:if="{{loadFlag}}">正在加载，请稍等...</view>
   <view class="loading-tip" wx:else bindtap="refreshPictures">点击重新加载图片！</view>
 </scroll-view>
+
+<view class="toady-btn" bindtap="toToday">
+  <image src="/icon/date.png"></image>
+  <text>今日</text>
+</view>
+
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
   <image src="/icon/gotop.png"></image>
 </view>

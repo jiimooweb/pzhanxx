@@ -4,7 +4,7 @@
       {{index + 1}}
     </view>
     <view class="pic">
-      <image src="{{item.url}}" mode="aspectFill"></image>
+      <image src="{{item.url ? item.url + '?imageMogr2/auto-orient/thumbnail/!20p/blur/1x0/quality/75|imageslim' : ''}}" mode="aspectFill"></image>
     </view>
     <view class="pic-info">
       <view class="title">{{item.title}}</view>
