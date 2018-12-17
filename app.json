@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/search/search",
-    "pages/test/test",
     "pages/today2/today",
     "pages/article/article",
     "pages/new/new",
