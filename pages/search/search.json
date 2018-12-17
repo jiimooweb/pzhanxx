@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "tags": "/components/tags/tags",
+    "author": "/components/author/author",
     "pic-list": "/components/pic-list/pic-list"
   },
   "disableScroll":true

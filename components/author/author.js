@@ -1,10 +1,10 @@
-// components/tags/tags.js
+// components/author/author.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    tags: Array
+    data: Array
   },
 
   /**
@@ -18,7 +18,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    
     _toPics: function (e) {
       this.toPics(e)
       this.triggerEvent('toPics')
@@ -29,7 +28,7 @@ Component({
       var name = e.currentTarget.dataset.name
 
       wx.navigateTo({
-        url: '/pages/pics/pics?tag_id=' + tag_id + '&name=' + name + '&type=0' ,
+        url: '/pages/pics/pics?name=' + name + '&type=1',
       })
     }
   }

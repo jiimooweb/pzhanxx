@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tags:[],
+    tags: [],
     value: "",
     cancelFlag: false,
     history: [],
@@ -27,6 +27,12 @@ Page({
       isLoadMore: true,
       topShow: false
     },
+    authors: {
+      data: [],
+      page: 1,
+      isLoadMore: true,
+      topShow: false
+    },
     scrollHeight: 0,
     topShow: false
   },
@@ -40,12 +46,12 @@ Page({
       history: wx.getStorageSync('history') ? wx.getStorageSync('history') : []
     })
     token.verify(this.getTags);
-    
+
   },
 
-  onShow: function() {
-    if(this.data.id > 0 && app.globalData.pictures.length > 0) {
-      if(this.data.orderIndex == 0) {
+  onShow: function () {
+    if (this.data.id > 0 && app.globalData.pictures.length > 0) {
+      if (this.data.orderIndex == 0) {
         this.setData({
           ['news.pictures']: app.globalData.pictures
         })
@@ -58,7 +64,7 @@ Page({
     }
   },
 
-  getStatusBarHeight: function() {
+  getStatusBarHeight: function () {
     wx.getSystemInfo({
       success: res => {
         var system = res.system
@@ -95,30 +101,30 @@ Page({
     })
   },
 
-  empty: function() {
+  empty: function () {
     this.setData({
       value: "",
-      cancelFlag: false      
+      cancelFlag: false
     })
   },
 
-  bindinput: function(e) {
-    if(e.detail.value != "") {
+  bindinput: function (e) {
+    if (e.detail.value != "") {
       this.setData({
         cancelFlag: true
       })
     }
   },
 
-  bindconfirm: function(e) {
-    this.initData()   
+  bindconfirm: function (e) {
+    this.initData()
     var value = e.detail.value
     var history = this.data.history
     if (history.indexOf(value) == -1) {
-      history.unshift(value)      
-    } 
-    if(history.length > 5) {
-      history.splice(history.length - 1,1);
+      history.unshift(value)
+    }
+    if (history.length > 5) {
+      history.splice(history.length - 1, 1);
     }
     this.setData({
       history: history,
@@ -129,17 +135,17 @@ Page({
     this.getPictures()
   },
 
-  searchHistory: function(e) {
+  searchHistory: function (e) {
     var value = e.currentTarget.dataset.value
     this.setData({
       value: value,
       searchFlag: true,
       cancelFlag: true
     })
-    this.getPictures()    
+    this.getPictures()
   },
 
-  delHistory: function(e) {
+  delHistory: function (e) {
     var index = e.currentTarget.dataset.index
     var history = this.data.history;
     history.splice(index, 1)
@@ -149,7 +155,7 @@ Page({
     wx.setStorageSync('history', history)
   },
 
-  getPictures: function() {
+  getPictures: function () {
     var orderIndex = this.data.orderIndex
     if (this.data.orderIndex == 0) {
       this.data.news.isLoadMore = false
@@ -160,8 +166,8 @@ Page({
     }
     wx.request({
       url: Config.restUrl + '/pictures/search',
-      header: { 'token': wx.getStorageSync('token') },      
-      data: { 'keyword': this.data.value, 'page': page, 'order': orderIndex},
+      header: { 'token': wx.getStorageSync('token') },
+      data: { 'keyword': this.data.value, 'page': page, 'order': orderIndex },
       success: res => {
         if (this.data.orderIndex == 0) {
           var pictures = res.data.data
@@ -175,7 +181,7 @@ Page({
             this.setData({
               ['news.pictures']: newPictures,
             });
-          } 
+          }
 
           if (pictures.length == 0) {
             this.data.news.isLoadMore = false
@@ -208,20 +214,51 @@ Page({
     })
   },
 
-  back: function() {
-    if(this.data.searchFlag) {
+  getAuthors: function () {
+    this.data.authors.isLoadMore = false
+    var page = this.data.authors.page
+    wx.request({
+      url: Config.restUrl + '/pictures/search-author',
+      header: { 'token': wx.getStorageSync('token') },
+      data: { 'keyword': this.data.value, 'page': page },
+      success: res => {
+        var authors = res.data.data
+        var oAuthors = this.data.authors.data
+        var newAuthors = [];
+
+        if (authors.length > 0) {
+          newAuthors = oAuthors.concat(authors)
+          this.data.authors.isLoadMore = true
+          this.data.authors.page = page + 1
+          this.setData({
+            ['authors.data']: newAuthors,
+          });
+        }
+
+        if (authors.length == 0 || authors.length < 20) {
+          this.data.authors.isLoadMore = false
+          this.setData({
+            ['authors.isLoadMore']: false
+          })
+        }
+      }
+    })
+  },
+
+  back: function () {
+    if (this.data.searchFlag) {
       this.setData({
-        searchFlag:false,
+        searchFlag: false,
       })
       this.initData()
-    }else {
+    } else {
       wx.navigateBack({
         delta: 1
       })
     }
   },
 
-  changeOrder: function(e) {
+  changeOrder: function (e) {
     if (e.target.dataset.index != undefined) {
       this.setData({
         orderIndex: e.target.dataset.index
@@ -230,20 +267,24 @@ Page({
         if (!this.data.news.isLoadMore) {
           return
         }
-      } else {
+        this.getPictures()
+
+      } else if (this.data.orderIndex == 1) {
         if (!this.data.olds.isLoadMore) {
           return
         }
+        this.getPictures()
+      } else {
+        this.getAuthors()
       }
-      this.getPictures()
     }
   },
 
-  scroll: function(e) {
+  scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
-    if(this.data.orderIndex == 0 ) {
+    if (this.data.orderIndex == 0) {
       var key = 'news.topShow'
-    }else {
+    } else {
       var key = 'olds.topShow'
     }
     if (scrollHeight > 2000) {
@@ -257,24 +298,33 @@ Page({
     }
   },
 
-  loadMore: function() {
+  loadMore: function () {
     if (this.data.orderIndex == 0) {
-      if(!this.data.news.isLoadMore) {
+      if (!this.data.news.isLoadMore) {
         return
       }
-    }else {
+      this.getPictures()
+
+    } else if (this.data.orderIndex == 1) {
       if (!this.data.olds.isLoadMore) {
         return
       }
+      this.getPictures()
+
+    } else {
+      if (!this.data.authors.isLoadMore) {
+        return
+      }
+      this.getAuthors()
+
     }
-    this.getPictures()
   },
 
-  toPreview: function(e) {
+  toPreview: function (e) {
     this.data.id = e.detail.id
     if (this.data.orderIndex == 0) {
       app.globalData.pictures = this.data.news.pictures
-    }else {
+    } else {
       app.globalData.pictures = this.data.olds.pictures
     }
   },
@@ -290,10 +340,10 @@ Page({
   },
 
   setPictures: function (status) {
-    if(this.data.orderIndex == 0) {
-      var pictures = this.data.news.pictures   
-    }else {
-      var pictures = this.data.olds.pictures      
+    if (this.data.orderIndex == 0) {
+      var pictures = this.data.news.pictures
+    } else {
+      var pictures = this.data.olds.pictures
     }
     for (var i in pictures) {
       if (pictures[i].id == this.data.id) {
@@ -310,7 +360,7 @@ Page({
     }
   },
 
-  initData: function() {
+  initData: function () {
     this.setData({
       ['news.pictures']: [],
       ['news.page']: 1,
@@ -318,6 +368,9 @@ Page({
       ['olds.pictures']: [],
       ['olds.page']: 1,
       ['olds.isLoadMore']: true,
+      ['authors.data']: [],
+      ['authors.page']: 1,
+      ['authors.isLoadMore']: true,
       orderIndex: 0
     })
   },
@@ -329,6 +382,6 @@ Page({
   },
 
 
-  
-  
+
+
 })

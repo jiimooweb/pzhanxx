@@ -485,10 +485,6 @@ Page({
         }
       })
     } else {
-      this.setData({
-        posterUrl: res.data.url,
-
-      })
       this.posterPanel.show()
     }
     

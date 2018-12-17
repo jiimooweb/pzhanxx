@@ -1,5 +1,9 @@
 @import "../../utils/common.wxss";
 
+scroll-view {
+  height: 100%;
+  width: 100%;
+}
 
 .loading-tip {
   display: flex;

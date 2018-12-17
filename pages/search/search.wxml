@@ -7,7 +7,7 @@
     </view>
     <view class="search">
       <image class="search-icon" src="/icon/search.png"></image>
-      <input type="type" placeholder-class="placeholder" placeholder="请输入搜索内容" confirm-type="search" value="{{value}}" bindinput="bindinput" bindconfirm="bindconfirm"  adjust-position="{{false}}"></input>
+      <input type="type" placeholder-class="placeholder" placeholder="请输入搜索内容" confirm-type="search" value="{{value}}" bindinput="bindinput" bindconfirm="bindconfirm" adjust-position="{{false}}"></input>
       <image class="cancel-icon" src="/icon/input-cancel.png" catchtap="empty" wx:if="{{cancelFlag}}"></image>
     </view>
   </view>
@@ -28,27 +28,37 @@
   <view class="order" bindtap="changeOrder">
     <view class="{{orderIndex == 0 ? 'active' : ''}}" data-index="0">从新到旧</view>
     <view class="{{orderIndex == 1 ? 'active' : ''}}" data-index="1">从旧到新</view>
-    <view class="{{orderIndex == 2 ? 'active' : ''}}" data-index="2">用户</view>
+    <view class="{{orderIndex == 2 ? 'active' : ''}}" data-index="2">画师</view>
   </view>
   <view class="result">
-    <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 1}}" style="height:{{scrollHeight}}px" scroll-with-animation>
+    <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 1 || orderIndex == 2}}" style="height:{{scrollHeight}}px" scroll-with-animation>
       <view id="anchor"></view>
       <pic-list pictures="{{news.pictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
       <view class="loading-tip" wx:if="{{news.isLoadMore}}">正在加载，请稍等...</view>
       <view class="loading-tip" wx:else>没有更多了</view>
-        <view class="to-top" wx:if="{{news.topShow}}" bindtap="toTop">
-    <image src="/icon/gotop.png"></image>
-  </view>
+      <view class="to-top" wx:if="{{news.topShow}}" bindtap="toTop">
+        <image src="/icon/gotop.png"></image>
+      </view>
     </scroll-view>
 
-    <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 0}}" style="height:{{scrollHeight}}px" scroll-with-animation>
+    <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 0  || orderIndex == 2}}" style="height:{{scrollHeight}}px" scroll-with-animation>
       <view id="anchor"></view>
       <pic-list pictures="{{olds.pictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
       <view class="loading-tip" wx:if="{{olds.isLoadMore}}">正在加载，请稍等...</view>
       <view class="loading-tip" wx:else>没有更多了</view>
-        <view class="to-top" wx:if="{{olds.topShow}}" bindtap="toTop">
-    <image src="/icon/gotop.png"></image>
-  </view>
+      <view class="to-top" wx:if="{{olds.topShow}}" bindtap="toTop">
+        <image src="/icon/gotop.png"></image>
+      </view>
+    </scroll-view>
+
+    <scroll-view scroll-y lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" bindscrolltolower="loadMore" hidden="{{orderIndex == 0 || orderIndex == 1}}" style="height:{{scrollHeight}}px" scroll-with-animation>
+      <view id="anchor"></view>
+      <author data="{{authors.data}}"></author>
+      <view class="loading-tip" wx:if="{{authors.isLoadMore}}">正在加载，请稍等...</view>
+      <view class="loading-tip" wx:else>没有更多了</view>
+      <view class="to-top" wx:if="{{authors.topShow}}" bindtap="toTop">
+        <image src="/icon/gotop.png"></image>
+      </view>
     </scroll-view>
   </view>
 

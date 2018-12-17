@@ -1,5 +1,5 @@
 <view class="wallpaper-relative">
   <view class="labels">
-    <view formType="submit" hoverClass="none" wx:for="{{tags}}" wx:key="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="toPics">{{item.name}}</view>
+    <view formType="submit" hoverClass="none" wx:for="{{tags}}" wx:key="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="_toPics">{{item.name}}</view>
   </view>
 </view>

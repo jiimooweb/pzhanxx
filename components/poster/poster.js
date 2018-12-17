@@ -42,9 +42,12 @@ Component({
     },
 
     load: function(e) {
+      console.log(e)
       wx.hideLoading()
+      
       this.setData({
-        loadFlag: true
+        loadFlag: true,
+        height: e.detail.height - 200
       })
     },
 

@@ -638,7 +638,7 @@ scroll-view {
   align-items: center;
   padding:5rpx;
   box-sizing: border-box;
-  box-shadow: 1px 2px 3px #8eb7e4;
+  box-shadow: 1px 2px 3px #339933;
   z-index: 20;
 }
 

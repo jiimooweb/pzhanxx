@@ -1,6 +1,6 @@
 <view class="container" wx:if="{{show}}">
   <scroll-view scroll-y>
-    <view class="content">
+    <view class="content" style="height:{{height}}px">
       <view class="poster">
         <image src="{{url}}" mode="widthFix" bindload="load"></image>
       </view>
@@ -9,7 +9,6 @@
         <view class="save" bindtap="save">保存</view>
       </view>
     </view>
-    <view style="height:100rpx;"></view>
   </scroll-view>
 
 </view>

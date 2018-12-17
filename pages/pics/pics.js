@@ -24,13 +24,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var tag_id = options.tag_id
+    var tag_id = options.tag_id ? options.tag_id : 0
     var name = options.name
+    this.data.type = options.type
     this.setData({
       tag_id: tag_id,
       title: name
     })
     token.verify(this.getPictures)
+    this.getSystemInfo()
   },
 
   /**
@@ -61,10 +63,16 @@ Page({
   },
 
   getPictures: function() {
-    var tag_id = this.data.tag_id;
-    var page = this.data.page
+    var page = this.data.page;
+    this.data.isLoadMode = false
+    var url = '';
+    if(this.data.type == 0 ) {
+      url = Config.restUrl + '/pictures/get-list-by-tags?tag_id=' + this.data.tag_id
+    } else {
+      url = Config.restUrl + '/pictures/get-list-by-author?author=' + this.data.title
+    }
     wx.request({
-      url: Config.restUrl + '/pictures/getListByTags?tag_id=' + tag_id,
+      url: url,
       header: { 'token': wx.getStorageSync('token') },
       data: {page: page},
       success: res => {
@@ -78,11 +86,9 @@ Page({
             page: page + 1,
             isLoadMode: true
           });
-          var pindex = getCurrentPages().length - 1
-          app.globalData.pictures[pindex] = newPictures
         }
 
-        if (newPictures.length == res.data.data.total) {
+        if (pictures.length == 0 || newPictures.length == res.data.data.total) {
           this.setData({
             isLoadMode: false
           });
@@ -119,6 +125,29 @@ Page({
     }
   },
 
+  getSystemInfo: function () {
+    wx.getSystemInfo({
+      success: res => {
+        var system = res.system
+        var barHeight = 0;
+        if (system.indexOf("iOS") != -1) {
+          barHeight = 44
+        } else {
+          barHeight = 48
+        }
+
+        this.setData({
+          barHeight: barHeight,
+          statusBarHeight: res.statusBarHeight
+        })
+        var scrollHeight = res.windowHeight - barHeight - res.statusBarHeight
+        this.setData({
+          sheight: scrollHeight
+        })
+      },
+    })
+  },
+
   scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
 
@@ -142,9 +171,6 @@ Page({
 
   loadMore: function (e) {
     if (!this.data.isLoadMode) {
-      this.setData({
-        isLoadMode: false
-      })
       return
     }
     this.getPictures()

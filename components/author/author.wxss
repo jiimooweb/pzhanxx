@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding:0 30rpx;
+  box-sizing: border-box;
+}
+
+.container .wapper {
+  display: flex;
+  flex-direction: column;
+  height:350rpx;
+  border-bottom: 1px solid #E4E7ED;
+  box-sizing: border-box;
+  padding:20rpx 0;
+}
+
+.container .author {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.container .author .name{
+  color: #606266;
+
+}
+
+.container .author .look{
+  color: #409EFF;
+}
+
+.container .pics {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.container .pics image{
+  width: 220rpx;
+  height: 220rpx;
+  margin-right: 15rpx;
+  border-radius: 10rpx;
+}
