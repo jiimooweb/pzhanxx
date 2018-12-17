@@ -11,13 +11,25 @@
 <view class="scroll-view">
   <scroll-view class="scroll" scroll-y bindscroll="scroll" bindscrolltolower="lower" enable-back-to-top="true" bindtouchstart="touchstart" bindtouchend="touchend" scroll-into-view="{{anchor}}">
     <view id="anchor"></view>
+    <view class="refresh" wx:if="{{refreshFlag}}">
+      正在刷新...
+    </view>
+
+    <view class="announcement" wx:if="{{announcementFlag}}">
+      <view class="icon">
+        <image src="/icon/socials/notice.png"></image>
+      </view>
+      <view class="ncontent">
+        <view class="ntitle">{{announcement.title}}</view>
+        <view class="ntext">{{announcement.content}}</view>
+      </view>
+    </view>
+
     <view class="ad-wapper" wx:if="{{adsFlag && !adError}}">
       <view class="ad-tips">请小伙伴们点下广告！减轻我们服务器的费用负担，感谢！</view>
       <ad binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
     </view>
-    <view class="refresh" wx:if="{{refreshFlag}}">
-      正在刷新...
-    </view>
+    
     <view class="social" wx:for="{{socials}}" wx:for-item="social" wx:for-index="socialIndex" scrolltolower="100" wx:key="{{socialIndex}}">
       <view class="user">
         <view class="avatar">

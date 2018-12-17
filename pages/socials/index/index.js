@@ -16,6 +16,7 @@ Page({
     refreshFlag: false,
     anchor: '',
     adsFlag: false,
+    announcementFlag: false,
     adError: false
   },
   
@@ -106,6 +107,7 @@ Page({
         }
 
         this.getAds()
+        this.getAnnouncement()
       }
     })
   },
@@ -333,7 +335,26 @@ Page({
     this.setData({
       adError: true
     })
-  }
+  },
+
+  getAnnouncement: function () {
+    wx.request({
+      url: Config.restUrl + '/announcements/app',
+      header: { 'token': wx.getStorageSync('token') },
+      success: res => {
+        var announcements = res.data.data
+        for (var i in announcements) {
+          if (announcements[i].page == 'Social') {
+            this.setData({
+              announcementFlag: true,
+              announcement: announcements[i]
+            })
+            break;
+          }
+        }
+      }
+    })
+  },
 
   
 })

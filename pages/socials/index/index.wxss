@@ -306,3 +306,41 @@ botton {
   padding:0 5rpx;
   text-align: center;
 }
+
+.announcement {
+  height: 180rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.announcement .icon {
+  height:100rpx;
+  min-width: 100rpx;
+}
+
+.announcement .icon image{
+  height:100%;
+  width: 100%;
+}
+
+.announcement .ncontent {
+  padding:20rpx 0 20rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.announcement .ncontent .ntitle{
+  color:#303133; 
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 50rpx;
+}
+
+.announcement .ncontent .ntext{
+  color:#606266; 
+  font-size: 26rpx;
+}
+
