@@ -364,4 +364,10 @@ botton {
   font-size: 26rpx;
 }
 
+.announcement .detail {
+  display: inline-block;
+  color: #409EFF;
+  margin-left: 10rpx;
+}
+
 

@@ -360,5 +360,14 @@ Page({
     }
   },
 
+  toDetail: function() {
+    var url = this.data.announcement.url
+    if (url) {
+      wx.navigateTo({
+        url: url,
+      })
+    }
+  }
+
   
 })
