@@ -133,6 +133,19 @@ scroll-view {
   width: 180rpx;
 }
 
+.share {
+  width: 180rpx;
+  margin: 0;
+  padding:0;
+  text-align: left;
+  background: #fff;
+
+}
+
+.share::after{
+  border: 0;
+}
+
 .like image {
   width: 60rpx;
   height:60rpx;
@@ -141,9 +154,15 @@ scroll-view {
 }
 
 .comment image {
-  width: 48rpx;
-  height: 48rpx;
+  width: 46rpx;
+  height: 46rpx;
   padding-top:9rpx;
+  margin-right: 10rpx;
+}
+
+.share image {
+  width: 46rpx;
+  height: 46rpx;
   margin-right: 10rpx;
 }
 
@@ -267,7 +286,7 @@ scroll-view {
 .section {
   position: fixed;
   bottom: 0;
-  height: 300rpx;
+  height: 400rpx;
   width: 100%;
   background-color: #fff;
   padding:20rpx 30rpx 30rpx 30rpx;
@@ -294,16 +313,16 @@ scroll-view {
 }
 
 .reply-input {
-  flex: 5;
   background-color: #fff;
   box-sizing: border-box;
-  padding: 10rpx 0 30rpx 0;
+  /* padding: 10rpx 0 30rpx 0; */
   font-size: 30rpx;
   width: 100%;
+  height: 200rpx;
 }
 
 .textarea {
-  height: 100%;
+  height: 200rpx;
   width: 100%;
 }
 
@@ -312,6 +331,7 @@ scroll-view {
   font-size: 30rpx;  
   font-weight: 200;
   width: 100%;
+  height: 200rpx;
   
 }
 

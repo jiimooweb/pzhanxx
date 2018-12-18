@@ -41,7 +41,7 @@ Page({
     }
     
     var id = options.id
-    var index = options.index
+    // var index = options.index
     this.setData({
       id: id
     })

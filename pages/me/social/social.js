@@ -40,11 +40,15 @@ Page({
         this.loginPanel = this.selectComponent("#loginPanel");
     },
 
-    onShareAppMessage: function() {
-        return {
-            title: 'P站星选',
-        }
-    },
+  onShareAppMessage: function (e) {
+    var index = e.target.dataset.index
+    var social = this.data.socials[index]
+    return {
+      'title': social.content,
+      'imageUrl': social.photos.length > 0 ? social.photos[0].url : '',
+      'path': 'pages/socials/social/social?id=' + social.id
+    }
+  },
 
     getSocials: function(page) {
         if (page === undefined) {

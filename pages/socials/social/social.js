@@ -14,7 +14,8 @@ Page({
     comments:[],
     fan_id: 0,
     loading: true,
-    isShow: false
+    isShow: false,
+    icon: ''
   },
 
   /**
@@ -45,6 +46,7 @@ Page({
       this.getSocial() 
     }
     this.getUid()
+    this.setIcon()
    
   },
   
@@ -54,9 +56,12 @@ Page({
     }
   },
 
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    var social = this.data.social
     return {
-      title: 'P站星选',
+      'title': social.content,
+      'imageUrl': social.photos.length > 0 ? social.photos[0].url : '',
+      'path': 'pages/socials/social/social?id=' + social.id
     }
   },
   
@@ -71,6 +76,19 @@ Page({
     }) 
   },
   
+  setIcon: function() {
+    if(getCurrentPages().length == 1) {
+      this.setData({
+        icon: '/icon/preview/home.png'
+      })
+    }
+  },
+
+  iconTap: function() {
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
 
   getUid: function () {
     wx.request({

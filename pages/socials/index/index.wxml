@@ -64,6 +64,10 @@
           <text wx:if="{{social.comments_count == 0}}">评论</text>
           <text wx:else>{{social.comments_count}}</text>
         </view>
+        <button class="share" open-type='share' bindtap="share" data-index="{{socialIndex}}">
+          <image src="/icon/preview/share.png"></image>
+          <text>分享</text>
+        </button>
       </view>
     </view>
     <view class="loading-more" wx:if="{{loadMore}}">

@@ -1,8 +1,8 @@
-<tab-bar title="动态详情" block></tab-bar>
+<tab-bar title="动态详情" block icon="{{icon}}" bind:iconTap="iconTap"></tab-bar>
 <report id="reportPanel" bind:select="reportSelect"></report>
 
 
-<scroll-view class="scroll" scroll-y  bindscrolltolower="lower" enable-back-to-top="true">
+<scroll-view class="scroll" scroll-y bindscrolltolower="lower" enable-back-to-top="true">
   <view class="social">
     <view class="user">
       <view class="avatar">
@@ -10,7 +10,7 @@
       </view>
       <view class="nickname">
         <view class="name">{{social.fan.nickname}}</view>
-        <view class="time">{{social.created_at}}</view>      
+        <view class="time">{{social.created_at}}</view>
       </view>
       <view class="report-btn" wx:if="{{social.fan_id == fan_id}}" catchtap="delSocial" data-id="{{social.id}}" style="color:#F56C6C">删除</view>
       <view class="report-btn" wx:else catchtap="reportShow" data-type='socials'>举报</view>
@@ -19,9 +19,9 @@
       <view class="text" wx:if="{{social.content != null}}">{{social.content}}</view>
       <view class="photos">
         <block wx:for="{{social.photos}}" wx:for-item="photo" wx:key="{{index}}">
-          <image wx:if="{{social.new == 1}}"  src="{{photo.url}}"   class="photo{{social.img_type}}" mode="aspectFill" bindtap="preview" data-index="{{socialIndex}}" data-id="{{index}}" ></image>
-          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!90p/blur/1x0/quality/75|imageslim"   class="photo{{social.img_type}}" mode="aspectFill" bindtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
-       </block>
+          <image wx:if="{{social.new == 1}}" src="{{photo.url}}" class="photo{{social.img_type}}" mode="aspectFill" bindtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+          <image wx:else src="{{photo.url}}?imageMogr2/auto-orient/thumbnail/!90p/blur/1x0/quality/75|imageslim" class="photo{{social.img_type}}" mode="aspectFill" bindtap="preview" data-index="{{socialIndex}}" data-id="{{index}}"></image>
+        </block>
       </view>
     </view>
     <view class="footer">
@@ -32,10 +32,14 @@
         <text wx:else>{{social.like_fans_count}}</text>
       </view>
       <view class="comment" catchtap="toComment" data-id="{{social.id}}" data-index="{{socialIndex}}">
-        <image src="/icon/socials/comment.png"></image>    
+        <image src="/icon/socials/comment.png"></image>
         <text wx:if="{{social.comments_count == 0}}">评论</text>
         <text wx:else>{{social.comments_count}}</text>
       </view>
+      <button class="share" open-type='share'>
+        <image src="/icon/preview/share.png"></image>
+        <text>分享</text>
+      </button>
     </view>
   </view>
   <view class="line"></view>
@@ -46,46 +50,46 @@
   </view>
 
   <view class="social-comment" wx:for="{{comments}}" wx:for-item="comment" data-index="{{index}}" bindtap="operate" wx:if="{{comments.length > 0}}" wx:key="{{index}}">
-  <view class="user">
-    <view class="avatar">
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{comment.fan.avatarUrl}}" mode="cover"></image>
+    <view class="user">
+      <view class="avatar">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{comment.fan.avatarUrl}}" mode="cover"></image>
+      </view>
+      <view class="nickname">
+        <view class="name">{{comment.fan.nickname}}</view>
+        <view class="time">{{comment.created_at}}</view>
+      </view>
+      <view class="reply" catchtap="showReply" data-index="{{index}}">
+        <image src="/icon/socials/comment.png"></image>
+        <text>回复</text>
+      </view>
     </view>
-    <view class="nickname">
-      <view class="name">{{comment.fan.nickname}}</view>
-      <view class="time">{{comment.created_at}}</view>      
-    </view>
-    <view class="reply" catchtap="showReply"  data-index="{{index}}">
-      <image src="/icon/socials/comment.png"></image>
-      <text>回复</text>
+    <view class="content">
+      <view class="text">{{comment.content}}</view>
+      <view catchtap="toReply" data-id="{{comment.id}}" data-index="{{index}}">
+        <view class="reply-list" wx:for="{{comment.replys}}" wx:for-item="reply">
+          <text class="fan">{{reply.fan.nickname}}</text>
+          <text class="toFan" wx:if="{{reply.to_fan_id > 0}}"><text style="font-weight:400;margin-left:4rpx;">回复</text>@{{reply.to_fan.nickname}}</text>
+          <text>：</text>
+          <text>{{reply.content}}</text>
+        </view>
+        <view wx:if="{{comment.replys_count == 0}}">
+        </view>
+        <view class="reply-list" wx:elif="{{comment.replys_count > 2 && index < 3}}">
+          <text style="color:#909399">查看全部{{comment.replys_count}}条回复</text>
+        </view>
+        <view class="reply-list" style="padding-bottom: 0rpx;" wx:elif="{{comment.replys_count < 3 && index < 3}}">
+
+        </view>
+        <view class="reply-list" wx:else>
+          <text style="color:#909399">查看全部{{comment.replys_count}}条回复</text>
+        </view>
+      </view>
+
     </view>
   </view>
-  <view class="content">
-    <view class="text">{{comment.content}}</view>
-    <view catchtap="toReply" data-id="{{comment.id}}" data-index="{{index}}">
-      <view class="reply-list" wx:for="{{comment.replys}}" wx:for-item="reply">
-        <text class="fan">{{reply.fan.nickname}}</text>
-        <text class="toFan" wx:if="{{reply.to_fan_id > 0}}"><text style="font-weight:400;margin-left:4rpx;">回复</text>@{{reply.to_fan.nickname}}</text>
-        <text>：</text>
-        <text>{{reply.content}}</text>
-      </view>
-      <view  wx:if="{{comment.replys_count == 0}}">
-      </view>
-      <view class="reply-list" wx:elif="{{comment.replys_count > 2 && index < 3}}">
-        <text style="color:#909399">查看全部{{comment.replys_count}}条回复</text>
-      </view>
-      <view class="reply-list" style="padding-bottom: 0rpx;" wx:elif="{{comment.replys_count < 3 && index < 3}}">
-          
-      </view>
-      <view class="reply-list" wx:else>
-        <text style="color:#909399">查看全部{{comment.replys_count}}条回复</text>
-      </view>
-    </view>
-    
+  <view class="no-comment" wx:if="{{comments.length == 0}}">
+    <text>暂无评论</text>
   </view>
-</view>
-<view class="no-comment" wx:if="{{comments.length == 0}}">
-  <text>暂无评论</text>
-</view>
 </scroll-view>
 
 <loading loading="{{loading}}"></loading>
@@ -100,30 +104,30 @@
 </view>
 
 <view class="reply-panel" wx:if="{{commentPanleFlag}}">
-  <view style="height:100%;width:100%" bindtap="changeFlag" ></view>
+  <view style="height:100%;width:100%" bindtap="changeFlag"></view>
   <form bindsubmit="formComment">
-  <view class="section">
-    <!-- <view class="header">评论</view> -->
-    <view class="reply-input">
-      <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" cursor-spacing="40" auto-focus="{{true}}"/>
-    </view>
-    <button class="send" formType="submit">发表</button>
-  </view>
-  </form>
-</view>
-
-<view class="reply-panel" wx:if="{{replyPanleFlag}}">
-  <view style="height:100%;width:100%" bindtap="changeReplyFlag" ></view>
-  <form bindsubmit="formReply">
     <view class="section">
-      <!-- <view class="header">回复</view> -->
+      <!-- <view class="header">评论</view> -->
       <view class="reply-input">
-        <textarea type="text" placeholder="回复 @{{comment.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="40" auto-focus/>
+        <textarea type="text" placeholder="说说你的想法吧！" placeholder-class="placeholder" class="textarea" name="content" cursor-spacing="40" auto-focus="{{true}}" auto-height />
       </view>
       <button class="send" formType="submit">发表</button>
     </view>
   </form>
-  
+</view>
+
+<view class="reply-panel" wx:if="{{replyPanleFlag}}">
+  <view style="height:100%;width:100%" bindtap="changeReplyFlag"></view>
+  <form bindsubmit="formReply">
+    <view class="section">
+      <!-- <view class="header">回复</view> -->
+      <view class="reply-input">
+        <textarea type="text" placeholder="回复 @{{comment.fan.nickname}}" placeholder-class="placeholder" class="textarea" name="content" fixed cursor-spacing="40" auto-focus auto-height />
+      </view>
+      <button class="send" formType="submit">发表</button>
+    </view>
+  </form>
+
 </view>
 
 

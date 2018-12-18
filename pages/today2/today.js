@@ -10,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    todays: [],
+    load: true
   },
 
   /**
@@ -43,11 +44,17 @@ Page({
   },
 
   getToday: function() {
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.request({
       url: Config.restUrl + '/todays/one',
       header: { 'token': wx.getStorageSync('token') },
       success: res => {
-        console.log(res)
+        this.setData({
+          todays: res.data.data
+        })
+        console.log(this.data.todays)
       }
     })
   },
@@ -55,6 +62,20 @@ Page({
   back: function(e) {
     wx.switchTab({
       url: '/pages/index/index',
+    })
+  },
+
+  load: function(e) {
+    wx.hideLoading()
+    this.setData({
+      load: false
+    })
+  },
+
+  toPreview: function(e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/preview/preview?id=' + id,
     })
   }
 })

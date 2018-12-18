@@ -115,6 +115,19 @@
   width: 180rpx;
 }
 
+.share {
+  width: 180rpx;
+  margin: 0;
+  padding:0;
+  text-align: left;
+  background: #fff;
+
+}
+
+.share::after{
+  border: 0;
+}
+
 .like image {
   width: 60rpx;
   height:60rpx;
@@ -123,9 +136,15 @@
 }
 
 .comment image {
-  width: 48rpx;
-  height: 48rpx;
+  width: 46rpx;
+  height: 46rpx;
   padding-top:9rpx;
+  margin-right: 10rpx;
+}
+
+.share image {
+  width: 46rpx;
+  height: 46rpx;
   margin-right: 10rpx;
 }
 

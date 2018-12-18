@@ -73,3 +73,12 @@ swiper-item {
   border-bottom: 1rpx solid #fff;
   padding: 40rpx 0;
 }
+
+.load-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  top:0;
+  z-index: 11;
+}
