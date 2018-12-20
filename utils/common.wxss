@@ -1373,7 +1373,7 @@ scroll-view {
     color: #4c4c4c;
     line-height: 32rpx;
     vertical-align: middle;
-    background: url(https://minibizhi.313515.com/BiZhiStatic/icon-all-more.svg) right center no-repeat;
+    background: url(https://download.rdoorweb.com/icon-all-more.svg) right center no-repeat;
     background-size: 80rpx 36rpx;
     text-align: left;
 }
