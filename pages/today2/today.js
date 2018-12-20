@@ -11,14 +11,21 @@ Page({
    */
   data: {
     todays: [],
-    load: true
+    load: true,
+    id: 0,
+    current: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getToday()
+    if(options.id) {
+      this.setData({
+        id: options.id
+      })
+    }
+    token.verify(this.getToday)
   },
 
   /**
@@ -35,12 +42,23 @@ Page({
 
   },
 
+  change: function(e) {
+    this.setData({
+      current:e.detail.current
+    })
+  },
+
  
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    var today = this.data.todays[this.data.current]
+    return {
+      'title': today.text,
+      'imageUrl': today.picture.url,
+      'path': 'pages/today2/today?id=' + today.id
+    }
   },
 
   getToday: function() {
@@ -51,12 +69,25 @@ Page({
       url: Config.restUrl + '/todays/one',
       header: { 'token': wx.getStorageSync('token') },
       success: res => {
+        var todays = res.data.data
         this.setData({
-          todays: res.data.data
+          todays: todays
         })
-        console.log(this.data.todays)
+        this.setCurrent(todays)
       }
     })
+  },
+
+  setCurrent: function(data) {
+    var id = this.data.id
+    for(var i in data) {
+      if(data[i].id == id) {
+        this.setData({
+          current: i
+        })
+        break;
+      }
+    }
   },
 
   back: function(e) {
