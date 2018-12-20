@@ -28,28 +28,33 @@ Page({
     carouselIndex: 0,
     tipFlag: !wx.getStorageSync('tip_staus'),
     adsFlag: false,
-    adError: false
+    adError: false,
+    fullAdFlag: true,
+    countDownNum: 5,
+    fullAdurl:'https://download.rdoorweb.com/20181122/605a360c39cef8716a10d2d96639fc54.jpg',
+    todayShow: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    token.verify(this.getSwipers)
-    this.getElementHeight()
+  onLoad: function (options) {
+    token.verify(this.getSwipers);
+    this.getElementHeight();
+    wx.hideTabBar();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (this.data.swipers.length > 0) {
       this.getTags();
     }
@@ -60,9 +65,10 @@ Page({
       })
       app.globalData.pictures = []
     }
+    this.countDown();
   },
 
-  getNotices: function() {
+  getNotices: function () {
     var page = this.data.page
     wx.request({
       url: Config.restUrl + '/notices',
@@ -81,14 +87,14 @@ Page({
     })
   },
 
-  onSlideChangeEnd: function(e) {
+  onSlideChangeEnd: function (e) {
     var that = this;
     that.setData({
       carouselIndex: e.detail.current
     })
   },
 
-  getSwipers: function() {
+  getSwipers: function () {
     wx.request({
       url: Config.restUrl + '/swiper_groups/display',
       header: {
@@ -109,7 +115,7 @@ Page({
     })
   },
 
-  getTags: function() {
+  getTags: function () {
     wx.request({
       url: Config.restUrl + '/tags/random',
       header: {
@@ -125,7 +131,7 @@ Page({
     })
   },
 
-  getSpecials: function() {
+  getSpecials: function () {
     wx.request({
       url: Config.restUrl + '/specials/hot',
       header: {
@@ -140,7 +146,7 @@ Page({
     })
   },
 
-  getPictures: function(page) {
+  getPictures: function (page) {
     var random_picture_ids = this.data.random_picture_ids
     this.data.isLoadMore = false
 
@@ -182,7 +188,7 @@ Page({
     })
   },
 
-  getAds: function() {
+  getAds: function () {
     wx.request({
       url: Config.restUrl + '/ads/app',
       header: {
@@ -208,19 +214,19 @@ Page({
     })
   },
 
-  getElementHeight: function() {
+  getElementHeight: function () {
     var that = this;
     var query = wx.createSelectorQuery();
     //选择id
     query.select('#outside').boundingClientRect()
-    query.exec(function(res) {
+    query.exec(function (res) {
       that.setData({
         outsideHeight: res[0].height,
       })
     })
   },
 
-  scroll: function(e) {
+  scroll: function (e) {
     var scrollHeight = e.detail.scrollTop
     if (scrollHeight > this.data.outsideHeight) {
       this.setData({
@@ -243,20 +249,20 @@ Page({
     }
   },
 
-  toTop: function() {
+  toTop: function () {
     this.setData({
       anchor: 'outside'
     })
   },
 
-  loadMore: function(e) {
+  loadMore: function (e) {
     if (!this.data.isLoadMore) {
       return
     }
     this.getPictures()
   },
 
-  getPicture: function() {
+  getPicture: function () {
     var id = this.data.id
     wx.request({
       url: Config.restUrl + '/pictures/' + id,
@@ -279,22 +285,22 @@ Page({
     })
   },
 
-  toPreview: function(e) {
+  toPreview: function (e) {
     this.data.id = e.detail.id
     app.globalData.pictures = this.data.pictures
   },
 
-  collect: function(e) {
+  collect: function (e) {
     this.data.id = e.detail.id
     this.setPictures(1)
   },
 
-  uncollect: function(e) {
+  uncollect: function (e) {
     this.data.id = e.detail.id
     this.setPictures(0)
   },
 
-  setPictures: function(status) {
+  setPictures: function (status) {
     var pictures = this.data.pictures
     for (var i in pictures) {
       if (pictures[i].id == this.data.id) {
@@ -307,14 +313,14 @@ Page({
     }
   },
 
-  toNew: function(e) {
+  toNew: function (e) {
     app.globalData.newTab = 1;
     wx.switchTab({
       url: '/pages/new/new',
     })
   },
 
-  toOther: function(e) {
+  toOther: function (e) {
     var url = e.currentTarget.dataset.url
     var to_type = e.currentTarget.dataset.type
     if (to_type == 0) {
@@ -329,7 +335,7 @@ Page({
 
   },
 
-  refreshPictures: function() {
+  refreshPictures: function () {
     this.setData({
       pictures: [],
       random_picture_ids: [],
@@ -340,13 +346,13 @@ Page({
 
   //  专辑
 
-  goSpecial: function() {
+  goSpecial: function () {
     app.globalData.newTab = 2;
     wx.switchTab({
       url: '/pages/new/new'
     })
   },
-  gohotSpecial: function(e) {
+  gohotSpecial: function (e) {
     var index = e.currentTarget.dataset.index;
     var specials = this.data.specials;
     var item = specials[index];
@@ -357,29 +363,60 @@ Page({
     })
   },
 
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: 'P站星选',
     }
   },
 
-  colseTip: function(e) {
+  colseTip: function (e) {
     wx.setStorageSync('tip_staus', true)
     this.setData({
       tipFlag: false
     })
   },
 
-  toSearch: function() {
+  toSearch: function () {
     wx.navigateTo({
       url: '/pages/search/search',
     })
   },
 
-  toToday: function() {
+  toToday: function () {
     wx.navigateTo({
       url: '/pages/today2/today',
     })
-  }
+  },
 
+  countDown: function () {
+    let that = this;
+    let countDownNum = that.data.countDownNum;//获取倒计时初始值
+    //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
+    that.setData({
+      timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+        //每隔一秒countDownNum就减一，实现同步
+        countDownNum--;
+        //然后把countDownNum存进data，好让用户知道时间在倒计着
+        that.setData({
+          countDownNum: countDownNum
+        })
+        //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
+        if (countDownNum == 0) {
+          //这里特别要注意，计时器是始终一直在走的，如果你的时间为0，那么就要关掉定时器！不然相当耗性能
+          //因为timer是存在data里面的，所以在关掉时，也要在data里取出后再关闭
+          that.hidefullAd();
+          //关闭定时器之后，可作其他处理codes go here
+        }
+      }, 1000)
+    })
+  },
+  hidefullAd: function () {
+    clearInterval(this.data.timer);
+
+    this.setData({
+      fullAdFlag: false,
+      todayShow: true
+    })
+    wx.showTabBar();
+  }
 })
