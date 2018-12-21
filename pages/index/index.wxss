@@ -586,20 +586,20 @@ scroll-view {
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: 102;
+  z-index: 99;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  
+  margin-top:45rpx;
+
 }
 
 .addTip image{
-  margin-top:30rpx;
-  height: 280rpx;
-  width: 700rpx;
+  height: 100%;
+  width: 100%;
 }
-/* 
+
 .addTip .know{
   position: absolute;
   bottom: 150rpx;
@@ -609,7 +609,7 @@ scroll-view {
   color: #fff;
   font-size: 28rpx;
   font-weight: 500;
-} */
+}
 
 .ad-wapper {
   width: 100%;
@@ -718,7 +718,8 @@ scroll-view {
   background-color:  rgba(0, 0, 0, 0.5);
   text-align: center;
   align-items: center;
-  padding:5rpx 10rpx;
+  padding:8rpx 25rpx;
   z-index: 32;
   color: #fff;
+  font-size: 30rpx;
 }

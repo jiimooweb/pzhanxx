@@ -8,13 +8,14 @@
 <!-- </view> -->
 
 <tab-bar title="{{title}}" wx:if="{{!fullAdFlag}}" block icon="/icon/index-search.png" bind:iconTap="toSearch"></tab-bar>
-<view class="addTip" wx:if="{{tipFlag}}">
-  <!-- <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image> -->
-  <image src="http://download.zshjnyoa.com/icon-addTip.png" mode="aspectFit"  bindtap="colseTip"></image>
-  <!-- <view class="know" bindtap="colseTip">我知道了</view> -->
-</view>
+  <view class="addTip" wx:if="{{tipFlag}}">
+    <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image>
+    <!-- <image src="http://download.zshjnyoa.com/icon-addTip.png" mode="aspectFit"  bindtap="colseTip"></image> -->
+    <view class="know" bindtap="colseTip">我知道了</view>
+  </view>
 
 <scroll-view enableBackToTop scroll-y bindscrolltolower="loadMore" class="index-scroll-view" lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" scroll-with-animation>
+
   <view id="outside">
     <view class="swipers" id="swipers">
       <swiper autoplay circular="true" class="swiper" duration="500" interval="3000" nextMargin="50rpx" previousMargin="50rpx" current="0" bindchange='onSlideChangeEnd'>
@@ -36,10 +37,7 @@
         </button>
       </view>
     </view>
-    <view class="ad-wapper" wx:if="{{adsFlag && !adError}}">
-      <view class="ad-tips">请小伙伴们点下广告！减轻我们服务器的费用负担，感谢！</view>
-      <ad binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
-    </view>
+    <ad wx:if="{{!adError}}" binderror="adError" unit-id="adunit-7a05e184b255a48b"></ad>
     <view class="recommend-pic" id="recommend">
       <button class="module-title" catchtap="toNew" hoverClass="none">推荐图片</button>
     </view>
