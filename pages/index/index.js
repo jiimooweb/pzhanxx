@@ -29,19 +29,20 @@ Page({
     tipFlag: !wx.getStorageSync('tip_staus'),
     adsFlag: false,
     adError: false,
-    fullAdFlag: true,
+    fullAdFlag: false,
     countDownNum: 5,
-    fullAdurl:'https://download.rdoorweb.com/20181122/605a360c39cef8716a10d2d96639fc54.jpg',
+    fullAdurl:'',
     todayShow: false,
+    mask: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    token.verify(this.getSwipers);
+    wx.hideTabBar();    
+    token.verify(this.getAds);
     this.getElementHeight();
-    wx.hideTabBar();
   },
 
   /**
@@ -65,7 +66,6 @@ Page({
       })
       app.globalData.pictures = []
     }
-    this.countDown();
   },
 
   getNotices: function () {
@@ -110,7 +110,6 @@ Page({
         this.getSpecials()
         this.getPictures()
         this.getNotices()
-        this.getAds()
       }
     })
   },
@@ -197,13 +196,23 @@ Page({
       success: res => {
         var ads = res.data.data
         for (var i in ads) {
-          if (ads[i].page == 'Index') {
+          if (ads[i].page == 'FullAd') {
             this.setData({
-              adsFlag: true
+              fullAdFlag: true,
+              fullAdurl: ads[i].img,
             })
             break;
           }
         }
+        this.setData({
+          mask: false
+        })
+        if (this.data.fullAdFlag) {
+          this.countDown();
+        }else {
+          wx.showTabBar();
+        }
+        this.getSwipers()
       }
     })
   },
@@ -352,6 +361,7 @@ Page({
       url: '/pages/new/new'
     })
   },
+
   gohotSpecial: function (e) {
     var index = e.currentTarget.dataset.index;
     var specials = this.data.specials;

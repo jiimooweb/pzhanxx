@@ -1,4 +1,5 @@
 <!-- <view class="container"  hidden="{{!fullAdFlag}}"> -->
+<view class="mask" wx:if="{{mask}}"></view>
 <view class="fullAd" hidden="{{!fullAdFlag}}">
   <image src="{{fullAdurl}}" mode="aspectFill"></image>
   <view class="confirm-btn" bindtap='hidefullAd'>
