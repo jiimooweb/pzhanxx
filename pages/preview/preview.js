@@ -25,7 +25,6 @@ Page({
     authorizeFlag: false,
     share: false,
     scrollHeight: 0,
-    adsFlag: false,
     adError: false,
     shareFlag: false,
     posterUrl: ''
@@ -144,8 +143,6 @@ Page({
           recommend_ids: recommend_ids,
           load: true
         })
-        this.getAds()
-
 
       }
     })
@@ -419,23 +416,23 @@ Page({
     wx.hideLoading()
   },
 
-  getAds: function () {
-    wx.request({
-      url: Config.restUrl + '/ads/app',
-      header: { 'token': wx.getStorageSync('token') },
-      success: res => {
-        var ads = res.data.data
-        for (var i in ads) {
-          if (ads[i].page == 'Preview') {
-            this.setData({
-              adsFlag: true
-            })
-            break;
-          }
-        }
-      }
-    })
-  },
+  // getAds: function () {
+  //   wx.request({
+  //     url: Config.restUrl + '/ads/app',
+  //     header: { 'token': wx.getStorageSync('token') },
+  //     success: res => {
+  //       var ads = res.data.data
+  //       for (var i in ads) {
+  //         if (ads[i].page == 'Preview') {
+  //           this.setData({
+  //             adsFlag: true
+  //           })
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   })
+  // },
 
   adError: function (e) {
     this.setData({

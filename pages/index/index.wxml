@@ -1,9 +1,19 @@
-<tab-bar title="{{title}}" block icon="/icon/index-search.png" bind:iconTap="toSearch"></tab-bar>
-
-<view class="addTip" wx:if="{{tipFlag}}">
-  <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image>
-  <view class="know" bindtap="colseTip">我知道了</view>
+<!-- <view class="container"  hidden="{{!fullAdFlag}}"> -->
+<view class="mask" wx:if="{{mask}}"></view>
+<view class="fullAd" hidden="{{!fullAdFlag}}">
+  <image src="{{fullAdurl}}" mode="aspectFill"></image>
+  <view class="confirm-btn" bindtap='hidefullAd'>
+    <text>跳过 {{countDownNum}}</text>
+  </view>
 </view>
+<!-- </view> -->
+
+<tab-bar title="{{title}}" wx:if="{{!fullAdFlag}}" block icon="/icon/index-search.png" bind:iconTap="toSearch"></tab-bar>
+  <view class="addTip" wx:if="{{tipFlag}}">
+    <image src="https://download.rdoorweb.com/pzhan/WechatIMG8361.png"></image>
+    <!-- <image src="http://download.zshjnyoa.com/icon-addTip.png" mode="aspectFit"  bindtap="colseTip"></image> -->
+    <view class="know" bindtap="colseTip">我知道了</view>
+  </view>
 
 <scroll-view enableBackToTop scroll-y bindscrolltolower="loadMore" class="index-scroll-view" lowerThreshold="100" bindscroll="scroll" scroll-into-view="{{anchor}}" scroll-with-animation>
 
@@ -18,13 +28,9 @@
         </swiper-item>
       </swiper>
     </view>
-
     <tags tags="{{tags}}"></tags>
-
     <view class="hot-album" id="ablums">
-      <button class="module-title" bindtap='goSpecial'>
-        热门专辑
-      </button>
+      <button class="module-title" bindtap='goSpecial'>热门专辑</button>
       <view class="album-view">
         <button class="hot-btn" bindtap='gohotSpecial' data-index="{{index}}" formType="submit" hoverClass="none" wx:for="{{specials}}" wx:key="{{index}}">
           <image mode="aspectFill" src="{{item.cover}}?imageMogr2/auto-orient/thumbnail/!30p/blur/1x0/quality/75|imageslim"></image>
@@ -32,27 +38,19 @@
         </button>
       </view>
     </view>
-    <view class="ad-wapper" wx:if="{{adsFlag && !adError}}">
-      <view class="ad-tips">请小伙伴们点下广告！减轻我们服务器的费用负担，感谢！</view>
-      <ad binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
-    </view>
+    <ad wx:if="{{!adError}}" binderror="adError" unit-id="adunit-7a05e184b255a48b"></ad>
     <view class="recommend-pic" id="recommend">
-      <button class="module-title" catchtap="toNew" hoverClass="none">
-        推荐图片
-      </button>
+      <button class="module-title" catchtap="toNew" hoverClass="none">推荐图片</button>
     </view>
     <pic-list pictures="{{pictures}}" bind:toPreview="toPreview" bind:collect="collect" bind:uncollect="uncollect"></pic-list>
-
   </view>
   <view class="loading-tip" wx:if="{{loadFlag}}">正在加载，请稍等...</view>
   <view class="loading-tip" wx:else bindtap="refreshPictures">点击重新加载图片！</view>
 </scroll-view>
-
-<view class="toady-btn" bindtap="toToday">
+<view class="toady-btn" bindtap="toToday" wx:if="{{todayShow}}">
   <image src="/icon/date.png"></image>
   <text>今日</text>
 </view>
-
 <view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
   <image src="/icon/gotop.png"></image>
 </view>

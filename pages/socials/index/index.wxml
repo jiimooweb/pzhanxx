@@ -27,10 +27,7 @@
       </view>
     </view>
 
-    <view class="ad-wapper" wx:if="{{adsFlag && !adError}}">
-      <view class="ad-tips">请小伙伴们点下广告！减轻我们服务器的费用负担，感谢！</view>
-      <ad binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
-    </view>
+    <ad wx:if="{{!adError}}" binderror="adError"  unit-id="adunit-580b07575df8af7c"></ad>
 
     <view class="social" wx:for="{{socials}}" wx:for-item="social" wx:for-index="socialIndex" scrolltolower="100" wx:key="{{socialIndex}}">
       <view class="user">

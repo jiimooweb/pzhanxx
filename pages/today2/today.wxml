@@ -1,9 +1,9 @@
 <tab-bar back="{{true}}" bgColor="rgba(0,0,0,0)" bind:back="back"></tab-bar>
 
-<swiper>
+<swiper bindchange="change" current="{{current}}">
   <swiper-item wx:for="{{todays}}" wx:key="{{index}}" data-id="{{item.picture.id}}" catchtap="toPreview">
     <view class="bg-image">
-    <image wx:if="{{index == 0}}" src="{{item.picture.url}}" mode="aspectFill" bindload="load"></image>
+    <image wx:if="{{index == current}}" src="{{item.picture.url}}" mode="aspectFill" bindload="load"></image>
       <image wx:else src="{{item.picture.url}}" mode="aspectFill"></image>
     </view>
     <view class="mask">

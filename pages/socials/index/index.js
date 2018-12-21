@@ -15,9 +15,8 @@ Page({
     tipFlag: !wx.getStorageSync('tip_staus'),
     refreshFlag: false,
     anchor: '',
-    adsFlag: false,
+    adError: false,
     announcementFlag: false,
-    adError: false
   },
   
 
@@ -99,8 +98,6 @@ Page({
           })
           return
         }
-
-        this.getAds()
         this.getAnnouncement()
       }
     })
@@ -307,23 +304,23 @@ Page({
     })
   },
 
-  getAds: function () {
-    wx.request({
-      url: Config.restUrl + '/ads/app',
-      header: { 'token': wx.getStorageSync('token') },
-      success: res => {
-        var ads = res.data.data
-        for(var i in ads) {
-          if(ads[i].page == 'Social') {
-            this.setData({
-              adsFlag: true
-            })
-            break;
-          }
-        }
-      }
-    })
-  },
+  // getAds: function () {
+  //   wx.request({
+  //     url: Config.restUrl + '/ads/app',
+  //     header: { 'token': wx.getStorageSync('token') },
+  //     success: res => {
+  //       var ads = res.data.data
+  //       for(var i in ads) {
+  //         if(ads[i].page == 'Social') {
+  //           this.setData({
+  //             adsFlag: true
+  //           })
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   })
+  // },
 
   adError: function (e) {
     this.setData({

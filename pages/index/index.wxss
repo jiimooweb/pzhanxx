@@ -586,16 +586,17 @@ scroll-view {
   height: 100%;
   width: 100%;
   top: 0;
-  z-index: 100;
+  z-index: 99;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  
+  margin-top:45rpx;
+
 }
 
+
 .addTip image{
-  margin-top:30rpx;
   height: 100%;
   width: 100%;
 }
@@ -680,4 +681,54 @@ scroll-view {
   height: 100%;
 }
 
+.fullAd {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 130;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
 
+/* .ad-img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+} */
+
+.fullAd image {
+  width: 100%;
+  height: 100%;
+}
+
+.confirm-btn {
+  z-index: 135;
+}
+
+.confirm-btn {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 60rpx;
+  right: 40rpx;
+  border-radius: 30rpx;
+  background-color:  rgba(0, 0, 0, 0.5);
+  text-align: center;
+  align-items: center;
+  padding:8rpx 25rpx;
+  z-index: 32;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 101;
+}
