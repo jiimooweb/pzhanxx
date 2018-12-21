@@ -275,7 +275,7 @@ Page({
 
     toTop: function() {
         this.setData({
-            anchor: 'anchor'
+            anchor: 'f'
         })
     },
 

@@ -1,0 +1,71 @@
+<tab-date tabs="{{tabs}}" bind:choose="tabChoose" bind:change="dateChange" tabIndex="{{tabIndex}}" id="tabs" year="{{year}}" month="{{monthF}}" day="{{day}}"></tab-date>
+<!-- 日期列表 -->
+<view class="popup-row" style="height:{{scrollHeight}}px" hidden='{{headtap}}'>
+    <view class="ui-row">
+        <view class="ui-col ui-col-3" style="flex: 0 0 25%;">
+            <view class="ui-col-content">
+                <view bindtap="yearTap" data-show="{{showY}}" class="time-tabs-year">{{year_list}}</view>
+                <scroll-view scroll-with-animation="" class="ui-v-tabs" scroll-top="52.5" scroll-y="" style="">
+                    <block wx:for="{{months}}" wx:key="*this">
+                        <view bindtap="handleMonth" data-choice="{{item}}" class="ui-v-tab {{choice==item?'ui-choice':'ui-nochoice'}}">
+                            <text class="{{choice==item?'active':''}}"></text> {{item}}月
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+        <view class="ui-col">
+            <view class="ui-col-content">
+                <scroll-view scrollY class="popup-scroll-view" style="height:{{scrollHeight}}px">
+                    <view class="month-box">
+                        <view class="month-year-box" wx:for="{{arrYear}}" wx:key="id" hidden='{{showY}}'>
+                            <view bindtap="handleYear" class="year-list" data-year="{{item}}">
+                                <view class='month-year'>{{item}}</view>
+                            </view>
+                        </view>
+                        <view class="month-list-box" wx:for="{{days}}" wx:key="id" hidden='{{!showY}}'>
+                            <view bindtap="handleDay" class="month-list" data-select="{{item.day}}">
+                                <view class="dian  {{select ==item && month==choice? 'dian-select':'dian-unselect'}}">
+                                    <text class='dianyit'> · </text>
+                                    <text class='dianyit'>·</text>
+                                </view>
+                                <view class='month-day'>{{item.day}}</view>
+                                <view class="month-line">
+                                    <text></text>
+                                    <text></text>
+                                    <text></text>
+                                </view>
+                                <view class='title'>
+                                    <text class='yi'> {{item.week}} </text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}"  hidden='{{!headtap}}'>
+    <swiper-item>
+        <scroll-view scrollY bindscrolltolower="loadNewAll" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{time}}" scroll-into-view="{{anchor}}">
+            <view id="anchor"></view>
+            <pic-leader-list pictures="{{all}}" bind:toPreview="toPreview"></pic-leader-list>
+            <view class="loading-tip" wx:if="{{all_loadFlag}}">正在加载，请稍等...</view>
+            <view class="loading-tip" wx:if="{{!all_loadFlag}}">已完成加载!</view>
+        </scroll-view>
+
+    </swiper-item>
+    <swiper-item>
+        <scroll-view scrollY bindscrolltolower="loadNewFirst" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{time}}" scroll-into-view="{{anchor}}">
+            <view id="anchor"></view>
+            <pic-leader-list pictures="{{first}}" bind:toPreview="toPreview"></pic-leader-list>
+            <view class="loading-tip" wx:if="{{first_loadFlag}}">正在加载，请稍等...</view>
+            <view class="loading-tip" wx:if="{{!first_loadFlag}}">已完成加载!</view>
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<view class="to-top" wx:if="{{topShow}}" bindtap="toTop">
+    <image src="/icon/gotop.png"></image>
+</view>

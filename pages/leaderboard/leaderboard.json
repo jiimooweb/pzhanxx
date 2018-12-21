@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "tab-date": "/components/tab-date/tab-date",
+        "pic-leader-list": "/components/pic-leader-list/pic-leader-list",
+        "rank": "/components/rank/rank"
+    }
+}

@@ -24,7 +24,8 @@
     "pages/special/reply/reply",
     "pages/today/today",
     "pages/rule/rule",
-    "pages/me/download/download"
+    "pages/me/download/download",
+    "pages/leaderboard/leaderboard"
   ],
   "window": {
     "backgroundTextStyle": "black",
@@ -51,8 +52,8 @@
         "selectedIconPath": "icon/tabbar/new_on.png"
       },
       {
-        "pagePath": "pages/today/today",
-        "text": "今日",
+        "pagePath": "pages/leaderboard/leaderboard",
+        "text": "排行",
         "iconPath": "icon/tabbar/today.png",
         "selectedIconPath": "icon/tabbar/today_on.png"
       },
