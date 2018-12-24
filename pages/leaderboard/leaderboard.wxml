@@ -25,7 +25,7 @@
                         </view>
                         <view class="month-list-box" wx:for="{{days}}" wx:key="id" hidden='{{!showY}}'>
                             <view bindtap="handleDay" class="month-list" data-select="{{item.day}}">
-                                <view class="dian  {{select ==item && month==choice? 'dian-select':'dian-unselect'}}">
+                                <view class="dian  {{select ==item.day && month==choice? 'dian-select':'dian-unselect'}}">
                                     <text class='dianyit'> · </text>
                                     <text class='dianyit'>·</text>
                                 </view>
@@ -47,22 +47,32 @@
     </view>
 </view>
 
-<swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}"  hidden='{{!headtap}}'>
+<swiper bindchange="change" circular class="swiper-preview preview-wallpaper" duration="300" current="{{tabIndex}}" hidden='{{!headtap}}'>
     <swiper-item>
-        <scroll-view scrollY bindscrolltolower="loadNewAll" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{time}}" scroll-into-view="{{anchor}}">
+        <scroll-view scrollY bindscrolltolower="loadNewAll" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{all_time}}" scroll-into-view="{{anchor}}">
             <view id="anchor"></view>
             <pic-leader-list pictures="{{all}}" bind:toPreview="toPreview"></pic-leader-list>
-            <view class="loading-tip" wx:if="{{all_loadFlag}}">正在加载，请稍等...</view>
-            <view class="loading-tip" wx:if="{{!all_loadFlag}}">已完成加载!</view>
+            <view wx:if="{{all_length>0}}">
+                <view class="loading-tip" wx:if="{{all_loadFlag}}">正在加载，请稍等...</view>
+                <view class="loading-tip" wx:if="{{!all_loadFlag}}">已完成加载!</view>
+            </view>
+
+            <view wx:if="{{all_length==0}}" class="loading-tip">
+                资料尚未更新，敬请期待哟
+            </view>
         </scroll-view>
 
     </swiper-item>
     <swiper-item>
-        <scroll-view scrollY bindscrolltolower="loadNewFirst" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{time}}" scroll-into-view="{{anchor}}">
+        <scroll-view scrollY bindscrolltolower="loadNewFirst" scrollTop="0" bindscroll="scroll" lowerThreshold="100" data-time="{{first_time}}" scroll-into-view="{{anchor}}">
             <view id="anchor"></view>
             <pic-leader-list pictures="{{first}}" bind:toPreview="toPreview"></pic-leader-list>
-            <view class="loading-tip" wx:if="{{first_loadFlag}}">正在加载，请稍等...</view>
-            <view class="loading-tip" wx:if="{{!first_loadFlag}}">已完成加载!</view>
+            <view wx:if="{{first_length>0}}">
+                <view class="loading-tip" wx:if="{{first_loadFlag}}">正在加载，请稍等...</view>
+                <view class="loading-tip" wx:if="{{!first_loadFlag}}">已完成加载!</view>
+            </view>
+            <view wx:if="{{first_length==0}}" class="loading-tip">资料尚未更新，敬请期待哟
+            </view>
         </scroll-view>
     </swiper-item>
 </swiper>

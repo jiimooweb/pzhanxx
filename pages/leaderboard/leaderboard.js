@@ -13,7 +13,7 @@ var arrYear = []; //所有年份
 var today;
 var data_all;
 var data_first;
-var count = 2;
+var count = 10;
 
 Page({
 
@@ -25,7 +25,8 @@ Page({
         tabIndex: 0,
         headtap: true,
         showY: true,
-        all_loadFlag:true,
+        all_loadFlag: true,
+        first_loadFlag:true
 
     },
 
@@ -119,19 +120,19 @@ Page({
                     arrYear.push(data[i].year)
                 }
                 arrDate = data;
-                var days = this.getDay(today.year,today.month)
+                var days = this.getDay(today.year, today.month)
                 this.setData({
                     year: today.year,
                     year_list: today.year,
-                    month:today.month,
+                    month: today.month,
                     monthF: today.monthF,
                     day: today.day,
                     choice: today.month,
                     months: data[length - 1].month,
-                    days :days,
+                    days: days,
                     select: today.day
                 })
-                this.getData(today.year,today.month,today.day)
+                this.getData(today.year, today.month, today.day)
             }
         })
     },
@@ -152,17 +153,17 @@ Page({
             })
         }
     },
-    handleYear:function(event){
+    handleYear: function(event) {
         var item = event.currentTarget.dataset.year;
-        var r_months ;
-        for(let i in arrDate){
-            if(item == arrDate[i].year){
+        var r_months;
+        for (let i in arrDate) {
+            if (item == arrDate[i].year) {
                 r_months = arrDate[i].month
             }
         }
         var days = this.getDay(item, r_months[0])
         this.setData({
-            year_list:item,
+            year_list: item,
             months: r_months,
             choice: r_months[0],
             showY: true,
@@ -170,19 +171,18 @@ Page({
         })
 
     },
-    handleMonth: function (event){
+    handleMonth: function(event) {
         var that = this;
         var item = event.currentTarget.dataset.choice;
         var year = this.data.year_list;
-        var days = this.getDay(year,item);
-        console.log(days);
+        var days = this.getDay(year, item);
         this.setData({
             choice: item,
             days: days,
         })
 
     },
-    handleDay:function(event){
+    handleDay: function(event) {
         var that = this;
         var item = event.currentTarget.dataset.select;
         var year = this.data.year_list;
@@ -192,7 +192,7 @@ Page({
         })
         this.getData(year, month, item)
     },
-    getData: function (year,month,day){
+    getData: function(year, month, day) {
         wx.request({
             url: Config.restUrl + '/leaderDates/data',
             method: 'post',
@@ -207,7 +207,6 @@ Page({
             success: res => {
                 var data = res.data;
                 if (data != "") {
-                    console.log(data)
                     var monthF = this.monthFormat(month);
                     var first = data.first
                     var arr = []
@@ -218,15 +217,19 @@ Page({
                     data_first = arr;
                     var record_data_all;
                     var record_data_first;
-                    if (data_all.length>count){
+                    if (data_all.length > count) {
                         record_data_all = data_all.slice(0, count)
-                    }else{
+                        var all_loadFlag = true;
+                    } else {
                         record_data_all = data_all
+                        var all_loadFlag = false;
                     }
                     if (data_first.length > count) {
                         record_data_first = data_first.slice(0, count)
+                        var first_loadFlag = true;
                     } else {
                         record_data_first = data_first
+                        var first_loadFlag = false;
                     }
                     this.setData({
                         year: year,
@@ -235,29 +238,34 @@ Page({
                         day: day,
                         all: record_data_all,
                         first: record_data_first,
+                        all_length: record_data_all.length,
+                        first_length: record_data_first.length,
                         select: day,
                         headtap: true,
-                        time:1,
+                        all_time: 1,
+                        first_time:1,
+                        all_loadFlag: all_loadFlag,
+                        first_loadFlag: first_loadFlag
                     })
                 }
             }
         })
     },
     getDay: function(year, month) {
-        var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
+        var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         var arr = [1, 3, 5, 7, 8, 10, 12];
-        if(year ==2018){
+        if (year == 2018) {
             var record = []
-            if (year == today.year){
+            if (year == today.year) {
                 for (var i = today.day; i >= 21; i--) {
-                    var d = new Date(year+"-"+month+"-"+i);  
+                    var d = new Date(year + "-" + month + "-" + i);
                     var obj = {
-                        day:i,
+                        day: i,
                         week: weekday[d.getDay()]
                     }
                     record.push(obj);
                 }
-            }else{
+            } else {
                 for (var i = 31; i >= 21; i--) {
                     var d = new Date(year + "-" + month + "-" + i);
                     var obj = {
@@ -266,29 +274,27 @@ Page({
                     }
                     record.push(obj);
                 }
-                
+
             }
-            
+
             return record;
         }
-        if (year == today.year && month == today.month){
+        if (year == today.year && month == today.month) {
             var record = []
             for (var i = today.day; i > 0; i--) {
                 var r_month = month
-                if(month<10){
+                if (month < 10) {
                     r_month = '0' + r_month
                 }
                 if (i < 10) {
                     i = '0' + i
                 }
                 var d = new Date(year + "-" + r_month + "-" + i);
-                console.log(d)
                 var obj = {
                     day: i,
                     week: weekday[d.getDay()]
                 }
                 record.push(obj);
-                console.log(obj);
             }
             return record;
         }
@@ -383,7 +389,7 @@ Page({
         }
         return false;
     },
-    monthFormat: function (month) {
+    monthFormat: function(month) {
         switch (month) {
             case 1:
                 var value = 'Jan.';
@@ -425,22 +431,22 @@ Page({
         return value;
     },
 
-// swiper
-    change: function (e) {
+    // swiper
+    change: function(e) {
         var current = e.detail.current
         this.setData({
             tabIndex: current,
             topShow: false
         })
     },
-    tabChoose: function (e) {
+    tabChoose: function(e) {
         var index = e.detail.index
         this.setData({
-            headtap:true,
+            headtap: true,
             tabIndex: index,
         })
     },
-    scroll: function (e) {
+    scroll: function(e) {
         var scrollHeight = e.detail.scrollTop
         this.data.scroll = scrollHeight
         if (scrollHeight > 2000) {
@@ -454,20 +460,21 @@ Page({
         }
     },
 
-    toTop: function () {
+    toTop: function() {
         this.setData({
             anchor: 'anchor'
         })
     },
-    loadNewAll: function (e) {
+    loadNewAll: function(e) {
         var time = e.currentTarget.dataset.time + 1;
         var ceil_all = Math.ceil(data_all.length / count);
         var record_data_all = [];
         var all_loadFlag = true;
+
         if (ceil_all >= time) {
             if (ceil_all > time) {
                 record_data_all = data_all.slice((time - 1) * count, (time - 1) * count + count)
-                
+
             } else if (ceil_all == time) {
                 record_data_all = data_all.slice((time - 1) * count, data_all.length)
                 all_loadFlag = false;
@@ -478,16 +485,21 @@ Page({
             }
             this.setData({
                 all: all,
-                time:time,
+                all_time: time,
                 all_loadFlag: all_loadFlag
+            })
+        }else{
+            this.setData({
+                all_loadFlag: false
             })
         }
     },
-    loadNewFirst: function (e) {
+    loadNewFirst: function(e) {
         var time = e.currentTarget.dataset.time + 1;
         var ceil_first = Math.ceil(data_first.length / count);
         var record_data_first = [];
-        var first_loadFlag =true;
+        var first_loadFlag = true;
+
         if (ceil_first >= time) {
             if (ceil_first > time) {
                 record_data_first = data_first.slice((time - 1) * count, (time - 1) * count + count)
@@ -502,10 +514,14 @@ Page({
             }
             this.setData({
                 first: first,
-                time: time,
+                first_time: time,
                 first_loadFlag: first_loadFlag
             })
-        }        
+        }else{
+            this.setData({
+                first_loadFlag: false
+            })
+        }
     },
 
 })

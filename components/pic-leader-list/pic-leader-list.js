@@ -1,4 +1,6 @@
-import { Config } from "../../utils/config.js"
+import {
+    Config
+} from "../../utils/config.js"
 
 const app = getApp()
 
@@ -20,13 +22,13 @@ Component({
         rpictures: [],
     },
 
-    ready: function () {
+    ready: function() {
         this.loginPanel = this.selectComponent("#loginPanel");
     },
 
 
     pageLifetimes: {
-        show: function () {
+        show: function() {
             this.setLayout();
         }
     },
@@ -36,14 +38,20 @@ Component({
      */
     methods: {
 
-        _toPreview: function (e) {
+        _toPreview: function(e) {
             var index = e.currentTarget.dataset.index
             var id = e.currentTarget.dataset.id
-            this.triggerEvent('toPreview', { id: id })
+            // var arr = this.data.rpictures
+            // var obj = arr[index];
+
+            this.triggerEvent('toPreview', {
+                id: id
+            })
             this.toPreview(e)
+
         },
 
-        toPreview: function (e) {
+        toPreview: function(e) {
             var index = e.currentTarget.dataset.index
             var id = e.currentTarget.dataset.id
             wx.navigateTo({
@@ -51,7 +59,7 @@ Component({
             })
         },
 
-        setLayout: function () {
+        setLayout: function() {
             var pictures = this.properties.pictures
             this.setData({
                 rpictures: pictures

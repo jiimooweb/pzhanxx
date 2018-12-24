@@ -205,7 +205,9 @@ Page({
           }
         }
         this.setData({
-          mask: false
+          mask: false,
+          todayShow: true
+
         })
         if (this.data.fullAdFlag) {
           this.countDown();
