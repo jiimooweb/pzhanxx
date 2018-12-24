@@ -115,8 +115,8 @@
       <text>分享给好友或者群</text>
     </view>
     <view class="row">
-      <view class="btn1" bindtap="getPoster">分享到朋友圈</view>
-      <text>生成海报，保存分享到朋友圈</text>
+      <view class="btn1" bindtap="getPoster">生成海报</view>
+      <text>生成海报，保存分享给好友</text>
     </view>
   </view>
 </view>
