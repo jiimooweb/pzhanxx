@@ -1,6 +1,8 @@
 import { Config } from "../../../utils/config.js"
+import { Token } from "../../../utils/token.js"
 
 const app = getApp()
+const token = new Token
 
 Page({
 
@@ -41,12 +43,11 @@ Page({
         social: socials
       })
       
-      this.getComment(id)
+      token.verify(this.getComment)
     }else {
-      this.getSocial() 
+      token.verify(this.getSocial)
     }
-    this.getUid()
-    this.setIcon()
+    token.verify(this.getUid)
    
   },
   
@@ -98,6 +99,7 @@ Page({
         this.setData({
           fan_id: res.data.uid
         })
+        this.setIcon()
       },
     })
   },
@@ -166,6 +168,7 @@ Page({
   }, 
 
   getComment: function (social_id) {
+    var social_id = social_id == undefined ? this.data.social_id : social_id
     wx.request({
       url: Config.restUrl + '/socials/' + social_id + '/comments',
       header: { 'token': wx.getStorageSync('token') },

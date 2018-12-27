@@ -9,7 +9,7 @@
             <view class="hot-tab">
                 <view class="hot-bar {{hotIndex == 0 ? 'select' : ''}}" catchtap="getHotIndex" data-index="0">热度榜</view>
                 <view class="hot-bar {{hotIndex == 1 ? 'select' : ''}}" catchtap="getHotIndex" data-index="1">收藏榜</view>
-                <view class="hot-bar {{hotIndex == 2 ? 'select' : ''}}" catchtap="getHotIndex" data-index="2">点赞榜</view>
+                <view class="hot-bar {{hotIndex == 2 ? 'select' : ''}}" catchtap="getHotIndex" data-index="2">下载榜</view>
             </view>
 
             <rank hotPictures="{{hotPictures}}" bind:toPreview="toPreview" hotIndex="{{hotIndex}}"></rank>

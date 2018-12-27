@@ -46,7 +46,7 @@ Page({
             loadFlag: true,
             topShow: false
         },
-        likes: {
+        downloads: {
             'pictures': [],
             page: 1,
             isloadMore: true,
@@ -157,9 +157,9 @@ Page({
             page = this.data.collects.page
             this.data.collects.isloadMore = false
         } else {
-            keyword = 'like'
-            page = this.data.likes.page
-            this.data.likes.isloadMore = false
+            keyword = 'download'
+            page = this.data.downloads.page
+            this.data.downloads.isloadMore = false
         }
         wx.request({
             url: Config.restUrl + '/pictures/rank?keyword=' + keyword,
@@ -208,19 +208,19 @@ Page({
                         });
                     }
                 } else {
-                    var oPictures = this.data.likes.pictures
+                    var oPictures = this.data.downloads.pictures
                     if (pictures.length > 0) {
                         newPictures = oPictures.concat(pictures)
-                        this.data.likes.isloadMore = true
-                        this.data.likes.page = page + 1
+                        this.data.downloads.isloadMore = true
+                        this.data.downloads.page = page + 1
                         this.setData({
-                            ['likes.pictures']: newPictures,
+                            ['downloads.pictures']: newPictures,
                         });
 
                         if (newPictures.length == 100 || newPictures.length == total) {
-                            this.data.likes.isloadMore = false
+                            this.data.downloads.isloadMore = false
                             this.setData({
-                                ['likes.loadFlag']: false,
+                                ['downloads.loadFlag']: false,
                             });
                         }
                     }
@@ -358,14 +358,14 @@ Page({
                 hotPictures = this.data.collects.pictures
             }
         } else {
-            fixedText = '点赞榜'
-            if (!this.data.likes.isloadMore) {
+            fixedText = '下载榜'
+            if (!this.data.downloads.isloadMore) {
                 return
             }
-            if (this.data.likes.pictures.length == 0) {
+            if (this.data.downloads.pictures.length == 0) {
                 this.getHotPictures(index)
             } else {
-                hotPictures = this.data.likes.pictures
+                hotPictures = this.data.downloads.pictures
             }
         }
         this.setData({
@@ -408,7 +408,7 @@ Page({
                 return
             }
         } else {
-            if (!this.data.likes.isloadMore) {
+            if (!this.data.downloads.isloadMore) {
                 return
             }
         }

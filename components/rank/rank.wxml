@@ -11,7 +11,7 @@
       <view class="author">{{item.author}}</view>
       <view class="num" wx:if="{{hotIndex == 0}}">{{item.hot}} 热度</view>
       <view class="num" wx:if="{{hotIndex == 1}}">{{item.collect_fans_count}} 收藏</view>
-      <view class="num" wx:if="{{hotIndex == 2}}">{{item.like_fans_count}} 点赞</view>
+      <view class="num" wx:if="{{hotIndex == 2}}">{{item.download_fans_count}} 下载</view>
     </view>
   </view>
 </view>

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/socials/social/social",
     "pages/search/search",
     "pages/today2/today",
     "pages/article/article",
@@ -14,7 +15,6 @@
     "pages/me/social/social",
     "pages/me/collect/collect",
     "pages/socials/index/index",
-    "pages/socials/social/social",
     "pages/socials/release/release",
     "pages/socials/reply/reply",
     "pages/socials/comment/comment",
