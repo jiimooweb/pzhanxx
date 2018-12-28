@@ -31,7 +31,7 @@
     </view>
   </view>
   <view class="content">
-    <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
+    <view class="tofan" >
       <block wx:if="{{reply.to_fan_id > 0}}">回复
         <text class="name">@{{reply.to_fan.nickname}}</text>
       </block>
@@ -53,7 +53,7 @@
     </view>
   </view>
   <view class="content">
-    <view class="tofan" wx:if="{{reply.to_fan_id > 0}}">
+    <view class="tofan" >
       <block wx:if="{{reply.to_fan_id > 0}}">回复<text class="name">@{{reply.to_fan.nickname}}</text></block>
       <text class="text">{{reply.content}}</text>
     </view>
