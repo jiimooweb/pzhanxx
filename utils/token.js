@@ -31,7 +31,7 @@ class Token {
           success: res => {
             var token = res.data.token
             wx.setStorageSync('token', token)
-            var userInfo = wx.getStorageSync('userInfo')
+            var userInfo = wx.getStorageSync('userInfoRes')
             if (userInfo && wx.getStorageSync('authorize_status')) {
               _this.saveUserInfo(userInfo)
             }
@@ -45,7 +45,7 @@ class Token {
   }
 
   saveUserInfo(userInfo) {
-    wx.setStorageSync('userInfo', userInfo)    
+    wx.setStorageSync('userInfo', userInfo.userInfo)    
     wx.request({
       url: Config.restUrl + '/wechat/token/saveInfo',
       data: { 'userInfo': userInfo },
