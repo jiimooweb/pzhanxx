@@ -1,10 +1,10 @@
 <view class="bg" wx:if="{{display}}" >
   <view class="panel" catchtap animation="{{animation}}">
     <view class="image">
-      <image  class="thumb" src="http://p8r2g6z46.bkt.clouddn.com/20181023/8bf252d025b593aff3af93d142068e02.jpg?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFill"></image>
+      <image  class="thumb" src="https://download.rdoorweb.com/20181023/8bf252d025b593aff3af93d142068e02.jpg?imageMogr2/auto-orient/thumbnail/!50p/blur/1x0/quality/75|imageslim" mode="aspectFill"></image>
     </view>
     <view class="logo">
-      <image class="thumb" src="http://download.rdoorweb.com/pzhan/pz_logo.png" mode="aspectFill"></image>
+      <image class="thumb" src="https://download.rdoorweb.com/pzhan/pz_logo.png" mode="aspectFill"></image>
     </view>
     <view class="btn">
       <button class="login" bindgetuserinfo="getUserInfo" open-type="getUserInfo"><image  class="icon" src="/icon/wechat.png" mode="aspectFill"></image>

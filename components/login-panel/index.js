@@ -44,7 +44,7 @@ Component({
 
     getUserInfo: function (e) {
       if (e.detail.errMsg == "getUserInfo:ok") {
-        token.saveUserInfo(e.detail.userInfo)
+        token.saveUserInfo(e.detail)
         wx.setStorageSync('authorize_status',true)
         this.setData({
           userInfo: e.detail.userInfo
