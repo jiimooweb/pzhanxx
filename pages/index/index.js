@@ -350,7 +350,8 @@ Page({
     this.setData({
       pictures: [],
       random_picture_ids: [],
-      loadFlag: true
+      loadFlag: true,
+      anchor: 'outside'
     })
     this.getPictures()
   },
