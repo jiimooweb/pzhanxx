@@ -16,8 +16,7 @@ Page({
     page: 1,
     isLoadMode: true,
     topShow: false,
-    anchor: '',
-    page: 1
+    anchor: ''
   },
 
   /**
