@@ -7,7 +7,7 @@ import {
 
 const token = new Token
 const app = getApp()
-
+var Page = require('../../utils/xmadx_sdk.min.js').xmad(Page).xmPage;
 Page({
     /**
      * 页面的初始数据
@@ -33,6 +33,15 @@ Page({
         fullAdurl: '',
         todayShow: false,
         mask: true,
+        tSwitch:0,
+        adSwitch:1,
+        adTitle:"",
+        xmad: {
+            adData: {},
+            ad: {
+                banner: "xm2dd29da5f02801ca12e9fe788b4052",
+            }
+        },
     },
 
     /**
@@ -213,6 +222,7 @@ Page({
                 } else {
                     wx.showTabBar();
                 }
+                this.getTAds();
                 this.getSwipers()
             }
         })
@@ -430,5 +440,50 @@ Page({
             todayShow: true
         })
         wx.showTabBar();
+    },
+    getTAds:function(){
+        wx.request({
+            url: Config.restUrl + '/third_ads',
+            header: {
+                'token': wx.getStorageSync('token')
+            },
+            data: {
+                type:0
+            },
+            method: 'post',
+            success: res => {
+                var data = res.data
+                this.setData({
+                    tSwitch: data.tSwitch,
+                    adSwitch: data.adSwitch,
+                    adTitle: data.title,
+                })
+            }
+        })
+    },
+    adClick:function(){
+        wx.request({
+            url: Config.restUrl + '/third_ads/add',
+            header: {
+                'token': wx.getStorageSync('token')
+            },
+            data: {
+                type: 0
+            },
+            method: 'post',
+            success: res => {
+                var data = res.data
+                if(data.tSwitch==1){
+                    this.setData({
+                        tSwitch: data.tSwitch,
+                        adTitle: data.title
+                    })
+                }else{
+                    this.setData({
+                        tSwitch: data.tSwitch,
+                    })
+                }
+            }
+        })
     }
 })

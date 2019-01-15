@@ -11,7 +11,7 @@
                     <text style='font-size: 12px;' wx:if="{{item.is_first==0}}">#{{item.old_ranking}}</text>
                     <text style='font-size: 12px;color:#FC5B4C' wx:if="{{item.is_first==1}}">首次登场</text>
                 </view>
-                 <!-- <view class='count'wx:if="{{item.count>1}}">50</view> -->
+                 <view class='count'wx:if="{{item.count>1}}">{{item.count}}</view>
                 <image lazy-load="{{true}}" class="img" wx:if="{{item.picture.url && item.definition==0 }}" src="{{item.picture.url ? item.picture.url + '?imageMogr2/auto-orient/thumbnail/!35p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
                 <image lazy-load="{{true}}" class="img" wx:if="{{item.picture.url && item.definition==1 }}" src="{{item.picture.url ? item.picture.url + '?imageMogr2/auto-orient/thumbnail/!55p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
                 <image lazy-load="{{true}}" class="img" wx:if="{{item.picture.url && item.definition==2}}" src="{{item.picture.url ? item.picture.url + '?imageMogr2/auto-orient/thumbnail/!75p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>

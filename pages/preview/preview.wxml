@@ -2,123 +2,130 @@
 <login-panel id="loginPanel" bind:hide="loginHide"></login-panel>
 
 <scroll-view scrollY scrollTop="0" bindscroll="scroll" style='height:{{scrollHeight}}px'>
-  <view class="preview-box">
-    <view class="preview-image">
-      <image bindload="loadImage" lazy-load="{{true}}" src="{{picture.url ? picture.url + '?imageMogr2/auto-orient/thumbnail/!75p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
-    </view>
+    <view class="preview-box">
+        <view class="preview-image">
+            <image bindload="loadImage" lazy-load="{{true}}" src="{{picture.url ? picture.url + '?imageMogr2/auto-orient/thumbnail/!75p/blur/1x0/quality/75|imageslim' : ''}}" mode="widthFix"></image>
+        </view>
 
-    <view class="tags-relative">
-      <view class="title">{{picture.title}}</view>
-      <view class="author">
-        <view>{{picture.author}}</view>
-        <view>ID:{{picture.pic_id}}</view>
-      </view>
-      <tags tags="{{picture.tags}}"></tags>
-      <view class="border"></view>
+        <view class="tags-relative">
+            <view class="title">{{picture.title}}</view>
+            <view class="author">
+                <view>{{picture.author}}</view>
+                <view>ID:{{picture.pic_id}}</view>
+            </view>
+            <tags tags="{{picture.tags}}"></tags>
+            <view class="border"></view>
 
-      <view class="data-list">
-        <view class="row">
-          <image src="/icon/preview/click.png"></image>
-          <text>{{picture.click}}</text>
+            <view class="data-list">
+                <view class="row">
+                    <image src="/icon/preview/click.png"></image>
+                    <text>{{picture.click}}</text>
+                </view>
+                <view class="row">
+                    <image src="/icon/preview/liked.png"></image>
+                    <text>{{picture.like_fans_count}}</text>
+                </view>
+                <view class="row">
+                    <image src="/icon/preview/collect.png"></image>
+                    <text>{{picture.collect_fans_count}}</text>
+                </view>
+            </view>
         </view>
-        <view class="row">
-          <image src="/icon/preview/liked.png"></image>
-          <text>{{picture.like_fans_count}}</text>
+
+        <view class="segmentation"></view>
+        <view wx:if="{{tSwitch==1}}" class="ad-title" >{{adTitle}}</view>
+        <view bindtap="adClick" wx:if="{{adSwitch==1}}">
+            <view class="xm_banner" style="width:100%">
+                <xm-ad data-id="{{xmad.ad.banner}}" adData="{{xmad.adData}}" bindadload="adImgLoad" bindclick="appoIntView" bindclose="xmadClose" class="xm_component">
+                </xm-ad>
+            </view>
         </view>
-        <view class="row">
-          <image src="/icon/preview/collect.png"></image>
-          <text>{{picture.collect_fans_count}}</text>
+        <ad wx:if="{{!adError}}" binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
+        <view class="similar-wallpaper">
+            <view class="title">相关推荐</view>
+            <view wx:if="{{recommends.length > 0}}">
+                <pic-list pictures="{{recommends}}"></pic-list>
+            </view>
+            <view class="tips" wx:elif="{{recommends.length == 0 && load}}">
+                相关推荐内容为空，敬请期待新的内容！
+            </view>
+            <view class="tips" wx:else>
+                正在加载相关推荐，请稍等...
+            </view>
         </view>
-      </view>
     </view>
-    
-    <view class="segmentation"></view>
-    <ad wx:if="{{!adError}}" binderror="adError"  unit-id="adunit-cbc8e3f600d0bcac"></ad>
-    <view class="similar-wallpaper">
-      <view class="title">相关推荐</view>
-      <view wx:if="{{recommends.length > 0}}">
-        <pic-list pictures="{{recommends}}"></pic-list>
-      </view>
-      <view class="tips" wx:elif="{{recommends.length == 0 && load}}">
-        相关推荐内容为空，敬请期待新的内容！
-      </view>
-      <view class="tips" wx:else>
-        正在加载相关推荐，请稍等...
-      </view>
-    </view>
-  </view>
 </scroll-view>
 
 <view class="bottom-nav">
-  <button class="btn-home btn" catchtap="toHome" hoverClass="none">
-    <image class="fbtn" src="/icon/preview/home.png"></image>
-  </button>
-  <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
-    <image class="fbtn" src="/icon/preview/collect{{picture.collect ? '-active' : ''}}.png" style="margin-top:5rpx;width:55rpx;height:55rpx;"></image>
-  </button>
-  <button class="btn-download btn" catchtap="showDownloadPanel" hoverClass="none">
-    <image class="fbtn" src="/icon/preview/download.png"></image>
-  </button>
+    <button class="btn-home btn" catchtap="toHome" hoverClass="none">
+        <image class="fbtn" src="/icon/preview/home.png"></image>
+    </button>
+    <button class="btn-collect btn" catchtap="collectHandle" hoverClass="none">
+        <image class="fbtn" src="/icon/preview/collect{{picture.collect ? '-active' : ''}}.png" style="margin-top:5rpx;width:55rpx;height:55rpx;"></image>
+    </button>
+    <button class="btn-download btn" catchtap="showDownloadPanel" hoverClass="none">
+        <image class="fbtn" src="/icon/preview/download.png"></image>
+    </button>
 
-  <button catchtap="likeHandle" hoverClass="none">
-    <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
-  </button>
-  <button class="btn-share btn" catchtap="showSharePanel">
-    <image class="fbtn" src="/icon/preview/share.png" style="margin-top:3rpx;"></image>
-  </button>
+    <button catchtap="likeHandle" hoverClass="none">
+        <image class="fbtn" src="/icon/preview/like{{picture.like ? '-active' : ''}}.png" style="margin-top:2rpx;"></image>
+    </button>
+    <button class="btn-share btn" catchtap="showSharePanel">
+        <image class="fbtn" src="/icon/preview/share.png" style="margin-top:3rpx;"></image>
+    </button>
 </view>
 
 <view class="download-panel" wx:if="{{downloadFlag}}">
-  <view class="cancel" bindtap="hideDownloadPanel">
-    <image src="/icon/preview/cancel.png"></image>
-  </view>
-  <view class="panel">
-    <view class="title">请选择下载方式</view>
-    <view class="row" wx:if="{{picture.point <= point}}" catchtap="download" index-type="0">
-      <view class="btn1">积分下载</view>
-      <text>需要{{picture.point}}积分</text>
+    <view class="cancel" bindtap="hideDownloadPanel">
+        <image src="/icon/preview/cancel.png"></image>
     </view>
-    <view class="row" wx:else>
-      <view class="btn3">积分下载</view>
-      <text>需要{{picture.point}}积分,积分不足下载</text>
+    <view class="panel">
+        <view class="title">请选择下载方式</view>
+        <view class="row" wx:if="{{picture.point <= point}}" catchtap="download" index-type="0">
+            <view class="btn1">积分下载</view>
+            <text>需要{{picture.point}}积分</text>
+        </view>
+        <view class="row" wx:else>
+            <view class="btn3">积分下载</view>
+            <text>需要{{picture.point}}积分,积分不足下载</text>
+        </view>
+        <view class="row" wx:if="{{share_count > 0}}" catchtap="download" index-type="1">
+            <button class="btn2" open-type='share' bindtap="setShareFlag">分享下载</button>
+            <text>今日可分享免费下载{{share_count}}次</text>
+        </view>
+        <view class="row" wx:else>
+            <view class="btn3">分享下载</view>
+            <text>今日分享免费下载次数已用完</text>
+        </view>
     </view>
-    <view class="row" wx:if="{{share_count > 0}}" catchtap="download" index-type="1">
-      <button class="btn2" open-type='share' bindtap="setShareFlag">分享下载</button>
-      <text>今日可分享免费下载{{share_count}}次</text>
-    </view>
-    <view class="row" wx:else>
-      <view class="btn3">分享下载</view>
-      <text>今日分享免费下载次数已用完</text>
-    </view>
-  </view>
 </view>
 
 <view class="authore-panel" wx:if="{{authorizeFlag}}">
-  <view class="panel">
-    <view class="title">授权请求</view>
-    <view class="content">请允许图片保存到相册</view>
-    <view class="btn" catchtap="hideAuthorizePanel">
-      <button class="cancel">拒绝</button>
-      <button class="authorize" open-type='openSetting'>去授权</button>
+    <view class="panel">
+        <view class="title">授权请求</view>
+        <view class="content">请允许图片保存到相册</view>
+        <view class="btn" catchtap="hideAuthorizePanel">
+            <button class="cancel">拒绝</button>
+            <button class="authorize" open-type='openSetting'>去授权</button>
+        </view>
     </view>
-  </view>
 </view>
 
 <view class="download-panel" wx:if="{{shareFlag}}">
-  <view class="cancel" bindtap="hideSharePanel">
-    <image src="/icon/preview/cancel.png"></image>
-  </view>
-  <view class="panel">
-    <view class="title">请选择分享方式</view>
-    <view class="row">
-      <button class="btn2" openType="share">分享给好友</button> 
-      <text>分享给好友或者群</text>
+    <view class="cancel" bindtap="hideSharePanel">
+        <image src="/icon/preview/cancel.png"></image>
     </view>
-    <view class="row">
-      <view class="btn1" bindtap="getPoster">生成海报</view>
-      <text>生成海报，保存分享给好友</text>
+    <view class="panel">
+        <view class="title">请选择分享方式</view>
+        <view class="row">
+            <button class="btn2" openType="share">分享给好友</button>
+            <text>分享给好友或者群</text>
+        </view>
+        <view class="row">
+            <view class="btn1" bindtap="getPoster">生成海报</view>
+            <text>生成海报，保存分享给好友</text>
+        </view>
     </view>
-  </view>
 </view>
 <poster id="posterPanel" url="{{posterUrl}}"></poster>
 <!-- <view class="ad-panel">

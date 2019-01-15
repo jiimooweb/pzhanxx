@@ -41,22 +41,26 @@ Component({
         _toPreview: function(e) {
             var index = e.currentTarget.dataset.index
             var id = e.currentTarget.dataset.id
-            // var arr = this.data.rpictures
-            // var obj = arr[index];
-
             this.triggerEvent('toPreview', {
                 id: id
             })
             this.toPreview(e)
-
         },
 
         toPreview: function(e) {
             var index = e.currentTarget.dataset.index
             var id = e.currentTarget.dataset.id
-            wx.navigateTo({
-                url: '/pages/preview/preview?index=' + index + '&id=' + id,
-            })
+            var arr = this.data.rpictures
+            var obj = arr[index];
+            if (obj.count > 1) {
+                wx.navigateTo({
+                    url: '/pages/leaderShowMore/leaderShowMore?id=' + obj.id,
+                })
+            } else {
+                wx.navigateTo({
+                    url: '/pages/preview/preview?index=' + index + '&id=' + id,
+                })
+            }
         },
 
         setLayout: function() {

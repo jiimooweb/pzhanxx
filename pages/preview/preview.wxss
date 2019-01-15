@@ -1148,6 +1148,15 @@ swiper .loadingSvg {
 }
 
 
+.ad-title {
+    font-size: 26rpx;
+    color: #AFAFAF;
+    display: flex;
+    line-height: 55rpx;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 
 

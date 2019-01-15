@@ -54,13 +54,22 @@ Component({
 
     setLayout: function () {
       var pictures = this.properties.pictures
+      var llength = 0;
+      var rlength = 0;
       var lpictures = []
       var rpictures = []
       for (var i in pictures) {
-        if(i % 2 == 0) {
+        if(i == 0) {
+          llength += parseFloat(pictures[i].scale)
           lpictures.push(pictures[i])
-        }else {
-          rpictures.push(pictures[i])
+        } else {
+          if (llength > rlength) {
+            rlength += parseFloat(pictures[i].scale)
+            rpictures.push(pictures[i])
+          } else {
+            llength += parseFloat(pictures[i].scale)
+            lpictures.push(pictures[i])
+          }
         }
       }
       this.setData({
