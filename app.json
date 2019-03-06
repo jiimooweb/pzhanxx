@@ -32,7 +32,7 @@
     "pages/xmadPage/collect"
   ],
   "window": {
-    "backgroundTextStyle": "black",
+    "backgroundTextStyle": "dark",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"

@@ -37,6 +37,19 @@
     <view class="dot" wx:if="{{notice_count > 0}}"></view>
   </view>
 </view> 
+
+<view id="suggest">
+  <button class="btn-list" open-type="contact">
+    <view class="row">
+      <view class="right">
+        <image src="/icon/me/suggest.png"></image>
+        <view class="row-name">星选客服</view>
+      </view>
+      <view class="left"></view>
+    </view>
+  </button> 
+</view>
+
 <view class="list">
   <view class="row" catchtap="toShare">
     <view class="right">
@@ -69,17 +82,7 @@
     <view class="left"></view>
   </view> 
 </view>
-<view id="suggest">
-  <button class="btn-list" open-type="contact">
-    <view class="row">
-      <view class="right">
-        <image src="/icon/me/suggest.png"></image>
-        <view class="row-name">意见反馈</view>
-      </view>
-      <view class="left"></view>
-    </view>
-  </button> 
-</view>
+
 
 <view class="list">
   <view class="row" bindtap="toStatement">
