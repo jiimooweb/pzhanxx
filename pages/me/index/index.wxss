@@ -2,7 +2,9 @@
 page {
   background-color: #f6f6f6;
 }
-
+scroll-view {
+   height: calc(100vh);
+}
 .header {
   height: 340rpx;
   width: 100%;
@@ -192,7 +194,7 @@ page {
 .btn-list {
   background: #fff;
   width: 100%;
-  margin-bottom:20rpx;
+  /* margin-bottom:20rpx; */
   border-radius: 0;  
 }
 

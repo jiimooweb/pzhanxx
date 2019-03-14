@@ -3,7 +3,6 @@
     "usingComponents": {
         "loading": "/components/loading/loading",
         "login-panel": "/components/login-panel/index",
-        "tab-bar": "/components/tabBar/tabBar",
-        "xm-ad": "/components/xmAD/xmAD"
+        "tab-bar": "/components/tabBar/tabBar"
     }
 }

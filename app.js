@@ -3,7 +3,7 @@ import {
 } from "/utils/token.js"
 
 var token = new Token
-var App = require('./utils/xmadx_sdk.min.js').xmad(App, 'App').xmApp;
+
 App({
   onLaunch: function() {
 

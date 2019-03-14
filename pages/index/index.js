@@ -7,7 +7,7 @@ import {
 
 const token = new Token
 const app = getApp()
-var Page = require('../../utils/xmadx_sdk.min.js').xmad(Page).xmPage;
+
 Page({
     /**
      * 页面的初始数据
@@ -33,37 +33,33 @@ Page({
         fullAdurl: '',
         todayShow: false,
         mask: true,
-        tSwitch:0,
-        adSwitch:1,
-        adTitle:"",
-        xmad: {
-            adData: {},
-            ad: {
-                banner: "xm2dd29da5f02801ca12e9fe788b4052",
-            }
-        },
+        tSwitch: 0,
+        adSwitch: 1,
+        adTitle: ""
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         wx.hideTabBar();
         token.verify(this.getAds);
         this.getElementHeight();
+        
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
         if (this.data.swipers.length > 0) {
             this.getTags();
         }
@@ -76,7 +72,7 @@ Page({
         }
     },
 
-    getNotices: function () {
+    getNotices: function() {
         var page = this.data.page
         wx.request({
             url: Config.restUrl + '/notices',
@@ -95,14 +91,14 @@ Page({
         })
     },
 
-    onSlideChangeEnd: function (e) {
+    onSlideChangeEnd: function(e) {
         var that = this;
         that.setData({
             carouselIndex: e.detail.current
         })
     },
 
-    getSwipers: function () {
+    getSwipers: function() {
         wx.request({
             url: Config.restUrl + '/swiper_groups/display',
             header: {
@@ -122,7 +118,7 @@ Page({
         })
     },
 
-    getTags: function () {
+    getTags: function() {
         wx.request({
             url: Config.restUrl + '/tags/random',
             header: {
@@ -138,7 +134,7 @@ Page({
         })
     },
 
-    getSpecials: function () {
+    getSpecials: function() {
         wx.request({
             url: Config.restUrl + '/specials/hot',
             header: {
@@ -153,7 +149,7 @@ Page({
         })
     },
 
-    getPictures: function (page) {
+    getPictures: function(page) {
         var random_picture_ids = this.data.random_picture_ids
         this.data.isLoadMore = false
 
@@ -195,7 +191,7 @@ Page({
         })
     },
 
-    getAds: function () {
+    getAds: function() {
         wx.request({
             url: Config.restUrl + '/ads/app',
             header: {
@@ -223,30 +219,31 @@ Page({
                     wx.showTabBar();
                 }
                 this.getTAds();
-                this.getSwipers()
+                this.getSwipers();
+                this.getConfigs();
             }
         })
     },
 
-    adError: function (e) {
+    adError: function(e) {
         this.setData({
             adError: true
         })
     },
 
-    getElementHeight: function () {
+    getElementHeight: function() {
         var that = this;
         var query = wx.createSelectorQuery();
         //选择id
         query.select('#outside').boundingClientRect()
-        query.exec(function (res) {
+        query.exec(function(res) {
             that.setData({
                 outsideHeight: res[0].height,
             })
         })
     },
 
-    scroll: function (e) {
+    scroll: function(e) {
         var scrollHeight = e.detail.scrollTop
         if (scrollHeight > this.data.outsideHeight) {
             this.setData({
@@ -269,20 +266,20 @@ Page({
         }
     },
 
-    toTop: function () {
+    toTop: function() {
         this.setData({
             anchor: 'outside'
         })
     },
 
-    loadMore: function (e) {
+    loadMore: function(e) {
         if (!this.data.isLoadMore) {
             return
         }
         this.getPictures()
     },
 
-    getPicture: function () {
+    getPicture: function() {
         var id = this.data.id
         wx.request({
             url: Config.restUrl + '/pictures/' + id,
@@ -305,22 +302,22 @@ Page({
         })
     },
 
-    toPreview: function (e) {
+    toPreview: function(e) {
         this.data.id = e.detail.id
         app.globalData.pictures = this.data.pictures
     },
 
-    collect: function (e) {
+    collect: function(e) {
         this.data.id = e.detail.id
         this.setPictures(1)
     },
 
-    uncollect: function (e) {
+    uncollect: function(e) {
         this.data.id = e.detail.id
         this.setPictures(0)
     },
 
-    setPictures: function (status) {
+    setPictures: function(status) {
         var pictures = this.data.pictures
         for (var i in pictures) {
             if (pictures[i].id == this.data.id) {
@@ -333,14 +330,14 @@ Page({
         }
     },
 
-    toNew: function (e) {
+    toNew: function(e) {
         app.globalData.newTab = 1;
         wx.switchTab({
             url: '/pages/new/new',
         })
     },
 
-    toOther: function (e) {
+    toOther: function(e) {
         var url = e.currentTarget.dataset.url
         var to_type = e.currentTarget.dataset.type
         if (to_type == 0) {
@@ -355,7 +352,7 @@ Page({
 
     },
 
-    refreshPictures: function () {
+    refreshPictures: function() {
         this.setData({
             pictures: [],
             random_picture_ids: [],
@@ -367,14 +364,14 @@ Page({
 
     //  专辑
 
-    goSpecial: function () {
+    goSpecial: function() {
         app.globalData.newTab = 2;
         wx.switchTab({
             url: '/pages/new/new'
         })
     },
 
-    gohotSpecial: function (e) {
+    gohotSpecial: function(e) {
         var index = e.currentTarget.dataset.index;
         var specials = this.data.specials;
         var item = specials[index];
@@ -385,37 +382,37 @@ Page({
         })
     },
 
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         return {
             title: 'P站星选',
         }
     },
 
-    colseTip: function (e) {
+    colseTip: function(e) {
         wx.setStorageSync('tip_staus', true)
         this.setData({
             tipFlag: false
         })
     },
 
-    toSearch: function () {
+    toSearch: function() {
         wx.navigateTo({
             url: '/pages/search/search',
         })
     },
 
-    toToday: function () {
+    toToday: function() {
         wx.navigateTo({
             url: '/pages/today2/today',
         })
     },
 
-    countDown: function () {
+    countDown: function() {
         let that = this;
-        let countDownNum = that.data.countDownNum;//获取倒计时初始值
+        let countDownNum = that.data.countDownNum; //获取倒计时初始值
         //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
         that.setData({
-            timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+            timer: setInterval(function() { //这里把setInterval赋值给变量名为timer的变量
                 //每隔一秒countDownNum就减一，实现同步
                 countDownNum--;
                 //然后把countDownNum存进data，好让用户知道时间在倒计着
@@ -432,7 +429,7 @@ Page({
             }, 1000)
         })
     },
-    hidefullAd: function () {
+    hidefullAd: function() {
         clearInterval(this.data.timer);
 
         this.setData({
@@ -441,14 +438,14 @@ Page({
         })
         wx.showTabBar();
     },
-    getTAds:function(){
+    getTAds: function() {
         wx.request({
             url: Config.restUrl + '/third_ads',
             header: {
                 'token': wx.getStorageSync('token')
             },
             data: {
-                type:0
+                type: 0
             },
             method: 'post',
             success: res => {
@@ -461,7 +458,7 @@ Page({
             }
         })
     },
-    adClick:function(){
+    adClick: function() {
         wx.request({
             url: Config.restUrl + '/third_ads/add',
             header: {
@@ -473,17 +470,50 @@ Page({
             method: 'post',
             success: res => {
                 var data = res.data
-                if(data.tSwitch==1){
+                if (data.tSwitch == 1) {
                     this.setData({
                         tSwitch: data.tSwitch,
                         adTitle: data.title
                     })
-                }else{
+                } else {
                     this.setData({
                         tSwitch: data.tSwitch,
                     })
                 }
             }
+        })
+    },
+    getConfigs: function() {
+        wx.request({
+            url: Config.restUrl + '/config',
+            header: {
+                'token': wx.getStorageSync('token')
+            },
+            data: {},
+            method: 'get',
+            success: res => {
+                var data = res.data.data
+                this.setData({
+                    indexImgSwitch: data.index_img_switch,
+                    indexImg: data.index_img,
+                    indexUrl: data.index_url
+                })
+            }
+        })
+    },
+    toPay: function() {
+        wx.navigateToMiniProgram({
+            appId: 'wxc1fb7bd6c21cb0cc',
+            path: 'pages/pay/pay',
+            extraData: {},
+            envVersion: 'release',
+            success(res) {}
+        })
+    },
+    toUrl: function() {
+        var url = this.indexUrl
+        wx.navigateTo({
+            url: url,
         })
     }
 })

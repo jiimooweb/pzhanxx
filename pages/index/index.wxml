@@ -38,13 +38,12 @@
                 </button>
             </view>
         </view>
-        <view wx:if="{{tSwitch==1}}" class="ad-title">{{adTitle}}</view>
-        <view bindtap="adClick" wx:if="{{adSwitch==1}}">
-            <view class="xm_banner" style="width:100%">
-                <xm-ad data-id="{{xmad.ad.banner}}" adData="{{xmad.adData}}" bindadload="adImgLoad" bindclick="appoIntView" bindclose="xmadClose" class="xm_component">
-                </xm-ad>
-            </view>
+
+        <view wx:if="{{indexImgSwitch==1}}" bindtap="{{indexUrl==0?'toPay':'toUrl'}}">
+            <image class="indexImg" src="{{indexImg}}"></image>
         </view>
+
+
         <ad wx:if="{{!adError}}" binderror="adError" unit-id="adunit-7a05e184b255a48b"></ad>
         <view class="recommend-pic" id="recommend">
             <button class="module-title" catchtap="toNew" hoverClass="none">推荐图片</button>

@@ -9,7 +9,6 @@ const app = getApp()
 const token = new Token
 var count = 10;
 var data_all;
-var Page = require('../../utils/xmadx_sdk.min.js').xmad(Page).xmPage;
 
 Page({
 
@@ -18,12 +17,6 @@ Page({
      */
     data: {
         id: '',
-        xmad: {
-            adData: {},
-            ad: {
-                banner: "xm2c9157b61314c52d8b23a8734eec20",
-            }
-        },
     },
 
     /**

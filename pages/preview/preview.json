@@ -4,8 +4,7 @@
     "pic-list": "/components/pic-list/pic-list",
     "tags": "/components/tags/tags",
     "login-panel": "/components/login-panel/index",
-    "poster": "/components/poster/poster",
-    "xm-ad": "/components/xmAD/xmAD"
+    "poster": "/components/poster/poster"
   },
   "disableScroll": true
 }

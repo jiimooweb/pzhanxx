@@ -1,4 +1,5 @@
 <login-panel id="loginPanel" bind:hide="loginHide"></login-panel>
+<scroll-view scrollY  scrollTop="0" >
 <view class="header" style="background: url({{bgImages[id]}}) center/cover no-repeat" bindtap="changeBgId">
 <view class="mask"></view>
 </view>
@@ -38,7 +39,7 @@
   </view>
 </view> 
 
-<view id="suggest">
+<view id="suggest" class="list">
   <button class="btn-list" open-type="contact">
     <view class="row">
       <view class="right">
@@ -48,6 +49,14 @@
       <view class="left"></view>
     </view>
   </button> 
+
+    <view class="row" wx:if = "{{rewardSwitch==1}}"> 
+      <view class="right" catchtap="toPay">
+        <image src="/icon/me/hongbaofuli.png"></image>
+        <view class="row-name">打赏支持</view>
+      </view>
+         <view class="left">{{text}}</view>
+    </view>
 </view>
 
 <view class="list">
@@ -67,6 +76,7 @@
     </view>
     <view class="left"></view>
   </view>
+  
   <view class="row" catchtap="toDownload">
     <view class="right">
       <image src="/icon/me/download.png"></image>
@@ -94,7 +104,6 @@
   </view>
 </view> 
 
-
 <view class='signInPage' wx:if="{{signPanelFlag}}">
   <view class='signWindow'>
     <view class='closeWindow' bindtap="hideSignPanel">
@@ -113,3 +122,4 @@
     </view>
   </view>
 </view>
+</scroll-view>

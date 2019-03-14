@@ -2,8 +2,7 @@
   "usingComponents": {
     "tab-bar": "/components/tabBar/tabBar",
     "pic-list": "/components/pic-list/pic-list",
-    "tags": "/components/tags/tags",
-    "xm-ad": "/components/xmAD/xmAD"
+    "tags": "/components/tags/tags"
   },
   "disableScroll": true
 }

@@ -6,7 +6,6 @@ import {
 } from "../../utils/token.js"
 const token = new Token
 const app = getApp()
-var Page = require('../../utils/xmadx_sdk.min.js').xmad(Page).xmPage;
 Page({
 
     /**

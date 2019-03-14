@@ -26,10 +26,7 @@
     "pages/rule/rule",
     "pages/me/download/download",
     "pages/leaderboard/leaderboard",
-    "pages/leaderShowMore/leaderShowMore",
-    "pages/xmadPage/copyInfo" ,
-    "pages/xmadPage/sell", 
-    "pages/xmadPage/collect"
+    "pages/leaderShowMore/leaderShowMore"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -74,5 +71,6 @@
         "selectedIconPath": "icon/tabbar/me_on.png"
       }
     ]
-  }
+  },
+  "navigateToMiniProgramAppIdList":["wxc1fb7bd6c21cb0cc"]
 }

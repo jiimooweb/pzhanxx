@@ -15,11 +15,6 @@
     <view wx:if="{{all_length>0}}">
         <view class="loading-tip" wx:if="{{all_loadFlag}}">正在加载，请稍等...</view>
         <view class="loading-tip" wx:if="{{!all_loadFlag}}">已完成加载!</view>
-        <view bindtap="adClick" wx:if="{{!all_loadFlag}}">
-            <view class="xm_banner" style="width:100%">
-                <xm-ad data-id="{{xmad.ad.banner}}" adData="{{xmad.adData}}" bindadload="adImgLoad" bindclick="appoIntView" bindclose="xmadClose" class="xm_component">
-                </xm-ad>
-            </view>
-        </view>
+       
     </view>
 </scroll-view>

@@ -34,12 +34,6 @@
 
         <view class="segmentation"></view>
         <view wx:if="{{tSwitch==1}}" class="ad-title" >{{adTitle}}</view>
-        <view bindtap="adClick" wx:if="{{adSwitch==1}}">
-            <view class="xm_banner" style="width:100%">
-                <xm-ad data-id="{{xmad.ad.banner}}" adData="{{xmad.adData}}" bindadload="adImgLoad" bindclick="appoIntView" bindclose="xmadClose" class="xm_component">
-                </xm-ad>
-            </view>
-        </view>
         <ad wx:if="{{!adError}}" binderror="adError" unit-id="adunit-cbc8e3f600d0bcac"></ad>
         <view class="similar-wallpaper">
             <view class="title">相关推荐</view>
