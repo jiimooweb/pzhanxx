@@ -75,8 +75,8 @@
     </view>
     <view class="panel">
         <view class="title">请选择下载方式</view>
-        <view class="row" wx:if="{{picture.point <= point}}" catchtap="download" index-type="0">
-            <view class="btn1">积分下载</view>
+        <view class="row" wx:if="{{picture.point <= point}}" index-type="0">
+            <view class="btn1" catchtap="download">积分下载</view>
             <text>需要{{picture.point}}积分</text>
         </view>
         <view class="row" wx:else>
@@ -85,7 +85,7 @@
         </view>
         <view class="row" wx:if="{{share_count > 0}}" catchtap="download" index-type="1">
             <button class="btn2" open-type='share' bindtap="setShareFlag">分享下载</button>
-            <text>今日可分享免费下载{{share_count}}次</text>
+            <text catchtap="aaa">今日可分享免费下载{{share_count}}次</text>
         </view>
         <view class="row" wx:else>
             <view class="btn3">分享下载</view>
